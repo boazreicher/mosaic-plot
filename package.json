@@ -1,0 +1,37 @@
+{
+    "name": "mosaicplot",
+    "version": "1.0.0",
+    "description": "Mosaic Plot Grafana Plugin",
+    "scripts": {
+        "build": "grafana-toolkit plugin:build",
+        "test": "grafana-toolkit plugin:test",
+        "dev": "grafana-toolkit plugin:dev",
+        "watch": "grafana-toolkit plugin:dev --watch",
+        "sign": "grafana-toolkit plugin:sign",
+        "start": "yarn watch",
+        "restart": "net stop Grafana && net start Grafana",
+        "runAll": "grafana-toolkit plugin:dev && grafana-toolkit plugin:sign --rootUrls http://localhost:3000/ && net stop Grafana && net start Grafana",
+        "prepare": "build.bat && net stop Grafana && net start Grafana"
+    },
+    "author": "boazreicher",
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "@grafana/data": "latest",
+        "@grafana/toolkit": "^8.2.0",
+        "@grafana/ui": "latest",
+        "@types/d3": "^7.1.0",
+        "@types/react": "^17.0.38",
+        "@types/seedrandom": "^3.0.2",
+        "emotion": "10.0.27",
+        "grafana-plugin-support": "0.4.0"
+    },
+    "engines": {
+        "node": ">=14"
+    },
+    "dependencies": {
+        "css-to-object": "^1.1.0",
+        "d3": "^7.3.0",
+        "seedrandom": "^3.0.5",
+        "systemjs": "^6.11.0"
+    }
+}
