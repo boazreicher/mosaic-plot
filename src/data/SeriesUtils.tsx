@@ -1,5 +1,5 @@
 import { DataFrame, Vector } from '@grafana/data';
-import { DataFormat, SortMode, SortType } from 'types';
+import { BinType, DataFormat, SortMode, SortType } from 'types';
 import { Series } from './Series';
 import { TimeRange } from './TimeRange';
 
@@ -13,13 +13,14 @@ export function getDataSeries(
   numColumns: number,
   timeRange: TimeRange,
   dataFormat: DataFormat,
-  maxRows: number
+  maxRows: number,
+  binType: BinType
 ): Series[] {
   let rows: Record<string, Series> = {};
 
   dataFrames.forEach((dataFrame) => {
     let timestamps = calculateTimestamps(dataFrame.fields, numColumns, timeRange);
-    addRows(rows, dataFrame.fields, valueField, rowField, groupField, numColumns, dataFormat, timestamps);
+    addRows(rows, dataFrame.fields, valueField, rowField, groupField, numColumns, dataFormat, binType, timestamps);
   });
 
   let result: Series[] = [];
@@ -34,7 +35,7 @@ export function getDataSeries(
 }
 
 export function getNumColoumns(dataFrames: DataFrame[]) {
-  return dataFrames[0].fields[0].values.length
+  return dataFrames[0].fields[0].values.length;
 }
 
 export function sortSeries(series: Series[], sortType: SortType, sortMode: SortMode) {
@@ -85,13 +86,13 @@ function compareBySum(a: Series, b: Series) {
 }
 
 function compareBySortKeyLex(a: Series, b: Series) {
-  let groupA = a.getGroup();
-  let groupB = b.getGroup();
+  let groupA = normalizeName(a.getGroup());
+  let groupB = normalizeName(b.getGroup());
 
   if (groupA === undefined || groupB === undefined || groupA === groupB) {
-    return compareLex(a.getName(), b.getName());
+    return compareLex(normalizeName(a.getName()), normalizeName(b.getName()));
   }
-  return compareLex(groupA, groupB);
+  return compareLex(normalizeName(groupA), normalizeName(groupB));
 }
 
 function compareLex(a: string | undefined, b: string | undefined): number {
@@ -140,6 +141,20 @@ export function getTimeRange(series: DataFrame[]): TimeRange {
   return new TimeRange(minTimestamp, maxTimestamp);
 }
 
+function normalizeName(name?: string) {
+  if (name === undefined) {
+    return undefined;
+  }
+  // Normalize bucket names "<START>-<END>" to "<START>", so that lex sorting will work properly
+  let result = /^\s*(\d+\.?\d*)\s*-\s*(\d+\.?\d*)\s*$/i.exec(name);
+
+  if (!result) {
+    return name;
+  }
+
+  return result[1];
+}
+
 function calculateTimestamps(
   fields: import('@grafana/data').Field<any, import('@grafana/data').Vector<any>>[],
   numColumns: number,
@@ -172,6 +187,7 @@ function addRows(
   groupField: string,
   numColumns: number,
   dataFormat: string,
+  binType: BinType,
   timestamps: number[]
 ) {
   fields.forEach((field) => {
@@ -213,7 +229,7 @@ function addRows(
       console.warn('Found multiple series with ' + rowField + ': ' + rowName + ', using last...');
     }
 
-    rows[rowName] = buildSeries(rowName, groupName, field.values, numColumns, timestamps);
+    rows[rowName] = buildSeries(rowName, groupName, field.values, numColumns, binType, timestamps);
   });
 }
 
@@ -222,6 +238,7 @@ function buildSeries(
   groupName: string | undefined,
   values: Vector<any>,
   numColumns: number,
+  binType: BinType,
   timestamps: number[]
 ): Series {
   let series = new Series(rowName, groupName);
@@ -231,25 +248,43 @@ function buildSeries(
   let sum = 0;
   let remainder = 0;
   let binIndex = 0;
+  let actualBinSize = 0;
+  let remainderBinSize = 0;
 
   for (let index = 0; index < values.length; index++) {
     sum += remainder;
+    actualBinSize += remainderBinSize;
     if (index >= binIndex * binSize && index + 1 <= (binIndex + 1) * binSize) {
       // The value is completely in the bin
       sum += values.get(index);
+      actualBinSize += 1;
       remainder = 0;
+      remainderBinSize = 0;
     } else if (index > binIndex * binSize && index + 1 > (binIndex + 1) * binSize) {
       // The value overlaps the end of the bin
       let relativePart = 1 - (index + 1 - (binIndex + 1) * binSize);
+      actualBinSize += relativePart;
       sum += relativePart * values.get(index);
       remainder = (1 - relativePart) * values.get(index);
+      remainderBinSize += 1 - relativePart;
     } else {
       throw new Error('This shouldnt happen');
     }
 
     if (index + 1 >= (binIndex + 1) * binSize) {
       // Closing the bin
-      series.addValue(timestamps[binIndex], sum);
+      let aggregated: number;
+      switch (binType) {
+        case 'sum':
+          aggregated = sum;
+          break;
+        case 'avg':
+          aggregated = sum / binSize;
+          break;
+      }
+      console.log(`index: ${index}, sum: ${sum}, actualBinSize: ${actualBinSize}, binSize: ${binSize}`);
+      series.addValue(timestamps[binIndex], aggregated);
+      actualBinSize = 0;
       sum = 0;
       binIndex++;
     }

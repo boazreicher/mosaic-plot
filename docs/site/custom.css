@@ -1,0 +1,31 @@
+.wy-nav-content {
+    max-width: 70%;
+}
+
+.rst-content code {
+    color: #6842ef;
+}
+
+img[alt$=">"] {
+    float: right;
+}
+
+img[alt$="<"] {
+    float: left;
+}
+
+img[alt$="><"] {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+    float: none!important;
+}
+
+img[alt=features] {
+    width: 800px;
+}
+
+img[alt="image_small"] {
+    width: 500px;
+}

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Controls - Mosaic Plot</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../custom.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Controls";
+    var mkdocs_page_input_path = "controls.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Mosaic Plot</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Mosaic Plot</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../features/">Features</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../data/">Data</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../configuration_options/">Configuration Options</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Controls</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../examples/">Examples</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../getting_started/">Getting Started</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Mosaic Plot</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Controls</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/boazreicher/mosaic-plot/blob/main/docs/docs/controls.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="controls">Controls<a class="headerlink" href="#controls" title="Permanent link">#</a></h1>
+<p>Some <a href="../configuration_options/">configuration options</a> can be controlled without editing the panel, via controls in the panel itself:</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Action</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A</code></td>
+<td>Shows/hides the on-panel controls</td>
+<td></td>
+</tr>
+<tr>
+<td><code>B</code></td>
+<td>Shows/hides <a href="../features/#fog">fog</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>C</code></td>
+<td>Increase/decrease <a href="../features/#fog">fog</a> height</td>
+<td></td>
+</tr>
+<tr>
+<td><code>D</code></td>
+<td>Shows/hides time range selector</td>
+<td></td>
+</tr>
+<tr>
+<td><code>E</code></td>
+<td>Shows/hides vertical gridlines</td>
+<td></td>
+</tr>
+<tr>
+<td><code>F</code></td>
+<td>Toggle <a href="../features/#transitions">transitions</a> mode</td>
+<td></td>
+</tr>
+<tr>
+<td><code>G</code></td>
+<td>Toggle <a href="../configuration_options/#series">max Y type</a></td>
+<td></td>
+</tr>
+<tr>
+<td><code>H</code></td>
+<td>No charts breakdown</td>
+<td>If the data contains multiple series, they are aggregated according to the <code>Aggregation</code> setting</td>
+</tr>
+<tr>
+<td><code>I</code></td>
+<td>Charts breakdown by series</td>
+<td>Only applicable if the data contains multiple series</td>
+</tr>
+<tr>
+<td><code>J</code></td>
+<td>No totals breakdown</td>
+<td>The data is aggregated across all series/charts/groups according to the <code>Aggregation</code> setting</td>
+</tr>
+<tr>
+<td><code>K</code></td>
+<td>Totals breakdown by group</td>
+<td>The data is aggregated across all series/charts per group, according to the <code>Aggregation</code> setting</td>
+</tr>
+<tr>
+<td><code>L</code></td>
+<td>Totals breakdown by chart</td>
+<td>The data is aggregated across all series per chart, according to the <code>Aggregation</code> setting</td>
+</tr>
+<tr>
+<td><code>M</code></td>
+<td>Totals breakdown by series</td>
+<td>Only applicable if the data contains multiple series, and charts have per-series breakdown</td>
+</tr>
+</tbody>
+</table>
+<p><img align="left" alt="Image title" src="../img/controls2.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../examples/" class="btn btn-neutral float-right" title="Examples">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../configuration_options/" class="btn btn-neutral" title="Configuration Options"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/boazreicher/mosaic-plot/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../configuration_options/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../examples/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

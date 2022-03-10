@@ -1,7 +1,7 @@
 import { ScaleSequential } from 'd3';
 import { ScaleType, ZeroType } from 'types';
 import { Color } from './Color';
-import { fromString } from './ColorUtils';
+import { Black, fromString } from './ColorUtils';
 import { Hex } from './Hex';
 import { makeSpectrumColorScale } from './Spectrum';
 
@@ -31,6 +31,10 @@ export class ScaleColorPicker {
   }
 
   public getColor(value: number): Color {
+    if (this.minValue === this.maxValue) {
+      return Black();
+    }
+   
     if (value === 0) {
       switch (this.zeroType) {
         case 'color':

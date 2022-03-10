@@ -134,7 +134,7 @@ export const plugin = new PanelPlugin<MosaicPlotOptions>(MosaicPlotPanel).setPan
       path: 'minColumns',
       name: 'Min Columns',
       category: ['Grid Properties'],
-      defaultValue: 1,
+      defaultValue: 20,
       settings: {
         min: 1,
         max: 1000,
@@ -152,11 +152,23 @@ export const plugin = new PanelPlugin<MosaicPlotOptions>(MosaicPlotPanel).setPan
         step: 1,
       },
     })
-    .addBooleanSwitch({
-      path: 'compact',
-      name: 'Compact Mode',
-      defaultValue: false,
+    .addRadio({
+      path: 'binType',
+      name: 'Aggregation',
+      defaultValue: 'sum',
       category: ['Grid Properties'],
+      settings: {
+        options: [
+          {
+            value: 'sum',
+            label: 'Sum',
+          },
+          {
+            value: 'avg',
+            label: 'Average',
+          },
+        ],
+      },
     })
     .addRadio({
       path: 'scaleType',
@@ -192,17 +204,6 @@ export const plugin = new PanelPlugin<MosaicPlotOptions>(MosaicPlotPanel).setPan
       settings: {
         min: 1,
         max: 1000,
-        step: 1,
-      },
-    })
-    .addSliderInput({
-      path: 'seed',
-      name: 'Random Seed',
-      defaultValue: 0,
-      category: ['Grid Properties'],
-      settings: {
-        min: 0,
-        max: 100,
         step: 1,
       },
     })
@@ -274,7 +275,13 @@ export const plugin = new PanelPlugin<MosaicPlotOptions>(MosaicPlotPanel).setPan
       category: ['Labels'],
       defaultValue: true,
     })
-
+    .addBooleanSwitch({
+      path: 'compact',
+      name: 'Compact Mode',
+      defaultValue: false,
+      category: ['Labels'],
+    })
+ 
     .addCustomEditor({
       id: 'palette',
       path: 'palette',
@@ -372,5 +379,16 @@ export const plugin = new PanelPlugin<MosaicPlotOptions>(MosaicPlotPanel).setPan
       name: 'Enable Focus',
       category: ['Style'],
       defaultValue: false,
+    })
+    .addSliderInput({
+      path: 'seed',
+      name: 'Random Seed',
+      defaultValue: 0,
+      category: ['Style'],
+      settings: {
+        min: 0,
+        max: 100,
+        step: 1,
+      },
     });
 });

@@ -30,6 +30,7 @@ export interface MosaicPlotOptions {
   maxRows: number;
   enableFocus: boolean;
   animate: boolean;
+  binType: BinType;
 }
 
 export type CellShape = 'hex' | 'rect' | 'jigsaw' | 'circle' | 'circleStacked';
@@ -41,6 +42,7 @@ export type ZeroType = 'regular' | 'empty' | 'color';
 export type OutlineColorType = 'same' | 'custom';
 export type ScaleType = 'linear' | 'log' | 'squared' | 'sqrt';
 export type DataFormat = 'heatmap' | 'regular';
+export type BinType = 'sum' | 'avg';
 
 export type propNumber = number | string | undefined;
 export type optionsChangeCallback = (options: MosaicPlotOptions) => void;

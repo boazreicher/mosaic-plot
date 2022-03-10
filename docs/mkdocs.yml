@@ -1,0 +1,20 @@
+site_name: Mosaic Plot
+repo_url: https://github.com/boazreicher/mosaic-plot
+edit_uri: blob/main/docs/docs/
+theme:
+  name: readthedocs
+extra_css: [custom.css]
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - footnotes
+  - toc: { permalink: "#" }
+
+nav:
+  - "Mosaic Plot": "index.md"
+  - "Features": "features.md"
+  - "Data": "data.md"
+  - "Configuration Options": "configuration_options.md"
+  - "Examples": "examples.md"
+  - "Getting Started": "getting_started.md"
