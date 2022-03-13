@@ -53,6 +53,10 @@ export class RGB implements Color {
     console.warn('Method not implemented');
   }
 
+  toRGB(): RGB {
+    return this;
+  }
+
   toHsl(): HSL {
     let r = (this.red /= 255);
     let g = (this.green /= 255);

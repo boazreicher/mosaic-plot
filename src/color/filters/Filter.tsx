@@ -1,5 +1,6 @@
 import { Color } from 'color/Color';
 import { HSL } from 'color/HSL';
+import { RGB } from 'color/RGB';
 
 export class Filter implements Color {
   filterName: string;
@@ -27,4 +28,8 @@ export class Filter implements Color {
     return this.baseColor;
   }
   toFilter() {}
+
+  toRGB(): RGB {
+    throw new Error('Method not implemented.');
+  }
 }

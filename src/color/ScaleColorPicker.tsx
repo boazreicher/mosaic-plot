@@ -12,6 +12,7 @@ export class ScaleColorPicker {
   private zeroColor: string;
   private scaler: ScaleSequential<string, never>;
   private scaleType: ScaleType;
+  private discreteScale: boolean;
 
   constructor(
     minValue: number,
@@ -19,12 +20,14 @@ export class ScaleColorPicker {
     palette: string,
     invertPalette: boolean,
     scaleType: ScaleType,
+    discreteScale: boolean,
     zeroType: ZeroType = 'regular',
     zeroColor: string = '#000000'
   ) {
     this.minValue = minValue;
     this.maxValue = maxValue;
     this.scaleType = scaleType;
+    this.discreteScale = discreteScale;
     this.zeroType = zeroType;
     this.zeroColor = zeroColor;
     this.scaler = makeSpectrumColorScale(palette, 0, 100, invertPalette);
@@ -34,7 +37,7 @@ export class ScaleColorPicker {
     if (this.minValue === this.maxValue) {
       return Black();
     }
-   
+
     if (value === 0) {
       switch (this.zeroType) {
         case 'color':
@@ -63,10 +66,14 @@ export class ScaleColorPicker {
         break;
     }
 
+    if (this.discreteScale) {
+      factor = 20 * Math.round(factor / 20);
+    }
+
     return fromString(this.scaler(factor));
   }
 
   public static DefaultScaleColorPicker() {
-    return new ScaleColorPicker(0, 0, 'interpolateSpectral', false, 'log');
+    return new ScaleColorPicker(0, 0, 'interpolateSpectral', false, 'log', false);
   }
 }

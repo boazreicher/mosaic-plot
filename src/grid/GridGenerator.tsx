@@ -1,3 +1,4 @@
+import { RGB } from 'color/RGB';
 import { ScaleColorPicker } from 'color/ScaleColorPicker';
 import { Row } from 'data/Row';
 import { Series } from 'data/Series';
@@ -82,7 +83,13 @@ export abstract class GridGenerator {
   }
 
   protected getColorForCell(rowIndex: number, columnIndex: number) {
-    return this.colorPicker.getColor(this.series[rowIndex].getValues()[columnIndex]);
+    let color = this.colorPicker.getColor(this.series[rowIndex].getValues()[columnIndex]);
+
+    if (this.parameters.cellAttributes.invertColors) {
+      let rgb = color.toRGB();
+      color = new RGB(255 - rgb.red, 255 - rgb.green, 255 - rgb.blue);
+    }
+    return color;
   }
 
   protected abstract buildCell(

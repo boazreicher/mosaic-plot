@@ -11,6 +11,7 @@ export interface MosaicPlotOptions {
   leftMargin: number;
   palette: string;
   invertPalette: boolean;
+  invertColors: boolean;
   zeroType: ZeroType;
   zeroColor: string;
   outlineWidth: number;
@@ -31,12 +32,13 @@ export interface MosaicPlotOptions {
   enableFocus: boolean;
   animate: boolean;
   binType: BinType;
+  discreteScale: boolean;
 }
 
 export type CellShape = 'hex' | 'rect' | 'jigsaw' | 'circle' | 'circleStacked';
 export type SortType = 'lex' | 'max' | 'sum';
 export type SortMode = 'asc' | 'desc';
-export type LabelType = 'series' | 'group' | 'none';
+export type LabelType = 'series' | 'group' | 'buckets' | 'none';
 export type LabelPositionType = 'horizontal' | 'vertical' | 'angle';
 export type ZeroType = 'regular' | 'empty' | 'color';
 export type OutlineColorType = 'same' | 'custom';

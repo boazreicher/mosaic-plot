@@ -141,7 +141,7 @@ export function getTimeRange(series: DataFrame[]): TimeRange {
   return new TimeRange(minTimestamp, maxTimestamp);
 }
 
-function normalizeName(name?: string) {
+export function normalizeName(name?: string) {
   if (name === undefined) {
     return undefined;
   }
@@ -248,25 +248,18 @@ function buildSeries(
   let sum = 0;
   let remainder = 0;
   let binIndex = 0;
-  let actualBinSize = 0;
-  let remainderBinSize = 0;
 
   for (let index = 0; index < values.length; index++) {
     sum += remainder;
-    actualBinSize += remainderBinSize;
     if (index >= binIndex * binSize && index + 1 <= (binIndex + 1) * binSize) {
       // The value is completely in the bin
       sum += values.get(index);
-      actualBinSize += 1;
       remainder = 0;
-      remainderBinSize = 0;
     } else if (index > binIndex * binSize && index + 1 > (binIndex + 1) * binSize) {
       // The value overlaps the end of the bin
       let relativePart = 1 - (index + 1 - (binIndex + 1) * binSize);
-      actualBinSize += relativePart;
       sum += relativePart * values.get(index);
       remainder = (1 - relativePart) * values.get(index);
-      remainderBinSize += 1 - relativePart;
     } else {
       throw new Error('This shouldnt happen');
     }
@@ -282,9 +275,8 @@ function buildSeries(
           aggregated = sum / binSize;
           break;
       }
-      console.log(`index: ${index}, sum: ${sum}, actualBinSize: ${actualBinSize}, binSize: ${binSize}`);
+
       series.addValue(timestamps[binIndex], aggregated);
-      actualBinSize = 0;
       sum = 0;
       binIndex++;
     }

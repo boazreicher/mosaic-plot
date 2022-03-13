@@ -5,12 +5,14 @@ export class YAxisData {
   private width: number;
   private height: number;
   private labels: string[];
+  private buckets: boolean;
 
-  constructor(topLeft: Coordinates, width: number, height: number, labels: string[]) {
+  constructor(topLeft: Coordinates, width: number, height: number, labels: string[], buckets: boolean) {
     this.topLeft = topLeft;
     this.width = width;
     this.height = height;
     this.labels = labels;
+    this.buckets = buckets;
   }
 
   public getTopLeft() {
@@ -27,5 +29,9 @@ export class YAxisData {
 
   public getLabels() {
     return this.labels;
+  }
+
+  public useBuckets() {
+    return this.buckets;
   }
 }

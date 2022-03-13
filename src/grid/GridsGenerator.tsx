@@ -54,6 +54,7 @@ export class GridsGenerator {
         this.parameters.palette,
         this.parameters.invertPalette,
         this.parameters.scaleType,
+        this.parameters.discreteScale,
         this.parameters.zeroType,
         this.parameters.zeroColor
       )
@@ -83,6 +84,7 @@ export class GridsGenerator {
         this.parameters.outlineColor,
         this.parameters.outlineWidth,
         this.parameters.smooth,
+        this.parameters.invertColors,
         filterName
       );
       let parameters = new GridGeneratorParameters(

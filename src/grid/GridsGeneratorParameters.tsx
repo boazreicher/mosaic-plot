@@ -9,6 +9,7 @@ export class GridsGeneratorParameters {
   spacing: number;
   palette: string;
   invertPalette: boolean;
+  invertColors: boolean;
   zeroType: ZeroType;
   zeroColor: string;
   outlineWidth: number;
@@ -17,6 +18,7 @@ export class GridsGeneratorParameters {
   scaleType: ScaleType;
   seed: number;
   showScale: boolean;
+  discreteScale: boolean;
   filter: Filter;
   smooth: boolean;
   compact: boolean;
@@ -35,6 +37,7 @@ export class GridsGeneratorParameters {
     this.spacing = panelOptions.spacing;
     this.palette = panelOptions.palette;
     this.invertPalette = panelOptions.invertPalette;
+    this.invertColors = panelOptions.invertColors;
     this.zeroType = panelOptions.zeroType;
     this.zeroColor = panelOptions.zeroColor;
     this.outlineWidth = panelOptions.outlineWidth;
@@ -43,6 +46,7 @@ export class GridsGeneratorParameters {
     this.scaleType = panelOptions.scaleType;
     this.seed = panelOptions.seed;
     this.showScale = panelOptions.showScale;
+    this.discreteScale = panelOptions.discreteScale;
     this.filter = filter;
     this.smooth = panelOptions.smooth;
     this.compact = panelOptions.compact;

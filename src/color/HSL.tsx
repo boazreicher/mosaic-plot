@@ -1,4 +1,5 @@
 import { Color } from 'color/Color';
+import { RGB } from './RGB';
 
 export class HSL implements Color {
   h: number;
@@ -40,6 +41,10 @@ export class HSL implements Color {
 
   decreaseSaturation(decreasePercentage: number) {
     this.s = Math.round(Math.max(0, this.s * (1 - decreasePercentage / 100)));
+  }
+
+  toRGB(): RGB {
+    throw new Error('Unimplemented method');
   }
 
   toHsl(): HSL {

@@ -1,3 +1,4 @@
+import { normalizeName } from 'data/SeriesUtils';
 import { Grids } from 'grid/Grids';
 import * as React from 'react';
 import { Coordinates } from 'shapes/Coordinates';
@@ -44,11 +45,9 @@ function getTranslation(labelPositionType: LabelPositionType): string {
 }
 
 function createYAxis(data: YAxisData, labelPositionType: LabelPositionType) {
-  const yScale = d3
-    .scaleBand()
-    .domain(data.getLabels().reverse())
-    .range([data.getTopLeft().y + data.getHeight(), data.getTopLeft().y]);
-  const yAxis = d3.axisLeft(yScale).tickSize(0);
+  let yScale = initScale(data);
+
+  const yAxis = d3.axisLeft(yScale); //.tickSize(0);
   return (
     <g
       transform={getTransform(data.getTopLeft())}
@@ -74,7 +73,7 @@ export function buildAllYAxis(
   labelType: LabelType,
   compact: boolean
 ) {
-  if (labelType === 'none' || compact) {
+  if (labelType === 'none' || leftMargin === 0 || compact) {
     return [];
   }
   if (typeof width !== 'number') {
@@ -96,6 +95,9 @@ export function buildAllYAxis(
       case 'series':
         labels = grid.getRowNames();
         break;
+      case 'buckets':
+        labels = getBucketStartValues(grid.getRowNames());
+        break;
     }
 
     result.push(
@@ -103,10 +105,59 @@ export function buildAllYAxis(
         new Coordinates(leftMargin, labelsContainer.getTopLeft().y),
         -1,
         labelsContainer.getHeight(),
-        labels
+        labels,
+        labelType === 'buckets'
       )
     );
   });
 
   return result;
+}
+
+function getBucketStartValues(buckets: string[]): string[] {
+  let result: string[] = [];
+
+  buckets.forEach((bucket) => {
+    let normalized = normalizeName(bucket);
+    result.push(normalized === undefined ? bucket : normalized);
+  });
+
+  return result;
+}
+
+function initScale(data: YAxisData) {
+  if (data.useBuckets()) {
+    let min = getMin(data.getLabels());
+    let max = getMax(data.getLabels());
+    return d3.scaleLinear().domain([min, max]).range([data.getTopLeft().y + data.getHeight(), data.getTopLeft().y]);
+  } else {
+    return d3
+      .scaleBand()
+      .domain(data.getLabels().reverse())
+      .range([data.getTopLeft().y + data.getHeight(), data.getTopLeft().y]);
+  }
+}
+
+function getMin(labels: string[]) {
+  let min: number | undefined;
+
+  labels.forEach((label) => {
+    if (min === undefined || min > +label) {
+      min = +label;
+    }
+  });
+
+  return min;
+}
+
+function getMax(labels: string[]) {
+  let max = 0;
+
+  labels.forEach((label) => {
+    if (max < +label) {
+      max = +label;
+    }
+  });
+
+  return max;
 }

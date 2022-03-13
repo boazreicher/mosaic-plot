@@ -1,4 +1,5 @@
 import { HSL } from 'color/HSL';
+import { RGB } from './RGB';
 
 export interface Color {
   toString(): string;
@@ -11,4 +12,5 @@ export interface Color {
   decreaseLuminance(decreasePercentage: number): void;
 
   toHsl(): HSL;
+  toRGB(): RGB;
 }

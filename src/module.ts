@@ -224,6 +224,10 @@ export const plugin = new PanelPlugin<MosaicPlotOptions>(MosaicPlotPanel).setPan
             label: 'Groups',
           },
           {
+            value: 'buckets',
+            label: 'Buckets',
+          },
+          {
             value: 'none',
             label: 'None',
           },
@@ -276,6 +280,12 @@ export const plugin = new PanelPlugin<MosaicPlotOptions>(MosaicPlotPanel).setPan
       defaultValue: true,
     })
     .addBooleanSwitch({
+      path: 'discreteScale',
+      name: 'Discrete Scale',
+      category: ['Labels'],
+      defaultValue: false,
+    })
+    .addBooleanSwitch({
       path: 'compact',
       name: 'Compact Mode',
       defaultValue: false,
@@ -293,6 +303,12 @@ export const plugin = new PanelPlugin<MosaicPlotOptions>(MosaicPlotPanel).setPan
     .addBooleanSwitch({
       path: 'invertPalette',
       name: 'Invert Palette',
+      category: ['Style'],
+      defaultValue: false,
+    })
+    .addBooleanSwitch({
+      path: 'invertColors',
+      name: 'Invert Colors',
       category: ['Style'],
       defaultValue: false,
     })
