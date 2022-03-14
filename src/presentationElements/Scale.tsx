@@ -1,5 +1,6 @@
 import { Color } from 'color/Color';
 import { fromString } from 'color/ColorUtils';
+import { RGB } from 'color/RGB';
 import { makeSpectrumColorScale } from 'color/Spectrum';
 import { SCALE_FILLER_HEIGHT, SCALE_WIDTH } from 'Constants';
 import React from 'react';
@@ -20,6 +21,8 @@ export class Scale {
   private palette: string;
   private scaleType: ScaleType;
   private inverted: boolean;
+  private discrete: boolean;
+  private invertedColors: boolean;
 
   constructor(
     topLeft: Coordinates,
@@ -32,7 +35,9 @@ export class Scale {
     maxValue: number,
     palette: string,
     scaleType: ScaleType,
-    inverted: boolean
+    inverted: boolean,
+    discrete: boolean,
+    invertedColors: boolean
   ) {
     this.topLeft = topLeft;
     this.width = width;
@@ -45,6 +50,8 @@ export class Scale {
     this.palette = palette;
     this.scaleType = scaleType;
     this.inverted = inverted;
+    this.discrete = discrete;
+    this.invertedColors = invertedColors;
   }
 
   public static buildScale(
@@ -55,7 +62,9 @@ export class Scale {
     palette: string,
     invertPalette: boolean,
     scaleType: ScaleType,
-    inverted: boolean
+    inverted: boolean,
+    discrete: boolean,
+    invertedColors: boolean
   ) {
     if (typeof width !== 'number') {
       throw new Error('Width must be a number');
@@ -71,6 +80,13 @@ export class Scale {
     let minColor = fromString(scaler(0));
     let maxColor = fromString(scaler(100));
 
+    if (invertedColors) {
+      let minColorRGB = minColor.toRGB();
+      minColor = new RGB(255 - minColorRGB.red, 255 - minColorRGB.green, 255 - minColorRGB.blue);
+      let maxColorRGB = maxColor.toRGB();
+      maxColor = new RGB(255 - maxColorRGB.red, 255 - maxColorRGB.green, 255 - maxColorRGB.blue);
+    }
+
     return new Scale(
       new Coordinates(width - SCALE_WIDTH, 0),
       SCALE_WIDTH,
@@ -82,7 +98,9 @@ export class Scale {
       maxValue,
       palette,
       scaleType,
-      inverted
+      inverted,
+      discrete,
+      invertedColors
     );
   }
 
@@ -126,6 +144,6 @@ export class Scale {
   }
 
   private getFill(): string {
-    return "url('#scale_" + this.palette + '_' + this.inverted + "')";
+    return `url('#scale_${this.palette}_${this.inverted}_${this.discrete}_${this.invertedColors}')`;
   }
 }

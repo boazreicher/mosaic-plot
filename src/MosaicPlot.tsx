@@ -70,7 +70,15 @@ function buildElements(
     <>
       {getMainSvgStyle()}
       {buildGrids(width, height, panelOptions, onOptionsChange).toSvg()}
-      {buildDefs(panelOptions.palette, panelOptions.invertPalette, panelOptions.cellShape, cellDimensions, colorPairs)}
+      {buildDefs(
+        panelOptions.palette,
+        panelOptions.invertPalette,
+        panelOptions.discreteScale,
+        panelOptions.invertColors,
+        panelOptions.cellShape,
+        cellDimensions,
+        colorPairs
+      )}
       {buildScale(width, height, panelOptions).toSvg()}
       {buildXAxis(width, height, panelOptions, timeRange)}
       {buildAllYAxis(grids, width, height, panelOptions.leftMargin, panelOptions.labelType, panelOptions.compact).map(
@@ -98,7 +106,9 @@ function buildScale(width: number, height: number, panelOptions: MosaicPlotOptio
     panelOptions.palette,
     panelOptions.invertPalette,
     panelOptions.scaleType,
-    panelOptions.invertPalette
+    panelOptions.invertPalette,
+    panelOptions.discreteScale,
+    panelOptions.invertColors
   );
 }
 

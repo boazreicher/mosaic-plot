@@ -4,7 +4,9 @@ import { ColorStep } from 'color/filters/ColorStep';
 import { Filter } from 'color/filters/Filter';
 import { LinearGradient } from 'color/filters/LinearGradient';
 import { predefinedColorPalettes } from 'color/PredefinedColorPalettes';
+import { RGB } from 'color/RGB';
 import { makeSpectrumColorScale } from 'color/Spectrum';
+import { ScaleSequential } from 'd3';
 import React from 'react';
 import { CellDimensions } from 'shapes/CellDimensions';
 import { CellShape } from 'types';
@@ -27,21 +29,19 @@ function generateDefs(filters: Set<Filter>, cellDimensions: CellDimensions, shap
 export function buildDefs(
   palette: string,
   invertPalette: boolean,
+  discreteScale: boolean,
+  invertColors: boolean,
   shape: CellShape,
   cellDimensions: CellDimensions,
   colorPairs: Record<string, Set<string>>
 ) {
   let filters: Set<Filter> = new Set();
 
-  let colors: ColorStep[] = [];
   let scaler = makeSpectrumColorScale(palette, 0, 100, invertPalette);
 
-  for (let i = 0; i < 11; i++) {
-    let factor = i * 10;
-    colors.push(new ColorStep(fromString(scaler(100 - factor)), i * 10));
-  }
+  let colors: ColorStep[] = getColorSteps(scaler, discreteScale, invertColors);
 
-  let filter = new LinearGradient('scale_' + palette + '_' + invertPalette, colors);
+  let filter = new LinearGradient(`scale_${palette}_${invertPalette}_${discreteScale}_${invertColors}`, colors);
 
   filters.add(filter);
   filters.add(new Bevel());
@@ -83,4 +83,54 @@ function addColorPairFilters(filters: Set<Filter>, colorPairs: Record<string, Se
       filters.add(new LinearGradient(buildColorPairName(source, target), [sourceColor, targetColor], false));
     });
   }
+}
+
+function getColorSteps(
+  scaler: ScaleSequential<string, never>,
+  discreteScale: boolean,
+  invertColors: boolean
+): ColorStep[] {
+  let colors: ColorStep[] = [];
+  if (discreteScale) {
+    colors = getDiscreteColors(scaler);
+    // Discrete scale doesn't look right
+    colors = getContinuousColors(scaler);
+  } else {
+    colors = getContinuousColors(scaler);
+  }
+
+  if (invertColors) {
+    let invertedColors: ColorStep[] = [];
+    colors.forEach((colorStep) => {
+      let color = colorStep.getColor().toRGB();
+      invertedColors.push(
+        new ColorStep(new RGB(255 - color.red, 255 - color.green, 255 - color.blue), colorStep.getStep())
+      );
+    });
+    return invertedColors;
+  }
+  return colors;
+}
+
+function getContinuousColors(scaler: ScaleSequential<string, never>): ColorStep[] {
+  let colors: ColorStep[] = [];
+  for (let i = 0; i < 11; i++) {
+    let factor = i * 10;
+    colors.push(new ColorStep(fromString(scaler(100 - factor)), factor));
+  }
+  return colors;
+}
+
+function getDiscreteColors(scaler: ScaleSequential<string, never>): ColorStep[] {
+  let colors: ColorStep[] = [];
+  for (let i = 0; i < 5; i++) {
+    let factor = i * 20;
+    let factorNext = (i + 1) * 20 - 1;
+    if (factorNext === 99) {
+      factorNext = 100;
+    }
+    colors.push(new ColorStep(fromString(scaler(100 - factor)), factor));
+    colors.push(new ColorStep(fromString(scaler(100 - factor)), factorNext));
+  }
+  return colors;
 }
