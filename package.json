@@ -10,8 +10,7 @@
         "sign": "grafana-toolkit plugin:sign",
         "start": "yarn watch",
         "restart": "net stop Grafana && net start Grafana",
-        "runAll": "grafana-toolkit plugin:dev && grafana-toolkit plugin:sign --rootUrls http://localhost:3000/ && net stop Grafana && net start Grafana",
-        "prepare": "build.bat && net stop Grafana && net start Grafana"
+        "runAll": "grafana-toolkit plugin:dev && grafana-toolkit plugin:sign --rootUrls http://localhost:3000/ && net stop Grafana && net start Grafana"
     },
     "author": "boazreicher",
     "license": "Apache-2.0",
