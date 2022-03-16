@@ -32,7 +32,7 @@ export class Rectangle extends Cell {
     );
   }
 
-  public toSvgSpecific(): JSX.Element {
+  toSvgSpecific(): JSX.Element {
     let rectangleDimensions: RectangleDimensions = this.dimensions as RectangleDimensions;
 
     return (

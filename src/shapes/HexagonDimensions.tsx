@@ -11,27 +11,27 @@ export class HexagonDimensions extends CellDimensions {
     this.height = height;
   }
 
-  public getWidth() {
+  getWidth() {
     return this.width;
   }
 
-  public getHeight() {
+  getHeight() {
     return this.height;
   }
 
-  public getVerticalShift(): number {
+  getVerticalShift(): number {
     return this.height / 4;
   }
 
-  public toString(): string {
+  toString(): string {
     return this.getWidth() + ' x ' + this.getHeight();
   }
 
-  public static getGridHeightFactor(numRows: number): number {
+  static getGridHeightFactor(numRows: number): number {
     return 1 + (3 / 4) * (numRows - 1);
   }
 
-  public static getMinCellHeight() {
+  static getMinCellHeight() {
     return MIN_CELL_HEIGHT_HEXAGON;
   }
 }

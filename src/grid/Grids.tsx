@@ -13,15 +13,15 @@ export class Grids {
     this.onOptionsChange = onOptionsChange;
   }
 
-  public addGrid(grid: Grid) {
+  addGrid(grid: Grid) {
     this.grids.push(grid);
   }
 
-  public getGrids() {
+  getGrids() {
     return this.grids;
   }
 
-  public toSvg(): JSX.Element {
+  toSvg(): JSX.Element {
     return (
       <g onClick={this.getOnClickHandler(this.panelOptions, this.onOptionsChange)} className={CLICKABLE_CLASS}>
         {this.grids.map((grid) => grid.toSvg())}

@@ -83,9 +83,9 @@ export function blend(baseColor: Color, attributesColor: Color): Color {
 }
 
 export function fromString(colorString: string): Color {
-  if (colorString.startsWith("rgb(")) {
-    return RGB.fromString(colorString)
+  if (colorString.startsWith('rgb(')) {
+    return RGB.fromString(colorString);
   } else {
-    return Hex.fromString(colorString)
+    return Hex.fromString(colorString);
   }
 }

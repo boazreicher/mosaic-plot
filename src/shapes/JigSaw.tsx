@@ -37,7 +37,7 @@ export class JigSaw extends Cell {
     this.piece.setIdSuffix(dimensions.toString());
   }
 
-  public toSvgSpecific(): JSX.Element {
+  toSvgSpecific(): JSX.Element {
     return (
       <use
         x={this.topLeftCoordinates.x}
@@ -51,7 +51,7 @@ export class JigSaw extends Cell {
     );
   }
 
-  public getPiece() {
+  getPiece() {
     return this.piece;
   }
 }
@@ -70,11 +70,11 @@ export class JigSawPiece {
     this.bottom = bottom;
   }
 
-  public setIdSuffix(suffix: string) {
+  setIdSuffix(suffix: string) {
     this.idSuffix = suffix;
   }
 
-  public getId() {
+  getId() {
     return (
       this.typeAsString(this.left) +
       '_' +
@@ -99,7 +99,7 @@ export class JigSawPiece {
     }
   }
 
-  public static DefaultPiece() {
+  static DefaultPiece() {
     return new JigSawPiece(
       JigSawSegmentType.WALL,
       JigSawSegmentType.WALL,

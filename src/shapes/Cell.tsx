@@ -39,27 +39,27 @@ export abstract class Cell {
     this.filterName = filterName;
   }
 
-  public getTopLeft() {
+  getTopLeft() {
     return this.topLeftCoordinates;
   }
 
-  public toSvg(): JSX.Element {
+  toSvg(): JSX.Element {
     return <Tooltip content={this.toolTipData.asToolTipContent()}>{this.toSvgSpecific()}</Tooltip>;
   }
 
-  public getFill() {
+  getFill() {
     return this.fill;
   }
 
-  public setFill(fill: string) {
+  setFill(fill: string) {
     this.fill = fill;
   }
 
-  public setOutlineColor(color: string) {
+  setOutlineColor(color: string) {
     this.outlineColor = color;
   }
 
-  public abstract toSvgSpecific(): JSX.Element;
+  abstract toSvgSpecific(): JSX.Element;
 }
 
 export enum PositionType {

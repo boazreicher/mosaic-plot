@@ -41,7 +41,7 @@ export class Hex implements Color {
     return hexToRgb(this.hex);
   }
 
-  public static fromString(colorString: string): Color {
+  static fromString(colorString: string): Color {
     return new Hex(colorString);
   }
 }

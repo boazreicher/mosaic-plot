@@ -29,7 +29,7 @@ export class Timer {
     return Timer.instance;
   }
 
-  public setMaxNumColumns(actualNumColumns: number) {
+  setMaxNumColumns(actualNumColumns: number) {
     this.actualMaxNumColumns = actualNumColumns;
   }
 

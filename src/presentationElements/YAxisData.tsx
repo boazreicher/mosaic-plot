@@ -6,32 +6,38 @@ export class YAxisData {
   private height: number;
   private labels: string[];
   private buckets: boolean;
+  private id: string;
 
-  constructor(topLeft: Coordinates, width: number, height: number, labels: string[], buckets: boolean) {
+  constructor(topLeft: Coordinates, width: number, height: number, labels: string[], buckets: boolean, id: string) {
     this.topLeft = topLeft;
     this.width = width;
     this.height = height;
     this.labels = labels;
     this.buckets = buckets;
+    this.id = id;
   }
 
-  public getTopLeft() {
+  getTopLeft() {
     return this.topLeft;
   }
 
-  public getWidth() {
+  getWidth() {
     return this.width;
   }
 
-  public getHeight() {
+  getHeight() {
     return this.height;
   }
 
-  public getLabels() {
+  getLabels() {
     return this.labels;
   }
 
-  public useBuckets() {
+  useBuckets() {
     return this.buckets;
+  }
+
+  getId() {
+    return this.id;
   }
 }

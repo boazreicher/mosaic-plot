@@ -85,6 +85,7 @@ export function buildAllYAxis(
 
   let result: YAxisData[] = [];
 
+  let index = 0;
   grids.getGrids().forEach((grid) => {
     let labelsContainer = grid.getLabelsContainer();
     let labels: string[] = [];
@@ -106,7 +107,8 @@ export function buildAllYAxis(
         -1,
         labelsContainer.getHeight(),
         labels,
-        labelType === 'buckets'
+        labelType === 'buckets',
+        'yaxis_' + index
       )
     );
   });
@@ -129,7 +131,10 @@ function initScale(data: YAxisData) {
   if (data.useBuckets()) {
     let min = getMin(data.getLabels());
     let max = getMax(data.getLabels());
-    return d3.scaleLinear().domain([min, max]).range([data.getTopLeft().y + data.getHeight(), data.getTopLeft().y]);
+    return d3
+      .scaleLinear()
+      .domain([min, max])
+      .range([data.getTopLeft().y + data.getHeight(), data.getTopLeft().y]);
   } else {
     return d3
       .scaleBand()

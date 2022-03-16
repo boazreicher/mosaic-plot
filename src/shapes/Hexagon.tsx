@@ -81,7 +81,7 @@ export class Hexagon extends Cell {
     return result;
   }
 
-  public toSvgSpecific(): JSX.Element {
+  toSvgSpecific(): JSX.Element {
     return (
       <polyline
         filter={this.filterName}

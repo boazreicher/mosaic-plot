@@ -30,7 +30,7 @@ export class EmptyCell extends Cell {
     );
   }
 
-  public toSvgSpecific(): JSX.Element {
+  toSvgSpecific(): JSX.Element {
     return <></>;
   }
 }

@@ -302,7 +302,6 @@ export const plugin = new PanelPlugin<MosaicPlotOptions>(MosaicPlotPanel).setPan
       defaultValue: false,
       category: ['Labels'],
     })
- 
     .addCustomEditor({
       id: 'palette',
       path: 'palette',

@@ -19,11 +19,11 @@ export class GridGeneratorFactory {
     this.shape = shape;
   }
 
-  public setColorPicker(colorPicker: ScaleColorPicker) {
+  setColorPicker(colorPicker: ScaleColorPicker) {
     this.colorPicker = colorPicker;
   }
 
-  public getGenerator(parameters: GridGeneratorParameters, shift: number, seed: number): GridGenerator {
+  getGenerator(parameters: GridGeneratorParameters, shift: number, seed: number): GridGenerator {
     switch (this.shape) {
       case 'hex':
         return new HexagonGridGenerator(parameters, this.colorPicker, shift);
@@ -38,7 +38,7 @@ export class GridGeneratorFactory {
     }
   }
 
-  public getMinCellHeight() {
+  getMinCellHeight() {
     switch (this.shape) {
       case 'hex':
         return HexagonDimensions.getMinCellHeight();
@@ -52,7 +52,7 @@ export class GridGeneratorFactory {
     }
   }
 
-  public getGridHeightFactor(numRows: number) {
+  getGridHeightFactor(numRows: number) {
     switch (this.shape) {
       case 'hex':
         return HexagonDimensions.getGridHeightFactor(numRows);
@@ -66,7 +66,7 @@ export class GridGeneratorFactory {
     }
   }
 
-  public getDimensions(width: number, height: number, numColumns: number) {
+  getDimensions(width: number, height: number, numColumns: number) {
     switch (this.shape) {
       case 'hex':
         return new HexagonDimensions(width, height, numColumns);

@@ -10,7 +10,7 @@ export class JigSawCalculator {
     this.random = new seedrandom(seed);
   }
 
-  public getNewPiece(positionType: PositionType, left: JigSawPiece, above: JigSawPiece) {
+  getNewPiece(positionType: PositionType, left: JigSawPiece, above: JigSawPiece) {
     switch (positionType) {
       case PositionType.TOP_LEFT:
         return new JigSawPiece(

@@ -6,7 +6,7 @@ import { LabelsContainer } from './LabelsContainer';
 export class Grid {
   private id: string;
   private rows: Row[] = [];
-  private rowLength: number = -1;
+  private rowLength = -1;
   private gridHeight = -1;
   private labelsContainerMargin = -1;
   private colorPairs: Record<string, Set<string>> = {};
@@ -15,7 +15,7 @@ export class Grid {
     this.id = id;
   }
 
-  public addRow(row: Row) {
+  addRow(row: Row) {
     this.rows.push(row);
     if (this.rowLength === -1) {
       this.rowLength = row.numCells();
@@ -25,7 +25,7 @@ export class Grid {
     }
   }
 
-  public toSvg(): JSX.Element {
+  toSvg(): JSX.Element {
     return (
       <>
         <g id={this.id}>{this.rows.map((row) => row.toSvg())}</g>
@@ -33,18 +33,18 @@ export class Grid {
     );
   }
 
-  public addColorPair(source: string, target: string) {
+  addColorPair(source: string, target: string) {
     if (!this.colorPairs.hasOwnProperty(source)) {
       this.colorPairs[source] = new Set();
     }
     this.colorPairs[source].add(target);
   }
 
-  public getColorPairs() {
+  getColorPairs() {
     return this.colorPairs;
   }
 
-  public getRowNames() {
+  getRowNames() {
     let result: string[] = [];
 
     this.rows.forEach((row) => {
@@ -54,24 +54,24 @@ export class Grid {
     return result;
   }
 
-  public setLabelsContainerMargin(margin: number) {
+  setLabelsContainerMargin(margin: number) {
     this.labelsContainerMargin = margin;
   }
 
-  public setGridHeight(height: number) {
+  setGridHeight(height: number) {
     this.gridHeight = height;
   }
 
-  public getTopLeft() {
+  getTopLeft() {
     // Assuming topLeft is determined by the first cell in the first row
     return this.rows[0].getTopLeft();
   }
 
-  public getHeight() {
+  getHeight() {
     return this.gridHeight;
   }
 
-  public getLabelsContainer() {
+  getLabelsContainer() {
     let topLeft = this.getTopLeft();
     return new LabelsContainer(
       new Coordinates(topLeft.x, topLeft.y + this.labelsContainerMargin),
@@ -79,7 +79,7 @@ export class Grid {
     );
   }
 
-  public getId() {
+  getId() {
     return this.id;
   }
 }

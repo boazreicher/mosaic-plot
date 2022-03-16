@@ -6,15 +6,15 @@ export class Series {
   private minValue?: number;
   private maxValue?: number;
   private sum: number = 0;
-  private groupMax: number = 0;
-  private groupSum: number = 0;
+  private groupMax = 0;
+  private groupSum = 0;
 
   constructor(name: string, group?: string) {
     this.name = name;
     this.group = group;
   }
 
-  public addValue(timestamp: number, value: number) {
+  addValue(timestamp: number, value: number) {
     this.values.push(value);
     this.timestamps.push(timestamp);
     if (this.maxValue === undefined || value > this.maxValue) {
@@ -28,13 +28,13 @@ export class Series {
     this.sum += value;
   }
 
-  public updateGroupSum(value: number, group?: string) {
+  updateGroupSum(value: number, group?: string) {
     if (group === this.group) {
       this.groupSum += value;
     }
   }
 
-  public updateGroupMax(value: number, group?: string) {
+  updateGroupMax(value: number, group?: string) {
     if (group === this.group) {
       if (value > this.groupMax) {
         this.groupMax = value;
@@ -42,42 +42,42 @@ export class Series {
     }
   }
 
-  public getValues() {
+  getValues() {
     return this.values;
   }
 
-  public getTimestamps() {
+  getTimestamps() {
     return this.timestamps;
   }
 
-  public getName() {
+  getName() {
     return this.name;
   }
 
-  public getGroup() {
+  getGroup() {
     return this.group;
   }
 
-  public getSum() {
+  getSum() {
     return this.sum;
   }
 
-  public getGroupSum() {
+  getGroupSum() {
     return this.groupSum;
   }
 
-  public getGroupMax() {
+  getGroupMax() {
     return this.groupMax;
   }
 
-  public getMaxValue(): number {
+  getMaxValue(): number {
     if (this.maxValue === undefined) {
       throw new Error('Max value is undefined');
     }
     return this.maxValue;
   }
 
-  public getMinValue(): number {
+  getMinValue(): number {
     if (this.minValue === undefined) {
       throw new Error('Min value is undefined');
     }

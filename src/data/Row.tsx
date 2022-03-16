@@ -9,23 +9,23 @@ export class Row {
     this.name = name;
   }
 
-  public addCell(cell: Cell) {
+  addCell(cell: Cell) {
     this.cells.push(cell);
   }
 
-  public numCells() {
+  numCells() {
     return this.cells.length;
   }
 
-  public toSvg(): JSX.Element {
+  toSvg(): JSX.Element {
     return <>{this.cells.map((cell) => cell.toSvg())}</>;
   }
 
-  public getName() {
+  getName() {
     return this.name;
   }
 
-  public getTopLeft() {
+  getTopLeft() {
     // Assuming topLeft is determined by the first cell
     return this.cells[0].getTopLeft();
   }

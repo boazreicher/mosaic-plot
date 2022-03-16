@@ -54,7 +54,7 @@ export class Scale {
     this.invertedColors = invertedColors;
   }
 
-  public static buildScale(
+  static buildScale(
     scaleWidth: number,
     width: number,
     height: number,
@@ -105,7 +105,7 @@ export class Scale {
     );
   }
 
-  public toSvg(): JSX.Element {
+  toSvg(): JSX.Element {
     return (
       <>
         <rect

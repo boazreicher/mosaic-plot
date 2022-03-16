@@ -22,7 +22,7 @@ export class ScaleColorPicker {
     scaleType: ScaleType,
     discreteScale: boolean,
     zeroType: ZeroType = 'regular',
-    zeroColor: string = '#000000'
+    zeroColor = '#000000'
   ) {
     this.minValue = minValue;
     this.maxValue = maxValue;
@@ -33,7 +33,7 @@ export class ScaleColorPicker {
     this.scaler = makeSpectrumColorScale(palette, 0, 100, invertPalette);
   }
 
-  public getColor(value: number): Color {
+  getColor(value: number): Color {
     if (this.minValue === this.maxValue) {
       return Black();
     }
@@ -73,7 +73,7 @@ export class ScaleColorPicker {
     return fromString(this.scaler(factor));
   }
 
-  public static DefaultScaleColorPicker() {
+  static DefaultScaleColorPicker() {
     return new ScaleColorPicker(0, 0, 'interpolateSpectral', false, 'log', false);
   }
 }

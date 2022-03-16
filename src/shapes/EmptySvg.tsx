@@ -1,7 +1,7 @@
 import React from "react";
 
 export class EmptySvg {
-    public toSvg() {
+    toSvg() {
         return <></>
     }
 }

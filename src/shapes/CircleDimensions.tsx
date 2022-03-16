@@ -14,27 +14,27 @@ export class CircleDimensions extends CellDimensions {
     this.height = height;
   }
 
-  public getWidth() {
+  getWidth() {
     return this.width;
   }
 
-  public getHeight() {
+  getHeight() {
     return this.height;
   }
 
-  public getVerticalShift(): number {
+  getVerticalShift(): number {
     return 0;
   }
 
-  public toString(): string {
+  toString(): string {
     return Math.round(this.getWidth()) + 'x' + Math.round(this.getHeight());
   }
 
-  public static getGridHeightFactor(numRows: number): number {
+  static getGridHeightFactor(numRows: number): number {
     return numRows;
   }
 
-  public static getMinCellHeight() {
+  static getMinCellHeight() {
     return MIN_CELL_HEIGHT_CIRCLE;
   }
 }

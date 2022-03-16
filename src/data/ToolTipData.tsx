@@ -13,7 +13,7 @@ export class ToolTipData {
     this.groupName = groupName;
   }
 
-  public asToolTipContent() {
+  asToolTipContent() {
     return (
       <>
         <p>{this.formatTimestamp(this.timestamp)}</p>

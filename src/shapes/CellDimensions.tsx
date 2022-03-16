@@ -1,4 +1,4 @@
 export abstract class CellDimensions {
-  public abstract getVerticalShift(): number;
-  public abstract toString(): string;
+  abstract getVerticalShift(): number;
+  abstract toString(): string;
 }

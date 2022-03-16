@@ -159,10 +159,10 @@ function calculateTimestamps(
   fields: import('@grafana/data').Field<any, import('@grafana/data').Vector<any>>[],
   numColumns: number,
   timeRange: TimeRange
-): number[] {
-  let timestamps: number[] = [];
+): Array<number> {
+  let timestamps: Array<number> = new Array();
   fields.forEach((field) => {
-    if (field.type == 'time') {
+    if (field.type === 'time') {
       if (timestamps.length > 0) {
         console.warn('Multiple time fields in data frame.  Using last');
       }
@@ -191,7 +191,7 @@ function addRows(
   timestamps: number[]
 ) {
   fields.forEach((field) => {
-    if (field.type == 'time') {
+    if (field.type === 'time') {
       return;
     }
     let rowName: string | undefined;
@@ -199,7 +199,7 @@ function addRows(
     switch (dataFormat) {
       case 'regular':
         if (field.name === valueField) {
-          if (field.type != 'number') {
+          if (field.type !== 'number') {
             throw new Error('Value field must be of type number');
           }
 

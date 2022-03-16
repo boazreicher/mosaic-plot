@@ -36,7 +36,7 @@ export class Circle extends Cell {
     this.stacked = stacked;
   }
 
-  public toSvgSpecific(): JSX.Element {
+  toSvgSpecific(): JSX.Element {
     let circleDimensions: CircleDimensions = this.dimensions as CircleDimensions;
 
     let radius = this.stacked

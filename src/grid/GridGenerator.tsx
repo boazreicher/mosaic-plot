@@ -20,7 +20,7 @@ export abstract class GridGenerator {
     this.colorPicker = colorPicker;
   }
 
-  public generateGrid() {
+  generateGrid() {
     let grid = new Grid(this.parameters.name);
     for (let rowIndex = 0; rowIndex < this.series.length; rowIndex++) {
       let row = new Row(this.series[rowIndex].getName());
@@ -72,11 +72,11 @@ export abstract class GridGenerator {
     }
   }
 
-  public addSeries(series: Series) {
+  addSeries(series: Series) {
     this.series.push(series);
   }
 
-  public addAllSeries(data: Series[]) {
+  addAllSeries(data: Series[]) {
     data.forEach((series) => {
       this.series.push(series);
     });

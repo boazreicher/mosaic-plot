@@ -4,7 +4,7 @@ import { CellDimensions } from 'shapes/CellDimensions';
 import { JigSawDimensions } from 'shapes/JigSawDimensions';
 
 export class PathDefs {
-  public static getPaths(cellDimensions: CellDimensions) {
+  static getPaths(cellDimensions: CellDimensions) {
     let data: Record<string, string> = {};
     data['w_w_o_o'] =
       'M 0.45801448,0.45804449 V 29.542014 l 9.66228952,0.1549 c -8.2786795,12.202875 16.62622,8.846655 8.88108,0.0516 l 10.5406,-0.20653 v -11.00531 c 15.5645,7.44934 9.97357,-17.62285951 0,-7.6935 V 0.45801449 H 0.45801448 v 0';
@@ -157,7 +157,7 @@ export class PathDef {
     this.cellDimensions = cellDimensions;
   }
 
-  public toPathDef() {
+  toPathDef() {
     let jigsawPieceDimensions: JigSawDimensions = this.cellDimensions as JigSawDimensions;
     let scaleWidth = jigsawPieceDimensions.getWidth() / BASE_JIGSAW_PIECE_LENGTH;
     let scaleHeight = jigsawPieceDimensions.getHeight() / BASE_JIGSAW_PIECE_LENGTH;

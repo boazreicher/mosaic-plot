@@ -9,11 +9,11 @@ export class ColorStep {
     this.step = step;
   }
 
-  public getColor() {
+  getColor() {
     return this.color;
   }
 
-  public getStep() {
+  getStep() {
     return this.step;
   }
 }

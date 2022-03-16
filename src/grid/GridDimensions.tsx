@@ -11,15 +11,15 @@ export class GridDimensions {
     this.height = height;
   }
 
-  public getTopLeft() {
+  getTopLeft() {
     return this.topLeft;
   }
 
-  public getWidth() {
+  getWidth() {
     return this.width;
   }
 
-  public getHeight() {
+  getHeight() {
     return this.height;
   }
 }

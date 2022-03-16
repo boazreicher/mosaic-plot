@@ -9,11 +9,11 @@ export class LabelsContainer {
     this.height = height;
   }
 
-  public getTopLeft() {
+  getTopLeft() {
     return this.topLeft;
   }
 
-  public getHeight() {
+  getHeight() {
     return this.height;
   }
 }

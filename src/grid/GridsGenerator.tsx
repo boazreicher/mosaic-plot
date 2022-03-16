@@ -32,15 +32,15 @@ export class GridsGenerator {
     this.gridGeneratorFactory = new GridGeneratorFactory(parameters.shape);
   }
 
-  public getMinValue() {
+  getMinValue() {
     return this.minValue;
   }
 
-  public getMaxValue() {
+  getMaxValue() {
     return this.maxValue;
   }
 
-  public generateGrids(panelOptions: MosaicPlotOptions, onOptionsChange: optionsChangeCallback) {
+  generateGrids(panelOptions: MosaicPlotOptions, onOptionsChange: optionsChangeCallback) {
     let grids = new Grids(panelOptions, onOptionsChange);
 
     let rightMargin = this.parameters.showScale && !this.parameters.compact ? panelOptions.scaleWidth : 0;
@@ -122,11 +122,11 @@ export class GridsGenerator {
     }
   }
 
-  public getColorPairs() {
+  getColorPairs() {
     return this.colorPairs;
   }
 
-  public addSeries(series: Series) {
+  addSeries(series: Series) {
     let group = series.getGroup();
     group = group === undefined ? 'NA' : group;
 
@@ -156,7 +156,7 @@ export class GridsGenerator {
     return (this.parameters.height - spacing * this.numGrids) / heightFactor;
   }
 
-  public getCellDimensions() {
+  getCellDimensions() {
     return this.computedCellDimensions;
   }
 }

@@ -34,7 +34,7 @@ export class EmptyJigSaw extends JigSaw {
     );
   }
 
-  public toSvg(): JSX.Element {
+  toSvg(): JSX.Element {
     return <></>;
   }
 }

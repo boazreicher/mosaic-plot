@@ -14,10 +14,10 @@ export class RGB implements Color {
   }
 
   // TODO: Add support for RGBa
-  public static fromString(colorString: string): Color {
+  static fromString(colorString: string): Color {
     let parsed = /^rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)\s*$/i.exec(colorString);
 
-    if (!parsed || parsed.length != 4) {
+    if (!parsed || parsed.length !== 4) {
       console.warn(`Unable to parse color string ${colorString}`);
       return Black();
     }

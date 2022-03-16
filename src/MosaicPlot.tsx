@@ -83,7 +83,7 @@ function buildElements(
       {buildXAxis(width, height, panelOptions, timeRange)}
       {buildAllYAxis(grids, width, height, panelOptions.leftMargin, panelOptions.labelType, panelOptions.compact).map(
         (yAxisData) => (
-          <YAxis data={yAxisData} labelPositionType={panelOptions.labelPositionType} />
+          <YAxis key={yAxisData.getId()} data={yAxisData} labelPositionType={panelOptions.labelPositionType} />
         )
       )}
     </>

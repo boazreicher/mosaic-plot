@@ -8,7 +8,7 @@ import { RectangleDimensions } from 'shapes/RectangleDimensions';
 import { GridGenerator } from './GridGenerator';
 
 export class RectangleGridGenerator extends GridGenerator {
-  public static combos: Set<String> = new Set();
+  static combos: Set<String> = new Set();
 
   protected buildCell(
     rowIndex: number,
