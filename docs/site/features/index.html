@@ -54,21 +54,11 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Features</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#drilldowns">Drilldowns</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#group-drilldown">Group Drilldown</a>
+    <li class="toctree-l2"><a class="reference internal" href="#grouping">Grouping</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#chart-drilldown">Chart Drilldown</a>
+    <li class="toctree-l2"><a class="reference internal" href="#focus">Focus</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#totals-drilldown">Totals Drilldown</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#date-range-control">Date Range Control</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#fog">Fog</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#transitions">Transitions</a>
+    <li class="toctree-l2"><a class="reference internal" href="#smoothing">Smoothing</a>
     </li>
     </ul>
                     </li>
@@ -79,10 +69,6 @@
                 </ul>
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../configuration_options/">Configuration Options</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../controls/">Controls</a>
                     </li>
                 </ul>
                 <ul>
@@ -130,84 +116,39 @@
             <div class="section">
               
                 <h1 id="features">Features<a class="headerlink" href="#features" title="Permanent link">#</a></h1>
-<h2 id="drilldowns">Drilldowns<a class="headerlink" href="#drilldowns" title="Permanent link">#</a></h2>
-<h3 id="group-drilldown">Group Drilldown<a class="headerlink" href="#group-drilldown" title="Permanent link">#</a></h3>
-<p>It is possible to drilldown into a specific group by clicking the (colored) group segment on the left part of the plot
+<h2 id="grouping">Grouping<a class="headerlink" href="#grouping" title="Permanent link">#</a></h2>
+<p>By specifying a <a href="../configuration_options/#fields"><code>Group</code> field</a>, different series/rows can be grouped according to common values
 <br>
-<img alt="Image title" src="../img/groupdrilldownnew1.png" />
+This has the following effects:</p>
+<ul>
+<li>Sorting is performed on each group first, and then by Breakdown field</li>
+<li>Groups of rows can be visually separated using the Group Spacing field</li>
+<li>Row labels can show only the group names, instead of all of the specific rows</li>
+</ul>
+
+<p>For example, lets say we have CPU utilization data for 50 different hosts, running in 5 different regions
 <br>
-<br>
-The first drilldown focuses on the group by changing the plot's appearance in the following ways:</p>
-<ol>
-<li>
-Fading out all of the other groups
-</li>
-<li>
-Changing the color palette for the charts in the selected group (to make them more distinct)
-</li>
-<li>
-Having the totals chart represent only the data from the selected group
-</li>
-</ol>
-<p><img alt="Image title" src="../img/groupdrilldownnew2.png" />
-<br>
-<br>
-Drilling down into a group that's already in focus, changes it to exlucsive mode, where in addition to the effects of focusing the group, all of the other groups are altogether removed from the plot
-<br>
-<img alt="Image title" src="../img/groupdrilldownnew3.png" />
-<br>
-Clicking on a group that is already in exclusive mode will reset the selection (no group is selected)</p>
-<h3 id="chart-drilldown">Chart Drilldown<a class="headerlink" href="#chart-drilldown" title="Permanent link">#</a></h3>
-<p>Clicking on a chart brings it into focus by changing the plot's appearance in the following ways:</p>
-<ol>
-<li>
-Fading out all of the charts
-</li>
-<li>
-Setting the X-axis right below the selected chart
-</li>
-</ol>
-<p><img alt="Image title" src="../img/chartdrilldownnew1.png" />
-<br>
-Clicking on a chart that is already in focus will reset the selection (no chart is selected)</p>
-<h3 id="totals-drilldown">Totals Drilldown<a class="headerlink" href="#totals-drilldown" title="Permanent link">#</a></h3>
-<p>Clicking on the totals chart switches its stack mode from regular to stacked to 100% and back
-<br></p>
-<p><img alt="Image title" src="../img/totalsdrilldownnew1.png" /></p>
-<h2 id="date-range-control">Date Range Control<a class="headerlink" href="#date-range-control" title="Permanent link">#</a></h2>
-<p>The date range control allows for zooming in to specific areas of the plot
-<br>
-It is especially useful for data sets that have a high number of time points.
-<br>
-<br>
-The date range control can be enabled via the <a href="../controls/">plot controls</a>.  It will appear as a simple column chart (representing the plot's total) at the bottom of the plot
-<img alt="control" src="../img/daterange1.png" /></p>
-<p>A specific time range can be selected by clicking on the date range control chart and dragging across a range:</p>
-<p><img alt="control" src="../img/daterange2.png" /></p>
-<p>The selection can be modified and moved by interacting with it.  A single click on the date range control chart (outside of the selection) will reset the selected range:</p>
-<p><img alt="control" src="../img/daterangecontrol.gif" /></p>
-<h2 id="fog">Fog<a class="headerlink" href="#fog" title="Permanent link">#</a></h2>
-<p>Fog is used to highlight values above a certain threshold.  Parts of the chart below the fog's height will be hidden under the fog
-<br>
-By using fog, it is much easier to spot outlier values (which will be above the fog)</p>
-<p><img alt="Image title" src="../img/fognew.png" /></p>
-<h2 id="transitions">Transitions<a class="headerlink" href="#transitions" title="Permanent link">#</a></h2>
-<p>Tranistions are used to create sort of dynamic slideshows from Sierra plots.
-<br>
-The most common use case would be a dashboard that is presented over a long period of time and with no user interaction (such as on a TV monitor), where there's value in periodically cycling between which plot elements are in focus.
-<br>
-<br>
-There are two different tranisition modes:
-<br>
-<br>
-1. <code>Group</code>: The plot periodically highlights a different group:
-<br>
-<img alt="Image title" src="../img/transitionsgroup.gif" />
-<br>
-2. <code>Chart</code>: The plot periodically highlights a different chart:
-<br>
-<img alt="Image title" src="../img/transitionschart.gif" /></p>
-<p>The cycle period is <a href="../configuration_options/#transitions">configurable</a></p>
+The heatmap will look something like this:
+<img alt="cpu_no_grouping" src="../img/features/cpu_no_grouping.png" /></p>
+<p>Even though the rows are sorted such that they are effectively grouped by region (only because of the hosts' naming convention), it is still quite hard to distinguish between the different groups/regions, and be able to say something meaningful about the overall performance/trends in each region</p>
+<p>By using the <code>Region</code> label as the <code>Group</code> field, as well as applying some <code>Group Spacing</code>, we get:
+<img alt="cpu_grouping" src="../img/features/cpu_grouping.png" /></p>
+<p>This very minor change in the visualization makes a big difference in our ability to reason about the trends in different regions
+Since we are mainly concerned with the overall regional performance, we can change the <a href="../configuration_options/#labels"><code>Show Labels</code> field</a> to <code>Group</code> to get:
+<img alt="cpu_grouping_grouplabel" src="../img/features/cpu_grouping_grouplabel.png" /></p>
+<p>If we need to see the label for a specific row/host, we can always just hover over that row and see the tooltip data:
+<img alt="cpu_grouping_grouplabel_tooltip" src="../img/features/cpu_grouping_grouplabel_tooltip.png" /></p>
+<h2 id="focus">Focus<a class="headerlink" href="#focus" title="Permanent link">#</a></h2>
+<p>The number of columns in a Mosaic Plot determines its resolution.  Ideally, we would always show the maximum number of columns (which would be the number of data points in the underlying data).  However, showing too many cells can impact the web page's performance
+To address this, the <a href="../configuration_options/#grid-properties"><code>Min Columns</code></a> field can be used to limit the number of columns that are displayed
+In some cases however, we might want to show panels with a limited number of columns, but then be able to (maybe temporarily) increase that number so we can get a higher resolution and notice more detail</p>
+<p>To enable this interactivity, the <a href="../configuration_options/#style"><code>Enable Focus</code></a> option must be enabled.  Once it is enabled, clicking on any part of the panel will cause it to transition between the values in <a href="../configuration_options/#grid-properties"><code>Min Columns</code></a> and <a href="../configuration_options/#grid-properties"><code>Max Columns</code></a></p>
+<p><img alt="focus" src="../img/features/focus.gif" /></p>
+<h2 id="smoothing">Smoothing<a class="headerlink" href="#smoothing" title="Permanent link">#</a></h2>
+<p>When the <a href="../configuration_options/#style"><code>Smoothing</code></a> option is enabled, instead of simply coloring each cell according to its value, each cell is colored with a gradient, spanning from the color in the cell's left neighbor, to the cell's color
+Smoothing can make low resolution plots appear nicer, as well as remove visual artficats caused by arbitrary division of the data into cells:</p>
+<p><img alt="no_smoothing" src="../img/features/no_smoothing.png" />
+<img alt="smoothing" src="../img/features/smoothing.png" /></p>
               
             </div>
           </div>

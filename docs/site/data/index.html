@@ -59,6 +59,12 @@
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Data</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-regular-data-format">1. Regular Data Format</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-heatmap-data-format">2. Heatmap Data Format</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a>
     </li>
@@ -67,10 +73,6 @@
                 </ul>
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../configuration_options/">Configuration Options</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../controls/">Controls</a>
                     </li>
                 </ul>
                 <ul>
@@ -119,57 +121,150 @@
               
                 <h1 id="data">Data<a class="headerlink" href="#data" title="Permanent link">#</a></h1>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">#</a></h2>
-<p>The Sierra Plot panel expects <i>time series</i> data frames, meaning each series must contain at least on field with <code>time</code> type (if multiple such fields exist, the first one will be used)
-<br>
-The data must also contain at least one field with type <code>number</code> to be used as the <a href="../configuration_options/#fields"><code>Amplitude</code></a>
-<br>
-At least one field of type <code>string</code> is also required, to be used ad the <a href="../configuration_options/#fields"><code>Chart Breakdown</code></a>
-<br>
-<br>
-For example, let's assume that we want to plot the number of requests hitting a number of different servers
+<p>The Mosaic Plot panel expects <i>time series</i> data frames, meaning each series must contain at least on field with <code>time</code> type (if multiple such fields exist, the first one will be used)</p>
+<p>Two data formats are supported:</p>
+<h3 id="1-regular-data-format">1. Regular Data Format<a class="headerlink" href="#1-regular-data-format" title="Permanent link">#</a></h3>
+<p>This data format is applicable where each data frame has a <strong>numeric</strong> <a href="../configuration_options/#fields"><code>Amplitude</code></a> field and a <strong>string</strong> <a href="../configuration_options/#fields"><code>Breakdown</code></a> label to differentiate the different series.  It can also contain an (optional) additional <strong>string</strong> label for <a href="../configuration_options/#fields"><code>grouping</code></a> the different series.</p>
+<p>For example, let's assume that we want to plot the number of requests hitting a number of different servers
 <br>
 Each server is located in some region
 <br>
-Our request count metric is calculated separately for <code>type=OK</code> and <code>type=ERROR</code>
 <br>
-<br>
-For the above example, our data will contain a <code>time</code> field, a <code>number</code> field that represents the number of requests, and a <code>string</code> field representing the server name</p>
-<p>The following (optional) fields can also be used:</p>
+For the above example, our data will contain a <code>time</code> field, a <code>number</code> field that represents the number of requests, and a <code>string</code> field representing the server name.  It might also contain a <code>string</code> field represening the region name.</p>
+<p>The data will contain a single data frame that looks something like this:</p>
 <table>
 <thead>
 <tr>
-<th>Use</th>
-<th>Type</th>
-<th>Description</th>
-<th>Example</th>
+<th>Time</th>
+<th>Host</th>
+<th>Region</th>
+<th>Requests</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>Group Breakdown</code></td>
-<td><code>string</code></td>
-<td>Group charts with the same group value</td>
-<td>region</td>
+<td>1647399651000</td>
+<td>use1-03</td>
+<td>us-east-1</td>
+<td>234</td>
 </tr>
 <tr>
-<td><code>Series Breakdown</code></td>
-<td><code>string</code></td>
-<td>Split the charts' data according to the series values</td>
-<td>type</td>
+<td>1647399651000</td>
+<td>use1-02</td>
+<td>us-east-1</td>
+<td>163</td>
 </tr>
 <tr>
-<td><code>Weight</code></td>
-<td><code>number</code></td>
-<td>Used for weighted average calculations</td>
-<td>total requests</td>
+<td>1647399651000</td>
+<td>usw1-01</td>
+<td>us-west-1</td>
+<td>111</td>
+</tr>
+<tr>
+<td>1647399656000</td>
+<td>usw1-01</td>
+<td>us-west-1</td>
+<td>875</td>
+</tr>
+<tr>
+<td>1647399656000</td>
+<td>use1-03</td>
+<td>us-east-1</td>
+<td>125</td>
+</tr>
+<tr>
+<td>1647399656000</td>
+<td>use1-02</td>
+<td>us-east-1</td>
+<td>14</td>
 </tr>
 </tbody>
 </table>
+<div class="admonition hint inline">
+<p class="admonition-title">Hint</p>
+<p>When using the regular data format, rows are mapped to the  <a href="../configuration_options/#fields"><code>Breakdown</code></a> field</p>
+</div>
+<h3 id="2-heatmap-data-format">2. Heatmap Data Format<a class="headerlink" href="#2-heatmap-data-format" title="Permanent link">#</a></h3>
+<p>This data format is applicable where each data frame contains only a <strong>time</strong> field and a <strong>numeric</strong> value field.</p>
+<p>For example, let's assume we want to plot a heatmap of the number of requests over time, in bins representing response time ranges.  Basically histograms over time.
+<br>
+For the above example, our data will contain multiple data frames, where each frame has a <strong>time</strong> field and a value field, whose name represents the bucket (and vertical position in the plot).</p>
+<p>The data will contain multiple data frames that look something like this:</p>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>100-200</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1647399651000</td>
+<td>4</td>
+</tr>
+<tr>
+<td>1647399656000</td>
+<td>12</td>
+</tr>
+<tr>
+<td>1647399661000</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>200-500</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1647399651000</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1647399656000</td>
+<td>24</td>
+</tr>
+<tr>
+<td>1647399661000</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>500-1000</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1647399651000</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1647399656000</td>
+<td>10</td>
+</tr>
+<tr>
+<td>1647399661000</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition hint inline">
+<p class="admonition-title">Hint</p>
+<p>When using the heatmap data format, each row is mapped to a specific data frame</p>
+</div>
 <h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">#</a></h2>
 <ul>
-<li>Sierra Plot expects that each data frame has the same fields</li>
-<li>Sierra Plot expects that each data frame be of the same length</li>
-<li>Sierra Plot doesn't currently support null values</li>
+<li>Mosaic Plot expects that each data frame has the same fields</li>
+<li>Mosaic Plot expects that each data frame be of the same length</li>
+<li>Mosaic Plot doesn't currently support null values</li>
 </ul>
               
             </div>
