@@ -6,7 +6,7 @@ We have 50 different servers in 4 different regions, and are interested in seein
 Normally, it wouldn't be feasible to plot all 4 metrics over time for each of the 50 servers, so we would have to settle for summary stats<br>
 
 We would have something like this:
-![stats_noheatmap](/img/examples/stats_noheatmap.png)
+![stats_noheatmap](img/examples/stats_noheatmap.png)
 
 While this dashboard gives us a pretty good summary of the performance in each region, it is lacking in several aspects:
 <ol>
@@ -15,7 +15,7 @@ While this dashboard gives us a pretty good summary of the performance in each r
 </ol>
 
 By using Mosaic Plot panels, we can construct something like this:
-![stats_heatmap](/img/examples/stats_heatmap.png)
+![stats_heatmap](img/examples/stats_heatmap.png)
 
 First, for each region, we've added two heatmaps<br>
 One that shows the number of requests **per server** over time (white to blue) and one that shows the average error rate **per server** over time (green to red)<br>
@@ -31,7 +31,7 @@ This type of visualization allows us to get a clear picture of both the individu
 
 ## II.  Basic Heatmaps
 The following example shows 3 basic heatmaps, visualized as Mosaic Plots with different styling parameters:
-![demo1](/img/examples/demo1.png)
+![demo1p](img/examples/demo1.png)
 
 ## III.  Variations
 The following example shows the same data plotted plotted in 12 different styling variations<br>
@@ -40,7 +40,7 @@ Each column shows a different [`Shape`](configuration_options.md#grid-properties
 The top row is the basic style<br>
 The second row adds a [`Bevel`](configuration_options.md#style) effect
 The bottom row gets rid of the [`Outline`](configuration_options.md#style) and adds a [`Smoothing`](features.md#smoothing) effect
-![variations](/img/examples/variations.png)
+![variationsp](img/examples/variations.png)
 
 !!! hint inline
 
@@ -50,7 +50,7 @@ The bottom row gets rid of the [`Outline`](configuration_options.md#style) and a
 The following example shows the same data plotted plotted in 6 different styling variations<br>
 
 The middle and right plots on the bottom show the use of the [`Discrete Scale`](configuration_options.md#labels) option.  It can be very useful when the values can be categorized, such as assigning different value ranges to categories such as `GREAT`, `GOOD`, `AVERAGE`, `BAD` and `TERRIBLE`
-![variations2](/img/examples/variations2.png)
+![variations2p](img/examples/variations2.png)
 
 !!! hint inline
 
@@ -58,4 +58,4 @@ The middle and right plots on the bottom show the use of the [`Discrete Scale`](
 
 ## V.  Mandelbrot Set
 Just for fun, let's plot the Mandelbrot set using Mosaic Plots:<br>
-![mandelbrot](/img/examples/mandelbrot.png)
+![mandelbrotp](img/examples/mandelbrot.png)
