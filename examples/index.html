@@ -125,7 +125,7 @@
 We have 50 different servers in 4 different regions, and are interested in seeing for each server, the number of requests, error rate, CPU utilization and memory utilization<br>
 Normally, it wouldn't be feasible to plot all 4 metrics over time for each of the 50 servers, so we would have to settle for summary stats<br></p>
 <p>We would have something like this:
-<img alt="stats_noheatmap" src="/img/examples/stats_noheatmap.png" /></p>
+<img alt="stats_noheatmap" src="../img/examples/stats_noheatmap.png" /></p>
 <p>While this dashboard gives us a pretty good summary of the performance in each region, it is lacking in several aspects:</p>
 <ol>
 <li>There's not enough room in the dashboard to add requests and error rate stats over time</li>
@@ -133,7 +133,7 @@ Normally, it wouldn't be feasible to plot all 4 metrics over time for each of th
 </ol>
 
 <p>By using Mosaic Plot panels, we can construct something like this:
-<img alt="stats_heatmap" src="/img/examples/stats_heatmap.png" /></p>
+<img alt="stats_heatmap" src="../img/examples/stats_heatmap.png" /></p>
 <p>First, for each region, we've added two heatmaps<br>
 One that shows the number of requests <strong>per server</strong> over time (white to blue) and one that shows the average error rate <strong>per server</strong> over time (green to red)<br></p>
 <p>By using <a href="../configuration_options/#labels"><code>Compact Mode</code></a> we achieve an incredibly high data resolution.  The top left heatmap for example (showing the number of requests per server in us-east-1), contains 2880 different cells/data points, while taking up the space that would normally fit only a sparkline or two, let alone trying to fit a line/area chart in that space</p>
@@ -144,14 +144,14 @@ The second shows the average memory utilization of every server<br></p>
 This type of visualization allows us to get a clear picture of both the individual performance of each server, as well as the overall trends for each region </p>
 <h2 id="ii-basic-heatmaps">II.  Basic Heatmaps<a class="headerlink" href="#ii-basic-heatmaps" title="Permanent link">#</a></h2>
 <p>The following example shows 3 basic heatmaps, visualized as Mosaic Plots with different styling parameters:
-<img alt="demo1" src="/img/examples/demo1.png" /></p>
+<img alt="demo1p" src="../img/examples/demo1.png" /></p>
 <h2 id="iii-variations">III.  Variations<a class="headerlink" href="#iii-variations" title="Permanent link">#</a></h2>
 <p>The following example shows the same data plotted plotted in 12 different styling variations<br></p>
 <p>Each column shows a different <a href="../configuration_options/#grid-properties"><code>Shape</code></a>: <code>Rectangle</code>, <code>Hexagon</code>, <code>Stacked Circle</code> and <code>Circle</code><br>
 The top row is the basic style<br>
 The second row adds a <a href="../configuration_options/#style"><code>Bevel</code></a> effect
 The bottom row gets rid of the <a href="../configuration_options/#style"><code>Outline</code></a> and adds a <a href="../features/#smoothing"><code>Smoothing</code></a> effect
-<img alt="variations" src="/img/examples/variations.png" /></p>
+<img alt="variationsp" src="../img/examples/variations.png" /></p>
 <div class="admonition hint inline">
 <p class="admonition-title">Hint</p>
 <p><a href="/img/examples/variations.png" target="_blank">Open the image in a separate tab (full size) to clearly see the subtle differences between the first and second row</a></p>
@@ -159,14 +159,14 @@ The bottom row gets rid of the <a href="../configuration_options/#style"><code>O
 <h2 id="iv-more-variations">IV.  More Variations<a class="headerlink" href="#iv-more-variations" title="Permanent link">#</a></h2>
 <p>The following example shows the same data plotted plotted in 6 different styling variations<br></p>
 <p>The middle and right plots on the bottom show the use of the <a href="../configuration_options/#labels"><code>Discrete Scale</code></a> option.  It can be very useful when the values can be categorized, such as assigning different value ranges to categories such as <code>GREAT</code>, <code>GOOD</code>, <code>AVERAGE</code>, <code>BAD</code> and <code>TERRIBLE</code>
-<img alt="variations2" src="/img/examples/variations2.png" /></p>
+<img alt="variations2p" src="../img/examples/variations2.png" /></p>
 <div class="admonition hint inline">
 <p class="admonition-title">Hint</p>
 <p><a href="/img/examples/variations2.png" target="_blank">Open the image in a separate tab (full size) to clearly see the styling features in each plot</a></p>
 </div>
 <h2 id="v-mandelbrot-set">V.  Mandelbrot Set<a class="headerlink" href="#v-mandelbrot-set" title="Permanent link">#</a></h2>
 <p>Just for fun, let's plot the Mandelbrot set using Mosaic Plots:<br>
-<img alt="mandelbrot" src="/img/examples/mandelbrot.png" /></p>
+<img alt="mandelbrotp" src="../img/examples/mandelbrot.png" /></p>
               
             </div>
           </div>
