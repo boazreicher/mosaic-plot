@@ -64,31 +64,13 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#fields">Fields</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#fields-advanced">Fields [Advanced]</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#series">Series</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#totals">Totals</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#presentation">Presentation</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#style">Style</a>
+    <li class="toctree-l2"><a class="reference internal" href="#grid-properties">Grid Properties</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#labels">Labels</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#markers">Markers</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#fog">Fog</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#transitions">Transitions</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#gridlines">Gridlines</a>
+    <li class="toctree-l2"><a class="reference internal" href="#style">Style</a>
     </li>
     </ul>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../controls/">Controls</a>
                     </li>
                 </ul>
                 <ul>
@@ -148,76 +130,32 @@
 </thead>
 <tbody>
 <tr>
+<td><code>Data Format</code></td>
+<td>Structure of the data source (See <a href="../data/">Data</a>)</td>
+<td><strong>Required</strong></td>
+<td></td>
+</tr>
+<tr>
 <td><code>Amplitude</code></td>
-<td>Value field that determines the amplitude (height) of each chart</td>
+<td>Value field that determines the amplitude (color) of each cell</td>
 <td><strong>Required</strong></td>
 <td>Request Count, Error Count</td>
 </tr>
 <tr>
 <td><code>Breakdown</code></td>
-<td>String field (dimension) on which to split the data into different charts</td>
+<td>String field (dimension) on which to split the data into different rows</td>
 <td><strong>Required</strong></td>
 <td>Host Name</td>
 </tr>
 <tr>
 <td><code>Group</code></td>
-<td>String field (dimension) used to group different charts based on common values</td>
+<td>String field (dimension) used to group different rows based on common values</td>
 <td><em>Optional</em></td>
 <td>Cluster Name</td>
 </tr>
 </tbody>
 </table>
-<h2 id="fields-advanced">Fields [Advanced]<a class="headerlink" href="#fields-advanced" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-<th>Required</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Weight</code></td>
-<td>Value field that determines the weight of each chart.  Used for calculating weighted averages</td>
-<td><em>Optional</em></td>
-<td>Total Request Count</td>
-</tr>
-<tr>
-<td><code>Series Breakdown</code></td>
-<td>String field (dimension) on which to split each chart to multiple (usually stacked) series</td>
-<td><em>Optional</em></td>
-<td>Request Type</td>
-</tr>
-<tr>
-<td><code>Series Values</code></td>
-<td>Specific series values to include in the results</td>
-<td><em>Optional</em></td>
-<td>GET, POST, PUT</td>
-</tr>
-<tr>
-<td><code>Series Values to Exclude</code></td>
-<td>Specific series values to exclude from the results</td>
-<td><em>Optional</em></td>
-<td>GET, POST, PUT</td>
-</tr>
-<tr>
-<td><code>Group Values</code></td>
-<td>Specific group values to include in the results</td>
-<td><em>Optional</em></td>
-<td>Cluster1, Cluster2</td>
-</tr>
-<tr>
-<td><code>Group Values to Exclude</code></td>
-<td>Specific group values to exclude from the results</td>
-<td><em>Optional</em></td>
-<td>Cluster1, Cluster2</td>
-</tr>
-</tbody>
-</table>
-<h2 id="series">Series<a class="headerlink" href="#series" title="Permanent link">#</a></h2>
-<p><em>The following options contorl the behaviour and appearance of the specific charts</em></p>
+<h2 id="grid-properties">Grid Properties<a class="headerlink" href="#grid-properties" title="Permanent link">#</a></h2>
 <table>
 <thead>
 <tr>
@@ -226,147 +164,41 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>Shape</code></td>
+<td>Shape of each cell.  Possible values are: <ul><li>⬜ Rectangle</li><li>⬣ Hexagon</li><li>🧩 Jigsaw</li><li>⬤ Circle</li><li>🔿 Stacked Circle</li></ul></td>
+</tr>
+<tr>
+<td><code>Group Spacing</code></td>
+<td>Vertical separation between groups</td>
+</tr>
+<tr>
+<td><code>Sort Type</code></td>
+<td>Defines how rows should be sorted</td>
+</tr>
 <tr>
 <td><code>Sort Mode</code></td>
-<td>Mode for sorting groups and then charts within groups</td>
+<td>Sort ascending or descending</td>
 </tr>
 <tr>
-<td><code>Chart Type</code></td>
-<td>Chart type for regular charts.  Either linechart or stacked area chart</td>
+<td><code>Min Columns</code></td>
+<td>The minimum number of columns to display.  If <code>Focus</code> is disabled, this property determines the number of columns to show</td>
 </tr>
 <tr>
-<td><code>Stepped Area Chart</code></td>
-<td>Determines if lines between adjacent data points should be simply connected or appear as steps</td>
+<td><code>Max Columns</code></td>
+<td>The maximum number of columns to display when focusing</td>
 </tr>
 <tr>
 <td><code>Aggregation</code></td>
-<td>Determines how series values within a chart should be aggregated</td>
+<td>Aggregate function to apply when there are more data points than columns.  Possible values are: <ul><li>Sum</li><li>Average</li></ul></td>
 </tr>
 <tr>
-<td><code>Max Y Type</code></td>
-<td>Determines the how the Y-axis is scaled for each chart: <ul><li><code>Global</code>: Scaling relative to the maximum value across all charts</li><li><code>Total</code>: Scaling relative to the total maximum value</li><li><code>Local</code>: Scaling relative to the maximum value in each chart</li><li><code>Group</code>: Scaling relative to the maximum value across all charts in each group</li></ul></td>
+<td><code>Scale Type</code></td>
+<td>Scaling function for determining a cell's color.  Possible values are: <ul><li>Squared</li><li>Linear</li><li>Square Root</li><li>Log</li></ul></td>
 </tr>
 <tr>
-<td><code>Skew Percent</code></td>
-<td>Positions each chart with an increasing horizontal offset</td>
-</tr>
-<tr>
-<td><code>Scale Y</code></td>
-<td>Controls the vertical size of each chart</td>
-</tr>
-</tbody>
-</table>
-<h2 id="totals">Totals<a class="headerlink" href="#totals" title="Permanent link">#</a></h2>
-<p><em>The following options contorl the behaviour and appearance of the totals chart</em></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Chart Type</code></td>
-<td>Chart type for the totals chart.  Either linechart or stacked area chart</td>
-</tr>
-<tr>
-<td><code>Breakdown</code></td>
-<td>Breakdown composition for the totals chart: <ul><li><code>None</code>: A single series.  Aggregation of <strong>all</strong> values</li><li><code>Group</code>: Aggregate by groups</li><li><code>Chart</code>: Aggregate by chart</li><li><code>Series</code>: Aggregate by series (only if series breakdown is used)</li></ul></td>
-</tr>
-<tr>
-<td><code>Stack Mode</code></td>
-<td>Stack by actual values, or stack to 100%</td>
-</tr>
-<tr>
-<td><code>Total Height Percent</code></td>
-<td>Percentage of the plot area for the totals chart to occupy</td>
-</tr>
-<tr>
-<td><code>Show Total</code></td>
-<td>Show or hide the totals chart</td>
-</tr>
-</tbody>
-</table>
-<h2 id="presentation">Presentation<a class="headerlink" href="#presentation" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Show Range Selector</code></td>
-<td>Show or hide the X-axis' time range selector</td>
-</tr>
-<tr>
-<td><code>Show Groups</code></td>
-<td>Show or hide the group indicators and labels (doesn't affect any other behavior)</td>
-</tr>
-<tr>
-<td><code>Left Margin Size</code></td>
-<td>Size of the margin between the charts' left-most position and the panel's left border</td>
-</tr>
-<tr>
-<td><code>Top Margin Size</code></td>
-<td>Size of the margin between the charts' upper-most position and the panel's top border (or the total's chart, if it is visible)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="style">Style<a class="headerlink" href="#style" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Chart Color</code></td>
-<td>Base color for charts</td>
-</tr>
-<tr>
-<td><code>Color Mode</code></td>
-<td><ul><li><code>Regular</code>: Chart color is determined by <code>Chart Color</code> and <code>Color Type</code></li><li><code>Group</code>: The chart color's hue is determined by the group's color and <code>Color Type</code>.  <code>Chart Color</code> determines only the saturation and lightness</li><li><code>Values</code>: Gradient color based only on the chart's values</li><li><code>Values (inverted)</code>: Same as <code>Values</code>, but with inverted colors</li></ul></td>
-</tr>
-<tr>
-<td><code>Color Type</code></td>
-<td><ul><li><code>Single</code>: Use a single color for every chart (or every chart in a group, if <code>Color Mode</code> is set to <code>Group</code>)</li><li><code>Sequential</code>: Use increasing lightness values for each chart in a sequence (if  <code>Color Mode</code> is set to <code>Group</code>, the sequence is reset for each group)</li><li><code>Alternating</code>: Alternate lightness values for each chart in a sequence</li></ul></td>
-</tr>
-<tr>
-<td><code>Outline Color</code></td>
-<td>Color for each chart's outline (or for the chart itself, if <code>Chart Type</code> is set to <code>Line</code>)</td>
-</tr>
-<tr>
-<td><code>Outline Width</code></td>
-<td>Width for each chart's outline (or for the chart itself, if <code>Chart Type</code> is set to <code>Line</code>)</td>
-</tr>
-<tr>
-<td><code>Outline Opacity</code></td>
-<td>Opacity for each chart's outline (or for the chart itself, if <code>Chart Type</code> is set to <code>Line</code>)</td>
-</tr>
-<tr>
-<td><code>Glow</code></td>
-<td>If enabled, each outline has a glow effect (based on <code>Outline Color</code>)</td>
-</tr>
-<tr>
-<td><code>Glow Spread</code></td>
-<td>Size of the glow effect</td>
-</tr>
-<tr>
-<td><code>Bevel</code></td>
-<td>If enabled, each chart has a bevel effect (only applicable to area charts)</td>
-</tr>
-<tr>
-<td><code>Show Background</code></td>
-<td>If enabled, displays a background element behind the charts</td>
-</tr>
-<tr>
-<td><code>Background Color</code></td>
-<td>Color for the background element</td>
+<td><code>Max Rows</code></td>
+<td>The maximum number of rows to show (after sorting)</td>
 </tr>
 </tbody>
 </table>
@@ -380,33 +212,44 @@
 </thead>
 <tbody>
 <tr>
-<td><code>Show Chart Labels</code></td>
-<td>Show or hide chart labels</td>
+<td><code>Show Labels</code></td>
+<td>Controls the row labels.  Possible values are: <ul><li>Series</li><li>Group</li><li>Buckets</li><li>None</li></ul></td>
 </tr>
 <tr>
-<td><code>Label Color</code></td>
-<td>Color for chart and group labels</td>
+<td><code>Label Positions</code></td>
+<td>Controls the position of the labels.  Possible values are: <ul><li>Horizontal</li><li>Vertical</li><li>Angle</li></ul></td>
 </tr>
 <tr>
-<td><code>Chart Label Size</code></td>
-<td>Size of chart labels</td>
+<td><code>Left Margin</code></td>
+<td>Size of the labels margin</td>
 </tr>
 <tr>
-<td><code>Chart Label Shift</code></td>
-<td>Shift chart labels horizontally (away from the charts)</td>
+<td><code>Show X Axis</code></td>
+<td>Show or hide the horizontal axis</td>
 </tr>
 <tr>
-<td><code>Group Label Size</code></td>
-<td>Size of group labels</td>
+<td><code>Show Scale</code></td>
+<td>Show or hide the color scale</td>
+</tr>
+<tr>
+<td><code>Scale Width</code></td>
+<td>Horizontal width for the color scale</td>
+</tr>
+<tr>
+<td><code>Discrete Scale</code></td>
+<td>Divide the color scale into 5 discrete values</td>
+</tr>
+<tr>
+<td><code>Compact Mode</code></td>
+<td>If selected, hides everything except the grid itself</td>
 </tr>
 </tbody>
 </table>
-<h2 id="markers">Markers<a class="headerlink" href="#markers" title="Permanent link">#</a></h2>
-<p><em>Markers are indicators (when hovering over) of the timestamp and value of each series data point</em></p>
-<div class="admonition warning inline">
-<p class="admonition-title">Warning</p>
-<p>Enabling markers in plots that have a very high number of data points might have performance implications</p>
+<div class="admonition hint inline">
+<p class="admonition-title">Hint</p>
+<p>When <code>Show Labels</code> is set to <code>Buckets</code>, if <code>Data Format</code> is set to <code>heatmap</code> and the names of the rows are in the format <code>&lt;START_NUMBER&gt;-&lt;END_NUMBER&gt;</code> the row labels will show only the value of <code>&lt;START_NUMBER&gt;</code>, and only 10 values/buckets will be shown </p>
 </div>
+<h2 id="style">Style<a class="headerlink" href="#style" title="Permanent link">#</a></h2>
 <table>
 <thead>
 <tr>
@@ -416,89 +259,52 @@
 </thead>
 <tbody>
 <tr>
-<td><code>Mode</code></td>
-<td><ul><li><code>Disable</code>: Markers aren't drawn</li><li><code>Hidden</code>: Markers are present (tooltip on mouse over) but are hidden</li><li><code>Visible</code>: Markers are visible as dots on each series data point</li></ul></td>
+<td><code>Color Palette</code></td>
+<td>The color palette to use for coloring cells</td>
 </tr>
 <tr>
-<td><code>Show Chart Labels</code></td>
-<td>Show or hide chart labels</td>
+<td><code>Invert Palette</code></td>
+<td>Invert the color palette's order</td>
 </tr>
 <tr>
-<td><code>Show Chart Labels</code></td>
-<td>Show or hide chart labels</td>
-</tr>
-</tbody>
-</table>
-<h2 id="fog">Fog<a class="headerlink" href="#fog" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Show Fog</code></td>
-<td>Show or hide fog</td>
+<td><code>Invert Colors</code></td>
+<td>Invert all colors used in the panel</td>
 </tr>
 <tr>
-<td><code>Fog Height</code></td>
-<td>Fog height, as a percentage of each chart's height</td>
+<td><code>Zero Values</code></td>
+<td>Determines how empty (zero) cells should be treated.  Possible values are: <ul><li>Regular: Using the lowest color in the selected palette</li><li>Empty: No cell is created</li><li>Customer: Use a custom color</li></ul></td>
 </tr>
 <tr>
-<td><code>Fog Color</code></td>
-<td>Color for fog (supports transparency)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="transitions">Transitions<a class="headerlink" href="#transitions" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Type</code></td>
-<td><ul><li><code>None</code>: Disable transitions</li><li><code>Cycle Groups</code>: Highlight a new group every <code>Period</code> milliseconds</li><li><code>Cycle Charts</code>: Highlight a new chart every <code>Period</code> milliseconds</li></ul></td>
+<td><code>Zero Color</code></td>
+<td>Custom color to use for empty cells</td>
 </tr>
 <tr>
-<td><code>Period</code></td>
-<td>Cycle duration in milliseconds</td>
-</tr>
-</tbody>
-</table>
-<h2 id="gridlines">Gridlines<a class="headerlink" href="#gridlines" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Show</code></td>
-<td>Show or hide vertical gridlines</td>
+<td><code>Outline Color Type</code></td>
+<td>Determines how cell outlines should be colored.  Possible values are: <ul><li>Same as cell</li><li>Custom</li></ul></td>
 </tr>
 <tr>
-<td><code>Width</code></td>
-<td>Width of the vertical gridlines</td>
+<td><code>Outline Color</code></td>
+<td>Custom color to use for cell outlines</td>
 </tr>
 <tr>
-<td><code>Ticks</code></td>
-<td>Number of vertical gridlines</td>
+<td><code>Outline Width</code></td>
+<td>The width of cells' outline</td>
 </tr>
 <tr>
-<td><code>Color</code></td>
-<td>Color for vertical gridlines</td>
+<td><code>Bevel</code></td>
+<td>Add a bevel effect to each cell (might degrade performance when the grid contains a large number of cells)</td>
 </tr>
 <tr>
-<td><code>Position</code></td>
-<td><ul><li><code>Below Charts</code>: Position gridlines under the charts</li><li><code>Aboce Chart</code>: Position gridlines above the charts</li></ul></td>
+<td><code>Smoothing</code></td>
+<td>Create smooth color transitions between adjacent cells (might degrade performance when the grid contains a large number of cells)</td>
+</tr>
+<tr>
+<td><code>Enable Focus</code></td>
+<td>When focus is enabled, clicking on any part of the grid causes it to transition between <code>Min Columns</code> and <code>Max Columns</code></td>
+</tr>
+<tr>
+<td><code>Random Seed</code></td>
+<td>Random seed for generating Jigsaw puzzle grids</td>
 </tr>
 </tbody>
 </table>
@@ -509,7 +315,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../controls/" class="btn btn-neutral float-right" title="Controls">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../examples/" class="btn btn-neutral float-right" title="Examples">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../data/" class="btn btn-neutral" title="Data"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -545,7 +351,7 @@
       <span><a href="../data/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../controls/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../examples/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

@@ -63,50 +63,18 @@
                     <li class="toctree-l1"><a class="reference internal" href="../configuration_options/">Configuration Options</a>
                     </li>
                 </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../controls/">Controls</a>
-                    </li>
-                </ul>
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Examples</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#i-requests-to-servers">I.  Requests to Servers</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#ii-overview">I.I  Overview</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#iii-overall-trend">I.I.I  Overall Trend</a>
+    <li class="toctree-l2"><a class="reference internal" href="#i-server-stats">I.  Server Stats</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#iiii-error-trend">I.I.II  Error Trend</a>
+    <li class="toctree-l2"><a class="reference internal" href="#ii-basic-heatmaps">II.  Basic Heatmaps</a>
     </li>
-        </ul>
+    <li class="toctree-l2"><a class="reference internal" href="#iii-variations">III.  Variations</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#iii-specific-drilldowns">I.II  Specific Drilldowns</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#iiii-error-spike-in-us-east-2">I.II.I  Error Spike in us-east-2</a>
+    <li class="toctree-l2"><a class="reference internal" href="#iv-more-variations">IV.  More Variations</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#iiiii-error-spike-in-ap-southeast-1">I.II.II  Error Spike in ap-southeast-1</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#iiiiii-traffic-routing">I.II.III  Traffic Routing</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#iiiiv-auto-scaling">I.II.IV  Auto Scaling</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#iiiv-region-spillover">I.II.V  Region Spillover</a>
-    </li>
-        </ul>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#ii-mortality-rates">II. Mortality Rates</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#iii-covid19-cases">III. Covid19 Cases</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#iii-lots-of-charts">III. Lots of Charts</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#iiii-200-servers">III.I 200 Servers</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#iiiii-2000-servers">III.II 2000 Servers</a>
-    </li>
-        </ul>
+    <li class="toctree-l2"><a class="reference internal" href="#v-mandelbrot-set">V.  Mandelbrot Set</a>
     </li>
     </ul>
                     </li>
@@ -152,244 +120,53 @@
             <div class="section">
               
                 <h1 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">#</a></h1>
-<h2 id="i-requests-to-servers">I.  Requests to Servers<a class="headerlink" href="#i-requests-to-servers" title="Permanent link">#</a></h2>
-<p>The following example showcases how a Sierra Plot can be used to visualize and analyze a scenario of requests hitting:</p>
-<ul>
-<li>50 different servers</li>
-<li>in 5 different regions</li>
-<li>over 48 hours</li>
-<li>in 1-minute bins</li>
-<li>split by result type (<i>OK</i> or <i>ERROR</i>)
-</ul>
+<h2 id="i-server-stats">I.  Server Stats<a class="headerlink" href="#i-server-stats" title="Permanent link">#</a></h2>
+<p>The following example showcases how a Mosaic Plot can be used to effectively visualize servers stats for a large number of servers<br>
+We have 50 different servers in 4 different regions, and are interested in seeing for each server, the number of requests, error rate, CPU utilization and memory utilization<br>
+Normally, it wouldn't be feasible to plot all 4 metrics over time for each of the 50 servers, so we would have to settle for summary stats<br></p>
+<p>We would have something like this:
+<img alt="stats_noheatmap" src="../img/examples/stats_noheatmap.png" /></p>
+<p>While this dashboard gives us a pretty good summary of the performance in each region, it is lacking in several aspects:</p>
+<ol>
+<li>There's not enough room in the dashboard to add requests and error rate stats over time</li>
+<li>The data that is shown over time is only per region.  We have no way to see the behavior of specific servers</li>
+</ol>
 
-<p><img alt="initial" src="../img/examples/serversrequests/initial.png" /></p>
-<p>Before diving in, we can make the plot a bit clearer by changing the plot's <a href="../configuration_options/#series"><code>Max Y Type</code></a> from <code>Global</code> to <code>Group</code> using the <a href="../controls/">on-panel controls</a></p>
+<p>By using Mosaic Plot panels, we can construct something like this:
+<img alt="stats_heatmap" src="../img/examples/stats_heatmap.png" /></p>
+<p>First, for each region, we've added two heatmaps<br>
+One that shows the number of requests <strong>per server</strong> over time (white to blue) and one that shows the average error rate <strong>per server</strong> over time (green to red)<br></p>
+<p>By using <a href="../configuration_options/#labels"><code>Compact Mode</code></a> we achieve an incredibly high data resolution.  The top left heatmap for example (showing the number of requests per server in us-east-1), contains 2880 different cells/data points, while taking up the space that would normally fit only a sparkline or two, let alone trying to fit a line/area chart in that space</p>
+<p>Next, we've added two larger heatmaps<br>
+The first shows the average CPU utilization of every server<br>
+The second shows the average memory utilization of every server<br></p>
+<p>We've used the <a href="../features/#grouping"><code>Grouping</code></a> feature to clearly differentiate between each group of servers<br>
+This type of visualization allows us to get a clear picture of both the individual performance of each server, as well as the overall trends for each region </p>
+<h2 id="ii-basic-heatmaps">II.  Basic Heatmaps<a class="headerlink" href="#ii-basic-heatmaps" title="Permanent link">#</a></h2>
+<p>The following example shows 3 basic heatmaps, visualized as Mosaic Plots with different styling parameters:
+<img alt="demo1" src="../img/examples/demo1.png" /></p>
+<h2 id="iii-variations">III.  Variations<a class="headerlink" href="#iii-variations" title="Permanent link">#</a></h2>
+<p>The following example shows the same data plotted plotted in 12 different styling variations<br></p>
+<p>Each column shows a different <a href="../configuration_options/#grid-properties"><code>Shape</code></a>: <code>Rectangle</code>, <code>Hexagon</code>, <code>Stacked Circle</code> and <code>Circle</code><br>
+The top row is the basic style<br>
+The second row adds a <a href="../configuration_options/#style"><code>Bevel</code></a> effect
+The bottom row gets rid of the <a href="../configuration_options/#style"><code>Outline</code></a> and adds a <a href="../features/#smoothing"><code>Smoothing</code></a> effect
+<img alt="variations" src="../img/examples/variations.png" /></p>
 <div class="admonition hint inline">
 <p class="admonition-title">Hint</p>
-<p>Using <code>Max Y Type</code> =&gt; <code>Group</code> makes sense here, since comparing individual server metrics across different regions isn't very relevant.  The overall comparison across different regions is captured in the Totals chart</p>
+<p><a href="/img/examples/variations.png" target="_blank">Open the image in a separate tab (full size) to clearly see the subtle differences between the first and second row</a></p>
 </div>
-<p><img alt="initial" src="../img/examples/serversrequests/initialgroup.png" /></p>
-<h3 id="ii-overview">I.I  Overview<a class="headerlink" href="#ii-overview" title="Permanent link">#</a></h3>
-<h4 id="iii-overall-trend">I.I.I  Overall Trend<a class="headerlink" href="#iii-overall-trend" title="Permanent link">#</a></h4>
-<p>The Totals chart is a simple stacked area chart that clearly shows the overall trend, as well as the per-region breakdown.  However, it doesn't do a very good job of showing the indiviual trends for each region.
-<br>
-By changing the <a href="../configuration_options/#totals"><code>Totals Chart Type</code></a> to <code>Line</code> and playing aroung with the <code>Total Height Percent</code> value, we get:</p>
-<p><img alt="initial" src="../img/examples/serversrequests/initialtotalstrend.png" /></p>
-<p>A number of observations become apparent now:</p>
-<ol>
-<li>The trend shows a (baseline) 24 hour cycle in every region</li>
-<li>A certain time shift between the 24 hour cycles for each region (except <i>us-east-1</i> and <i>us-east-2</i>)</li>
-<li>A huge spike in <i>us-east-1</i> near the middle of the chart</li>
-<li>An unusual increase in request volume in <i>us-east-1</i> near the end of the chart</li>
-<li>An unusual increase in request volume in <i>us-east-2</i> near the end of the chart.  Around the same time as in  <i>us-east-1</i>, but much steeper</li>
-<li>In <i>eu-central-1</i> there were two servers which didn't get any traffic at all during most of the 48 hour period</li>
-</ol>
-
-<h4 id="iiii-error-trend">I.I.II  Error Trend<a class="headerlink" href="#iiii-error-trend" title="Permanent link">#</a></h4>
-<p>We can see the request count by type (<i>OK</i> or <i>ERROR</i>) by using the <a href="../configuration_options/#series"><code>Series Breakdown</code></a> and <a href="../configuration_options/#totals"><code>Totals Breakdown</code></a> features in the plot's <a href="../controls/">controls</a>:</p>
-<p><img alt="errors" src="../img/examples/serversrequests/errorsbreakdown.png" /></p>
-<div class="admonition note inline">
-<p class="admonition-title">Note</p>
-<p>Using <a href="../features/#totals-drilldown"><code>Stacked100</code></a> for the totals chart, since we usually care more about the relative error rate, and not the absoulte number of errors</p>
+<h2 id="iv-more-variations">IV.  More Variations<a class="headerlink" href="#iv-more-variations" title="Permanent link">#</a></h2>
+<p>The following example shows the same data plotted plotted in 6 different styling variations<br></p>
+<p>The middle and right plots on the bottom show the use of the <a href="../configuration_options/#labels"><code>Discrete Scale</code></a> option.  It can be very useful when the values can be categorized, such as assigning different value ranges to categories such as <code>GREAT</code>, <code>GOOD</code>, <code>AVERAGE</code>, <code>BAD</code> and <code>TERRIBLE</code>
+<img alt="variations2" src="../img/examples/variations2.png" /></p>
+<div class="admonition hint inline">
+<p class="admonition-title">Hint</p>
+<p><a href="/img/examples/variations2.png" target="_blank">Open the image in a separate tab (full size) to clearly see the styling features in each plot</a></p>
 </div>
-<p>We immediately see that the overall error rate is pretty much constant (at 5%) except for two increases, one starting at around 10:00 AM Jan 01, and the second a few hours later
-<br>
-It's also straightforward to attribute the first (bigger) increase to the servers in ap-southeast-1, and the second (smaller) increase to a single server in us-east-2
-<br>
-<br>
-Before drilling down into the specific issues, let's take one more step just to make sure that we didn't miss anything in our high-level view
-<br>
-To get a clear picture that specifically targets error rates (as opposed to the volume of requests and their breakdowns) we'll make the following adjustments to the plot's configuration:</p>
-<ol>
-<li>Change the <a href="configuration_options/#series">Series Chart Type</a> and <a href="configuration_options/#totals">Totals Chart Type</a> from <i>Stacked Area Chart</i> to <i>Line Chart</i></li>
-<li>Set the <b>Total</b> field as the plot's <a href="configuration_options/#fields-advanced">Weight Field</a></li>
-<li>Set the field value <i>ERROR</i> as the only <a href="configuration_options/#fields-advanced">Series Value</a></li>
-<li>Change the value of <a href="configuration_options/#series">Aggregation</a> from <i>Sum</i> to <i>Average</i></li>
-<li>Set the <a href="configuration_options/#style">Color Mode</a> to <i>Values (Inverted)</i></li>
-</ol>
-<div class="admonition note inline">
-<p class="admonition-title">Note</p>
-<p>Instead of the number of requests of each type, the plot now represents the relative error rate <code>Error / Total</code> for each server.  The Totals chart represents the weighted error rate across its selected breakdown</p>
-</div>
-<p><img alt="errors line" src="../img/examples/serversrequests/errorsall.png" />
-We can now feel confident that we didn't miss anything before (for example, a high error rate during a time where the number of requests is very small, which might not be visible in a stacked area chart)</p>
-<h3 id="iii-specific-drilldowns">I.II  Specific Drilldowns<a class="headerlink" href="#iii-specific-drilldowns" title="Permanent link">#</a></h3>
-<p>Now that we have a high-level picture of the systems behaviour over the 48 hour period, we'll drilldown into the specific issues that were spotted and see what kinds of information the plot might surface up</p>
-<h4 id="iiii-error-spike-in-us-east-2">I.II.I  Error Spike in us-east-2<a class="headerlink" href="#iiii-error-spike-in-us-east-2" title="Permanent link">#</a></h4>
-<p>In <a href="./#iiii-error-trend">I.I.II</a> we saw an error spike in us-east-2 at around 12:00 PM on Jan 01
-<br>
-By <a href="../features/#group-drilldown">drilling down on the us-east-2 group</a> and focusing on the specific time around the issue using the <a href="../features/#date-range-control">date range control</a> we can get a clearer picture of the behavior in us-east-2 at the time of the issue:
-<img alt="spike issue" src="../img/examples/serversrequests/errorszoom1.png" /></p>
-<div class="admonition note inline">
-<p class="admonition-title">Note</p>
-<p>In this example, <a href="../controls/"><code>Gridlines</code></a> were enabled.  They help us connect events in the plot to specific points in time (which might be difficult due to the plot's skew property)</p>
-</div>
-<p>We'll drilldown on us-east-2 again so we can focus on it completely:
-<img alt="spike issue zoom" src="../img/examples/serversrequests/errorszoom2.png" /></p>
-<p>A number of observations become apparent now:</p>
-<ol>
-<li>The issue only happened in one server (<i>ue2-6</i>)</li>
-<li>The effect on the region's overall error rate was an increase from around 5% to around 10%</li>
-<li>The number of requests for all other servers was pretty much constant at the time of the issue</li>
-<li>For the affected server (<i>ue2-6</i>), the number of non-error requests  was pretty much constant around the time of the issue</li>
-</ol>
-<p>The above observations might lead us to the following conclusions:</p>
-<ol>
-<li>All servers were functioning as expected</li>
-<li>The errors in <i>ue2-6</i> are due to a specific batch of requests that speficially resulted in errors</li>
-<li>The abnormal requests to <i>ue2-6</i> did not affect its serving of <i>normal</i> requests</li>
-</ol>
-
-<h4 id="iiiii-error-spike-in-ap-southeast-1">I.II.II  Error Spike in ap-southeast-1<a class="headerlink" href="#iiiii-error-spike-in-ap-southeast-1" title="Permanent link">#</a></h4>
-<p>In <a href="./#iiii-error-trend">I.I.II</a> we saw an error spike in ap-southeast-1 at around 10:00 AM on Jan 01
-<br>
-By <a href="../features/#group-drilldown">drilling down on the ap-southeast-1 group</a> we can get a clearer picture of the behaviour of the servers in that region:
-<img alt="spike issue 2" src="../img/examples/serversrequests/errorszoom21.png" /></p>
-<p>A number of observations become apparent now:</p>
-<ol>
-<li>All servers in that region were affected in roughly the same way</li>
-<li>At the peak of the issue, 100% of requests resulted in errors</li>
-<li>The trend in overall number of requests to the servers in ap-southeast-1 was not affected by the issue</li>
-</ol>
-
-<p>The above observations might lead us to the following conclusions:</p>
-<ol>
-<li>The issue (errors) was due to something internal (not due to some change in the requests)</li>
-<li>Since the issue affected all of the servers in the region, and at the same time, there's a good chance that the issue is due to some shared infrastructure component in the region</li>
-</ol>
-
-<h4 id="iiiiii-traffic-routing">I.II.III  Traffic Routing<a class="headerlink" href="#iiiiii-traffic-routing" title="Permanent link">#</a></h4>
-<p>If we look at us-west-1, we can spot something odd happening at around 06:00 AM Jan 01:
-<img alt="routing" src="../img/examples/serversrequests/serversreroute0.png" />
-Let's drilldown further:
-<img alt="routing 2" src="../img/examples/serversrequests/serversreroute01.png" />
-And now let's focus on the specific time range:
-<img alt="routing 3" src="../img/examples/serversrequests/serversreroute1.png" /> </p>
-<p>A number of observations become apparent now:</p>
-<ol>
-<li>The number of requests to 3 servers (<i>uw1-0</i>, <i>uw1-1</i> & <i>uw1-2</i>) <b>dropped</b> between 04:00 AM and 07:00 AM</li>
-<li>The number of requests to 3 servers (<i>uw1-3</i>, <i>uw1-4</i> & <i>uw1-5</i>) <b>increased</b> at the same time</li>
-<li>The trend in total number of requests to the region did not change during that time period</li>
-<li>While the traffic to <i>uw1-0</i>, <i>uw1-1</i> & <i>uw1-2</i> decreased, it did not go to zero</li>
-<li>There was no change in the traffic to usw1-6</li>
-</ol>
-
-<p>The above observations might lead us to the following conclusions:</p>
-<ol>
-<li>Some traffic routing/balancing mechanism shifted <b>some</b> of the traffic from [<i>uw1-0</i>, <i>uw1-1</i> & <i>uw1-2</i>] to [<i>uw1-3</i>, <i>uw1-4</i> & <i>uw1-5</i>]</li>
-<li>It doesn't seem like there was some clear issue in the first three servers, since they were still getting traffic and there wasn't an increase in errors</li>
-</ol>
-
-<h4 id="iiiiv-auto-scaling">I.II.IV  Auto Scaling<a class="headerlink" href="#iiiiv-auto-scaling" title="Permanent link">#</a></h4>
-<p>We noticed earlier that in <i>eu-central-1</i>, two servers didn't get any traffic at all during most of the 48 hour period
-<br>
-Let's focus on that region:
-<img alt="autoscaling 1" src="../img/examples/serversrequests/autoscaling1.png" /></p>
-<p>A number of observations become apparent now:</p>
-<ol>
-<li>Two server (<i>ec1-0</i> & <i>ec1-1</i>) didn't get any requests at all, until Jan 01 at 10:00 PM</li>
-<li>At about the same time, two other servers (<i>ec1-2</i> & <i>ec1-3</i>) started seeing an increase in the number of requests</li>
-<li>At around 01:00 AM Jan 02, the number of requests to <i>ec1-2</i> & <i>ec1-3</i> seems to have plateaued</li>
-<li>At about the same time, the number of requests to <i>ec1-0</i> & <i>ec1-1</i> seems to have increased sharply</li>
-<li>After the load on <i>ec1-2</i> & <i>ec1-3</i> subsided, traffic was shifted away from <i>ec1-0</i> & <i>ec1-1</i> until they were pulled out of rotation completely</i>
-</ol>
-
-<p>The above observations might lead us to the following conclusions:</p>
-<ol>
-<li>When the load on <i>ec1-2</i> & <i>ec1-3</i> increased (and passed some threshold), some autoscaling mechanism was triggered</li>
-<li>The autoscaling mechanism added <i>ec1-0</i> & <i>ec1-1</i> into rotation and they started getting traffic</li>
-<li>At some point, <i>ec1-2</i> & <i>ec1-3</i> reached some capacity threshold, and the LB mechanism maintained that threshold</li>
-<li>Since <i>ec1-2</i> & <i>ec1-3</i> were saturated, the LB mechanism started offloading more traffic to  <i>ec1-0</i> & <i>ec1-1</i></li>
-<li>The asymmetry between the ramp up (fast) and ramp down (slow) of traffic to <i>ec1-0</i> & <i>ec1-1</i> might indicate some hysteresis element at play</li>
-</ol>
-
-<p>Let's see if there was any noticeable effect on the amount of errors during that time:
-<img alt="autoscaling 2" src="../img/examples/serversrequests/autoscaling2.png" /></p>
-<p>A number of observations become apparent now:</p>
-<ol>
-<li>During the sharp increase in the number of requests to <i>ec1-2</i> & <i>ec1-3</i>, the error rate in those two servers slightly increased (also noticeable in the total graph for the region)</li>
-<li>Once <i>ec1-0</i> & <i>ec1-1</i> were added to the rotation the error rates subsided</li>
-</ol>
-
-<p>The above observations might lead us to the following conclusions:</p>
-<ol>
-<li>Overall, the LB mechanism is functioning properly</li>
-<li>Ideally, the additional servers could be added sooner and prevent the temporary increase in errors</li>
-<li>There's some optimization opportunities to the LB.  Specfically, it looks like the scale down could be much more aggresive</li>
-</ol>
-
-<h4 id="iiiv-region-spillover">I.II.V  Region Spillover<a class="headerlink" href="#iiiv-region-spillover" title="Permanent link">#</a></h4>
-<p>Let's focus on the regions us-east-1 and us-east-2 by selecting them as the <code>Group Values</code> in <a href="../configuration_options/#fields-advanced">Fields [Advanced]</a>:</p>
-<p><img alt="region spillover 1" src="../img/examples/serversrequests/regionspillover1.png" /></p>
-<p>By looking at the Totals chart we can observe the following:</p>
-<ol>
-<li>At around 20:00 Jan 02, us-east-1 saw a <b>gradual</b> increase in request volume</li>
-<li>About an hour later, us-east-2 saw a <b>sharp</b> increase in request volume</li>
-</ol>
-
-<p>By looking at the series charts we can observe the following:</p>
-<ol>
-<li>At around 21:00 Jan 02, the request volume to us-east-1 started plateauing</li>
-</ol>
-
-<p>The above observations might lead us to the following conclusions:</p>
-<ol>
-<li>The servers in us-east-1 reached some capacity threshold at 21:00</li>
-<li>At that point, traffic started to spill over to us-east-2</li>
-</ol>
-
-<p>It might be interesting to change the Totals chart's stack mode to <code>Stacked100</code>, to see the relative traffic distribution between the two us-east regions:</p>
-<p><img alt="region spillover 2" src="../img/examples/serversrequests/regionspillover2.png" /></p>
-<p>This shows us that the traffic distribution between the two us-east regions is roughly equal.
-<br>
-One of the regions (us-east-1) started getting a bigger relative share of the traffic, but it was re-balanced after an hour or so</p>
-<h2 id="ii-mortality-rates">II. Mortality Rates<a class="headerlink" href="#ii-mortality-rates" title="Permanent link">#</a></h2>
-<p>The following example shows the mortality rates in France between 1816 and 2016, by gender
-<br>
-It is based on the amazing <a href="https://kieranhealy.org/blog/archives/2018/12/04/heatmaps-of-mortality-rates/">visualization</a> created by <a href="https://kieranhealy.org/">Kieran Healy</a>:</p>
-<p><img alt="mortality" src="../img/examples/mortality/mortality1.png" /></p>
-<div class="admonition note inline">
-<p class="admonition-title">Note</p>
-<p>The <a href="../configuration_options/#labels">chart labels</a> have been disabled for clarity.  Each chart represents a single age cohort, starting from <i>0-1</i> at the bottom to <i>95</i> at the top</p>
-</div>
-<p>The plot allows us to immediatly observe events such as world wars and the 1918 influenza pandemic, as well as the considerable decline in infant mortality</p>
-<p>By switching the <a href="../configuration_options/#series"><code>max Y type</code></a> to <code>Local</code> we get a different representation, which makes it easier to see trends for each individual age cohort (at the cost of losing the ability to compare values across different age cohorts):</p>
-<p><img alt="mortality" src="../img/examples/mortality/mortality2.png" /></p>
-<p>We can also decide to group certain ages, and represent that in the plot:</p>
-<p><img alt="mortality" src="../img/examples/mortality/mortality3.png" /></p>
-<p>By switching the <a href="../configuration_options/#series"><code>max Y type</code></a> to <code>Group</code> we can see trends for each age cohort relative to its defined group:</p>
-<p><img alt="mortality" src="../img/examples/mortality/mortality4.png" /></p>
-<p>Some more styling options:</p>
-<p><img alt="mortality" src="../img/examples/mortality/mortality5.png" /></p>
-<h2 id="iii-covid19-cases">III. Covid19 Cases<a class="headerlink" href="#iii-covid19-cases" title="Permanent link">#</a></h2>
-<p>The following example shows the number of daily reported Covid-19 cases in the United States, by state:</p>
-<p><img alt="covid" src="../img/examples/covid/covid1.png" /></p>
-<p>By switching the <a href="../configuration_options/#series"><code>max Y type</code></a> to <code>Local</code> we get a different representation which shows us the trend in each specific state (each chart's Y-axis has its own scale):</p>
-<p><img alt="covid" src="../img/examples/covid/covid2.png" /></p>
-<p>By enabling <a href="../features/#fog"><code>Fog</code></a> we can highlight the peaks in the plot.  Since we're using <code>Local</code> for <a href="../configuration_options/#series"><code>max Y type</code></a>, the <a href="../features/#fog"><code>Fog</code></a> shows us the alignment of the peaks across all charts (basically, the peaks of the Covid-19 infection waves):</p>
-<p><img alt="covid" src="../img/examples/covid/covid3.png" /></p>
-<p>Some more styling options:</p>
-<p><img alt="covid" src="../img/examples/covid/covid4.png" /></p>
-<h2 id="iii-lots-of-charts">III. Lots of Charts<a class="headerlink" href="#iii-lots-of-charts" title="Permanent link">#</a></h2>
-<p>The following examples showcases how Sierra Plots are useful for visualizing high-cardinality datasets</p>
-<h3 id="iiii-200-servers">III.I 200 Servers<a class="headerlink" href="#iiii-200-servers" title="Permanent link">#</a></h3>
-<p>The following example shows request rates across a 24 hour period (with 5 minute bins) for <b>200</b> servers across 5 different regions
-<br>
-It shows that even with a very large number of charts, overall trends and abnormal behaviours are still easy to spot:</p>
-<p><img alt="many" src="../img/examples/many/2001.png" />
-<img alt="many" src="../img/examples/many/2002.png" />
-<img alt="many" src="../img/examples/many/2003.png" />
-<img alt="many" src="../img/examples/many/2004.png" /></p>
-<h3 id="iiiii-2000-servers">III.II 2000 Servers<a class="headerlink" href="#iiiii-2000-servers" title="Permanent link">#</a></h3>
-<p>Let's get a little crazy...
-<br>
-The following example shows request rates across a 12 hour period (with 5 minute bins) for <b>2000</b> servers across 5 different regions
-<br>
-Even now, trends and outliers are still readily apparent</p>
-<p><img alt="many" src="../img/examples/many/20001.png" />
-<img alt="many" src="../img/examples/many/20002.png" />
-<img alt="many" src="../img/examples/many/20003.png" />
-<img alt="many" src="../img/examples/many/20004.png" /></p>
+<h2 id="v-mandelbrot-set">V.  Mandelbrot Set<a class="headerlink" href="#v-mandelbrot-set" title="Permanent link">#</a></h2>
+<p>Just for fun, let's plot the Mandelbrot set using Mosaic Plots:<br>
+<img alt="mandelbrot" src="../img/examples/mandelbrot.png" /></p>
               
             </div>
           </div>
@@ -400,7 +177,7 @@ Even now, trends and outliers are still readily apparent</p>
         <a href="../getting_started/" class="btn btn-neutral float-right" title="Getting Started">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../controls/" class="btn btn-neutral" title="Controls"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../configuration_options/" class="btn btn-neutral" title="Configuration Options"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -430,7 +207,7 @@ Even now, trends and outliers are still readily apparent</p>
         </span>
     
     
-      <span><a href="../controls/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../configuration_options/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../getting_started/" style="color: #fcfcfc">Next &raquo;</a></span>

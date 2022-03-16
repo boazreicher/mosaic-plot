@@ -64,10 +64,6 @@
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../controls/">Controls</a>
-                    </li>
-                </ul>
-                <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../examples/">Examples</a>
                     </li>
                 </ul>
@@ -76,21 +72,7 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#plugin-test-environment">Plugin Test Environment</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#servers">Servers</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#servers-errors">Servers Errors</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mortality-rates">Mortality Rates</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#covid-19">Covid-19</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#promethues-datasource">Promethues Datasource</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#testdata-db-datasource">TestData DB Datasource</a>
-    </li>
-        </ul>
+    <li class="toctree-l2"><a class="reference internal" href="#example-dashboards">Example Dashboards</a>
     </li>
     </ul>
                     </li>
@@ -133,58 +115,10 @@
               
                 <h1 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">#</a></h1>
 <h2 id="plugin-test-environment">Plugin Test Environment<a class="headerlink" href="#plugin-test-environment" title="Permanent link">#</a></h2>
-<p>The simplest way to play around with Sierra Plot is to use the docker-compose <a href="https://github.com/boazreicher/sierra-plot/tree/main/plugin-test-environment">plugin test environment</a></p>
-<p>Docker compose will run a container with a Grafana instance (pn port 3000) that has the Sierra Plot plugin installed, along with a number of sample dashboards</p>
-<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">#</a></h2>
-<p>The following examples can be used to get a better practical sense of how Sierra Plots work
-<br>
-Each example contains the source data (in <i>csv</i> format) and a sample dashboard JSON file
-<br>
-To load the data into Grafana, the <a href="https://grafana.com/grafana/plugins/marcusolsson-csv-datasource/">CSV Datasource plugin</a> is required
-<br>
-When using the CSV Datasource, the <a href="https://grafana.com/docs/grafana/latest/panels/transformations/types-options/#prepare-time-series">prepare time series transformation</a> needs to be used (already configured in the sample dashboard JSONs)</p>
-<div class="admonition note inline">
-<p class="admonition-title">Note</p>
-<p>The data used in the following examples should not be used for any actual analysis.  Some of the data is completely generated, while some is based on real-world data sets, but with modifications made just for the purpose of these examples</p>
-</div>
-<h3 id="servers">Servers<a class="headerlink" href="#servers" title="Permanent link">#</a></h3>
-<p>Based on <a href="../examples/#i-requests-to-servers">this example</a>
-<br>
-Dataset: <a href="https://github.com/boazreicher/sierra-plot/raw/main/examples/data/test_servers.csv">CSV</a>
-<br>
-Dashboard: <a href="https://github.com/boazreicher/sierra-plot/raw/main/examples/dashboards/server1.json">JSON</a></p>
-<p><img alt="image_small" src="../img/examples/serversrequests/initial.png" /></p>
-<h3 id="servers-errors">Servers Errors<a class="headerlink" href="#servers-errors" title="Permanent link">#</a></h3>
-<p>Based on <a href="../examples/#iiii-error-trend">this example</a>
-<br>
-Dataset: <a href="https://github.com/boazreicher/sierra-plot/raw/main/examples/data/test_servers.csv">CSV</a>
-<br>
-Dashboard: <a href="https://github.com/boazreicher/sierra-plot/raw/main/examples/dashboards/servers_errors.json">JSON</a></p>
-<p><img alt="image_small" src="../img/examples/serversrequests/errorsall.png" /></p>
-<h3 id="mortality-rates">Mortality Rates<a class="headerlink" href="#mortality-rates" title="Permanent link">#</a></h3>
-<p>Based on <a href="../examples/#ii-mortality-rates">this example</a>
-<br>
-Dataset: <a href="https://github.com/boazreicher/sierra-plot/raw/main/examples/data/france_mortality.csv">CSV</a>
-<br>
-Dashboard: <a href="https://github.com/boazreicher/sierra-plot/raw/main/examples/dashboards/mortality.json">JSON</a></p>
-<p><img alt="image_small" src="../img/examples/serversrequests/initial.png" /></p>
-<h3 id="covid-19">Covid-19<a class="headerlink" href="#covid-19" title="Permanent link">#</a></h3>
-<p>Based on <a href="../examples/#iii-covid19-cases">this example</a>
-<br>
-Dataset: <a href="https://github.com/boazreicher/sierra-plot/raw/main/examples/data/us_states_increases_with_gender.csv">CSV</a>
-<br>
-Dashboard: <a href="https://github.com/boazreicher/sierra-plot/raw/main/examples/dashboards/covid19.json">JSON</a></p>
-<p><img alt="image_small" src="../img/examples/mortality/mortality1.png" /></p>
-<h3 id="promethues-datasource">Promethues Datasource<a class="headerlink" href="#promethues-datasource" title="Permanent link">#</a></h3>
-<p>The following example uses the standard Prometheus data source and uses the metric for the CPU utilization of the Prometheus server
-<br>
-Dashboard: <a href="https://github.com/boazreicher/sierra-plot/raw/main/examples/dashboards/prometheus.json">JSON</a></p>
-<p><img alt="image_small" src="../img/groupdrilldownnew1.png" /></p>
-<h3 id="testdata-db-datasource">TestData DB Datasource<a class="headerlink" href="#testdata-db-datasource" title="Permanent link">#</a></h3>
-<p>The following example uses the default TestData DB data source
-<br>
-Dashboard: <a href="https://github.com/boazreicher/sierra-plot/raw/main/examples/dashboards/randomwalk.json">JSON</a></p>
-<p><img alt="image_small" src="../img/defaultdatasource.png" /></p>
+<p>The simplest way to play around with Mosaic Plot is to use the docker-compose <a href="https://github.com/boazreicher/mosaic-plot/tree/main/plugin-test-environment">plugin test environment</a></p>
+<p>Docker compose will run a container with a Grafana instance (on port 3000) that has the Mosaic Plot plugin installed, along with a number of sample dashboards</p>
+<h2 id="example-dashboards">Example Dashboards<a class="headerlink" href="#example-dashboards" title="Permanent link">#</a></h2>
+<p>If Mosaic Plot is already installed in your Grafana instance, you can play around with it by using the following dashboards (create a new dashboard and then just copy the JSON contents into the JSON Model):</p>
               
             </div>
           </div>
