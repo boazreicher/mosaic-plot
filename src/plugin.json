@@ -27,7 +27,31 @@
                 "url": "https://github.com/boazreicher/mosaic-plot/blob/main/LICENSE"
             }
         ],
-        "screenshots": [],
+        "screenshots": [{
+                "name": "Example",
+                "path": "img/demo1.png"
+            },
+            {
+                "name": "Stats",
+                "path": "img/stats_heatmap.png"
+            },
+            {
+                "name": "Variations",
+                "path": "img/variations.png"
+            },
+            {
+                "name": "Variations2",
+                "path": "img/variations2.png"
+            },
+            {
+                "name": "Mandelbrot",
+                "path": "img/mandelbrot.png"
+            },
+            {
+                "name": "Focus",
+                "path": "img/focus.png"
+            }
+        ],
         "version": "%VERSION%",
         "updated": "%TODAY%"
     },
