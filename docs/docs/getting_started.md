@@ -17,20 +17,20 @@ If Mosaic Plot is already installed in your Grafana instance, you can play aroun
 
 [Heatmaps Demo (Source)](https://raw.githubusercontent.com/boazreicher/mosaic-plot/main/plugin-test-environment/provisioning/dashboards/dashboards/mosaic_demo_heatmaps.json)
 <p align="left">
-  <img width="460" height="300" src="/img/examples/demo1.png">
+  <img width="460" height="300" src="https://boazreicher.github.io/mosaic-plot/img/examples/demo1.png">
 </p>
 
 [Mandelbrot Set (Source)](https://raw.githubusercontent.com/boazreicher/mosaic-plot/main/plugin-test-environment/provisioning/dashboards/dashboards/mosaic_demo_mandelbrot.json)
 <p align="left">
-  <img width="460" height="300" src="/img/examples/mandelbrot.png">
+  <img width="460" height="300" src="https://boazreicher.github.io/mosaic-plot/img/examples/mandelbrot.png">
 </p>
 
 [Variations Demo (Source)](https://raw.githubusercontent.com/boazreicher/mosaic-plot/main/plugin-test-environment/provisioning/dashboards/dashboards/mosaic_demo_variations.json)
 <p align="left">
-  <img width="460" height="300" src="/img/examples/variations.png">
+  <img width="460" height="300" src="https://boazreicher.github.io/mosaic-plot/img/examples/variations.png">
 </p>
 
 [Variations 2 Demo (Source)](https://raw.githubusercontent.com/boazreicher/mosaic-plot/main/plugin-test-environment/provisioning/dashboards/dashboards/mosaic_demo_variations2.json)
 <p align="left">
-  <img width="460" height="300" src="/img/examples/variations2.png">
+  <img width="460" height="300" src="https://boazreicher.github.io/mosaic-plot/img/examples/variations2.png">
 </p>

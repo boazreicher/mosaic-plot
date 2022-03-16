@@ -11,12 +11,12 @@ Besides visualizing regular heatmaps, Mosaic Plot can be used to plot regular ti
 Mosaic Plot can be configured to be very compact, allowing a user to show a very large amount of data while taking up only a minimum porition of a dashboard's "real estate"
 
 ___
-![demo1](https://boazreicher.github.io/mosaic-plot/src/img/demo1.png)
-![stats](https://boazreicher.github.io/mosaic-plot/src/img/stats_heatmap.png)
-![variations](https://boazreicher.github.io/mosaic-plot/src/img/variations.png)
-![cariationa2](https://boazreicher.github.io/mosaic-plot/src/img/variations2.png)
-![mandelbrot](https://boazreicher.github.io/mosaic-plot/src/img/mandelbrot.png)
-![focus](https://boazreicher.github.io/mosaic-plot/src/img/focus.gif)
+![demo1](https://boazreicher.github.io/mosaic-plot/img/examples/demo1.png)
+![stats](https://boazreicher.github.io/mosaic-plot/img/examples/stats_heatmap.png)
+![variations](https://boazreicher.github.io/mosaic-plot/img/examples/variations.png)
+![cariationa2](https://boazreicher.github.io/mosaic-plot/img/examples/variations2.png)
+![mandelbrot](https://boazreicher.github.io/mosaic-plot/img/examples/mandelbrot.png)
+![focus](https://boazreicher.github.io/mosaic-plot/img/examples/focus.gif)
 ___
 
 

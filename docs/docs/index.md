@@ -7,7 +7,7 @@ Besides visualizing regular heatmaps, Mosaic Plot can be used to plot regular ti
 Mosaic Plot can be configured to be very compact, allowing a user to show a very large amount of data while taking up only a minimum porition of a dashboard's "real estate"
 
 <p align="center">
-  <img width="460" height="300" src="/img/logo.svg">
+  <img width="460" height="300" src="https://raw.githubusercontent.com/boazreicher/mosaic-plot/main/src/img/logo.svg">
 </p>
 
 ------
