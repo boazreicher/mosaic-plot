@@ -6,7 +6,7 @@ var seedrandom = require('seedrandom');
 export class JigSawCalculator {
   private random;
 
-  constructor(seed: string = 'abc') {
+  constructor(seed = 'abc') {
     this.random = new seedrandom(seed);
   }
 

@@ -156,11 +156,11 @@ export function normalizeName(name?: string) {
 }
 
 function calculateTimestamps(
-  fields: import('@grafana/data').Field<any, import('@grafana/data').Vector<any>>[],
+  fields: Array<import('@grafana/data').Field<any, import('@grafana/data').Vector<any>>>,
   numColumns: number,
   timeRange: TimeRange
-): Array<number> {
-  let timestamps: Array<number> = new Array();
+): number[] {
+  let timestamps: number[] = []
   fields.forEach((field) => {
     if (field.type === 'time') {
       if (timestamps.length > 0) {
@@ -181,7 +181,7 @@ function calculateTimestamps(
 }
 function addRows(
   rows: Record<string, Series>,
-  fields: import('@grafana/data').Field<any, import('@grafana/data').Vector<any>>[],
+  fields: Array<import('@grafana/data').Field<any, import('@grafana/data').Vector<any>>>,
   valueField: string,
   rowField: string,
   groupField: string,
@@ -215,7 +215,7 @@ function addRows(
         }
         break;
       case 'heatmap':
-        if (field.type != 'number') {
+        if (field.type !== 'number') {
           throw new Error('Value field must be of type number');
         }
         rowName = field.name;

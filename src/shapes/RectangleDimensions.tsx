@@ -5,11 +5,7 @@ export class RectangleDimensions extends CellDimensions {
   private width: number;
   private height: number;
 
-  constructor(
-    width: number,
-    height: number,
-    numColumns: number
-  ) {
+  constructor(width: number, height: number, numColumns: number) {
     super();
 
     this.width = width / numColumns;

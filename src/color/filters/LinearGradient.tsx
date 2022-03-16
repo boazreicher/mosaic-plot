@@ -6,7 +6,7 @@ export class LinearGradient extends Filter {
   colors: ColorStep[];
   vertical: boolean;
 
-  constructor(name: string, colors: ColorStep[], vertical: boolean = true) {
+  constructor(name: string, colors: ColorStep[], vertical = true) {
     super(name);
     this.colors = colors;
     this.vertical = vertical;

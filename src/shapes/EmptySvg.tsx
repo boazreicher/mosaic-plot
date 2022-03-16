@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 export class EmptySvg {
-    toSvg() {
-        return <></>
-    }
+  toSvg() {
+    return <></>;
+  }
 }
