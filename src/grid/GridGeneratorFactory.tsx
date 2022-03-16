@@ -66,17 +66,17 @@ export class GridGeneratorFactory {
     }
   }
 
-  public getDimensions(width: number, height: number, numColoumns: number) {
+  public getDimensions(width: number, height: number, numColumns: number) {
     switch (this.shape) {
       case 'hex':
-        return new HexagonDimensions(width, height, numColoumns);
+        return new HexagonDimensions(width, height, numColumns);
       case 'rect':
-        return new RectangleDimensions(width, height, numColoumns);
+        return new RectangleDimensions(width, height, numColumns);
       case 'jigsaw':
-        return new JigSawDimensions(width, height, numColoumns);
+        return new JigSawDimensions(width, height, numColumns);
       case 'circle':
       case 'circleStacked':
-        return new CircleDimensions(width, height, numColoumns);
+        return new CircleDimensions(width, height, numColumns);
     }
   }
 }

@@ -32,7 +32,7 @@ The data will contain a single data frame that looks something like this:
 
     When using the regular data format, rows are mapped to the  [`Breakdown`](configuration_options.md#fields) field
 
-### 1. Heatmap Data Format
+### 2. Heatmap Data Format
 
 This data format is applicable where each data frame contains only a **time** field and a **numeric** value field.
 

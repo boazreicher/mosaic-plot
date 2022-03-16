@@ -3,7 +3,7 @@ import { Bevel } from 'color/filters/Bevel';
 import { EmptyFilter } from 'color/filters/EmptyFilter';
 import { CLICKABLE_CLASS } from 'Constants';
 import { Series } from 'data/Series';
-import { getDataSeries, getNumColoumns } from 'data/SeriesUtils';
+import { getDataSeries, getNumColumns } from 'data/SeriesUtils';
 import { TimeRange } from 'data/TimeRange';
 import { Grids } from 'grid/Grids';
 import { GridsGenerator } from 'grid/GridsGenerator';
@@ -20,7 +20,7 @@ import { MosaicPlotOptions, optionsChangeCallback, propNumber } from 'types';
 import { getStyleObj } from 'utils/Style';
 
 var data: Series[] = [];
-var maxNumColoumns: number;
+var maxNumColumns: number;
 var minValue: number;
 var maxValue: number;
 var grids: Grids;
@@ -140,8 +140,8 @@ function buildGrids(
   cellDimensions = generator.getCellDimensions();
   colorPairs = generator.getColorPairs();
 
-  timer = Timer.getInstance(panelOptions, maxNumColoumns, onOptionsChange);
-  timer.setMaxNumColumns(maxNumColoumns);
+  timer = Timer.getInstance(panelOptions, maxNumColumns, onOptionsChange);
+  timer.setMaxNumColumns(maxNumColumns);
   if (panelOptions.animate && panelOptions.enableFocus) {
     timer.start();
   } else {
@@ -162,7 +162,7 @@ function initPlotElements(
   height: string | number | undefined,
   timeRange: TimeRange
 ): string | undefined {
-  maxNumColoumns = Math.min(getNumColoumns(dataFrames), panelOptions.maxColumns);
+  maxNumColumns = Math.min(getNumColumns(dataFrames), panelOptions.maxColumns);
 
   let numColumns: number;
   if (!panelOptions.enableFocus) {

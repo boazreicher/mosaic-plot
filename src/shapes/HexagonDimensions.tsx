@@ -5,9 +5,9 @@ export class HexagonDimensions extends CellDimensions {
   private width: number;
   private height: number;
 
-  constructor(width: number, height: number, numColoumns: number) {
+  constructor(width: number, height: number, numColumns: number) {
     super();
-    this.width = width / (numColoumns + 0.5);
+    this.width = width / (numColumns + 0.5);
     this.height = height;
   }
 

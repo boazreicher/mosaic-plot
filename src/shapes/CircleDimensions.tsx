@@ -5,12 +5,12 @@ export class CircleDimensions extends CellDimensions {
   private width: number;
   private height: number;
 
-  constructor(width: number, height: number, numColoumns: number) {
+  constructor(width: number, height: number, numColumns: number) {
     super();
 
     // Width is disregarded
     // this.width = height;
-    this.width = width / numColoumns;
+    this.width = width / numColumns;
     this.height = height;
   }
 

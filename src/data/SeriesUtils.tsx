@@ -34,7 +34,7 @@ export function getDataSeries(
   return result;
 }
 
-export function getNumColoumns(dataFrames: DataFrame[]) {
+export function getNumColumns(dataFrames: DataFrame[]) {
   return dataFrames[0].fields[0].values.length;
 }
 

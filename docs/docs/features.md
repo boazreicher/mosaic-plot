@@ -1,98 +1,47 @@
 # Features
 
-## Drilldowns
+## Grouping
 
-### Group Drilldown
-It is possible to drilldown into a specific group by clicking the (colored) group segment on the left part of the plot
+By specifying a [`Group` field](configuration_options.md#fields), different series/rows can be grouped according to common values
 <br>
-![Image title](img/groupdrilldownnew1.png)
-<br>
-<br>
-The first drilldown focuses on the group by changing the plot's appearance in the following ways:
-<ol>
-<li>
-Fading out all of the other groups
-</li>
-<li>
-Changing the color palette for the charts in the selected group (to make them more distinct)
-</li>
-<li>
-Having the totals chart represent only the data from the selected group
-</li>
-</ol>
-![Image title](img/groupdrilldownnew2.png)
-<br>
-<br>
-Drilling down into a group that's already in focus, changes it to exlucsive mode, where in addition to the effects of focusing the group, all of the other groups are altogether removed from the plot
-<br>
-![Image title](img/groupdrilldownnew3.png)
-<br>
-Clicking on a group that is already in exclusive mode will reset the selection (no group is selected)
+This has the following effects:
+<ul>
+<li>Sorting is performed on each group first, and then by Breakdown field</li>
+<li>Groups of rows can be visually separated using the Group Spacing field</li>
+<li>Row labels can show only the group names, instead of all of the specific rows</li>
+</ul>
 
-### Chart Drilldown
-
-Clicking on a chart brings it into focus by changing the plot's appearance in the following ways:
-<ol>
-<li>
-Fading out all of the charts
-</li>
-<li>
-Setting the X-axis right below the selected chart
-</li>
-</ol>
-![Image title](img/chartdrilldownnew1.png)
+For example, lets say we have CPU utilization data for 50 different hosts, running in 5 different regions
 <br>
-Clicking on a chart that is already in focus will reset the selection (no chart is selected)
+The heatmap will look something like this:
+![cpu_no_grouping](img/features/cpu_no_grouping.png)
 
-### Totals Drilldown
+Even though the rows are sorted such that they are effectively grouped by region (only because of the hosts' naming convention), it is still quite hard to distinguish between the different groups/regions, and be able to say something meaningful about the overall performance/trends in each region
 
-Clicking on the totals chart switches its stack mode from regular to stacked to 100% and back
-<br>
+By using the `Region` label as the `Group` field, as well as applying some `Group Spacing`, we get:
+![cpu_grouping](img/features/cpu_grouping.png)
 
-![Image title](img/totalsdrilldownnew1.png)
+This very minor change in the visualization makes a big difference in our ability to reason about the trends in different regions
+Since we are mainly concerned with the overall regional performance, we can change the [`Show Labels` field](configuration_options.md#labels) to `Group` to get:
+![cpu_grouping_grouplabel](img/features/cpu_grouping_grouplabel.png)
 
-## Date Range Control
+If we need to see the label for a specific row/host, we can always just hover over that row and see the tooltip data:
+![cpu_grouping_grouplabel_tooltip](img/features/cpu_grouping_grouplabel_tooltip.png)
 
-The date range control allows for zooming in to specific areas of the plot
-<br>
-It is especially useful for data sets that have a high number of time points.
-<br>
-<br>
-The date range control can be enabled via the [plot controls](controls.md).  It will appear as a simple column chart (representing the plot's total) at the bottom of the plot
-![control](img/daterange1.png)
+## Focus
 
-A specific time range can be selected by clicking on the date range control chart and dragging across a range:
+The number of columns in a Mosaic Plot determines its resolution.  Ideally, we would always show the maximum number of columns (which would be the number of data points in the underlying data).  However, showing too many cells can impact the web page's performance
+To address this, the [`Min Columns`](configuration_options.md#grid-properties) field can be used to limit the number of columns that are displayed
+In some cases however, we might want to show panels with a limited number of columns, but then be able to (maybe temporarily) increase that number so we can get a higher resolution and notice more detail
 
-![control](img/daterange2.png)
+To enable this interactivity, the [`Enable Focus`](configuration_options.md#style) option must be enabled.  Once it is enabled, clicking on any part of the panel will cause it to transition between the values in [`Min Columns`](configuration_options.md#grid-properties) and [`Max Columns`](configuration_options.md#grid-properties)
 
-The selection can be modified and moved by interacting with it.  A single click on the date range control chart (outside of the selection) will reset the selected range:
+![focus](img/features/focus.gif)
 
-![control](img/daterangecontrol.gif)
+## Smoothing
 
-## Fog
+When the [`Smoothing`](configuration_options.md#style) option is enabled, instead of simply coloring each cell according to its value, each cell is colored with a gradient, spanning from the color in the cell's left neighbor, to the cell's color
+Smoothing can make low resolution plots appear nicer, as well as remove visual artficats caused by arbitrary division of the data into cells:
 
-Fog is used to highlight values above a certain threshold.  Parts of the chart below the fog's height will be hidden under the fog
-<br>
-By using fog, it is much easier to spot outlier values (which will be above the fog)
-
-![Image title](img/fognew.png)
-
-## Transitions
-
-Tranistions are used to create sort of dynamic slideshows from Sierra plots.
-<br>
-The most common use case would be a dashboard that is presented over a long period of time and with no user interaction (such as on a TV monitor), where there's value in periodically cycling between which plot elements are in focus.
-<br>
-<br>
-There are two different tranisition modes:
-<br>
-<br>
-1. `Group`: The plot periodically highlights a different group:
-<br>
-![Image title](img/transitionsgroup.gif)
-<br>
-2. `Chart`: The plot periodically highlights a different chart:
-<br>
-![Image title](img/transitionschart.gif)
-
-The cycle period is [configurable](configuration_options.md#transitions)
+![no_smoothing](img/features/no_smoothing.png)
+![smoothing](img/features/smoothing.png)

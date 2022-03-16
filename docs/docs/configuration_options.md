@@ -20,7 +20,7 @@
 | `Sort Mode` | Sort ascending or descending |
 | `Min Columns` | The minimum number of columns to display.  If `Focus` is disabled, this property determines the number of columns to show |
 | `Max Columns` | The maximum number of columns to display when focusing |
-| `Aggregation` | Aggregate function to apply when there are more data points than coloumns.  Possible values are: <ul><li>Sum</li><li>Average</li></ul> |
+| `Aggregation` | Aggregate function to apply when there are more data points than columns.  Possible values are: <ul><li>Sum</li><li>Average</li></ul> |
 | `Scale Type` | Scaling function for determining a cell's color.  Possible values are: <ul><li>Squared</li><li>Linear</li><li>Square Root</li><li>Log</li></ul> |
 | `Max Rows` | The maximum number of rows to show (after sorting) |
 
@@ -35,6 +35,7 @@
 | `Show X Axis` | Show or hide the horizontal axis |
 | `Show Scale` | Show or hide the color scale |
 | `Scale Width` | Horizontal width for the color scale |
+| `Discrete Scale` | Divide the color scale into 5 discrete values |
 | `Compact Mode` | If selected, hides everything except the grid itself |
 
 ## Style
