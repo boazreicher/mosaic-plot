@@ -29,7 +29,7 @@
 
 | Name | Description |
 | ------------ | ------------- |
-| `Show Labels` | Controls the row labels.  Possible values are: <ul><li>Series</li><li>Group</li><li>None</li></ul> |
+| `Show Labels` | Controls the row labels.  Possible values are: <ul><li>Series</li><li>Group</li><li>Buckets</li><li>None</li></ul> |
 | `Label Positions` | Controls the position of the labels.  Possible values are: <ul><li>Horizontal</li><li>Vertical</li><li>Angle</li></ul> |
 | `Left Margin` | Size of the labels margin |
 | `Show X Axis` | Show or hide the horizontal axis |
@@ -37,6 +37,10 @@
 | `Scale Width` | Horizontal width for the color scale |
 | `Discrete Scale` | Divide the color scale into 5 discrete values |
 | `Compact Mode` | If selected, hides everything except the grid itself |
+
+!!! hint inline
+
+    When `Show Labels` is set to `Buckets`, if `Data Format` is set to `heatmap` and the names of the rows are in the format `<START_NUMBER>-<END_NUMBER>` the row labels will show only the value of `<START_NUMBER>`, and only 10 values/buckets will be shown 
 
 ## Style
 
