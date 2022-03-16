@@ -7,7 +7,8 @@ services:
     environment:
       GF_AUTH_ANONYMOUS_ENABLED: 1
       GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
-      GF_INSTALL_PLUGINS: https://github.com/boazreicher/sierra-plot/releases/download/v1.0.14/boazreicher-sierraplot-panel-1.0.14.zip;boazreicher-sierraplot-panel
+      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: "boazreicher-mosaicplot-panel"
+      GF_INSTALL_PLUGINS: https://github.com/boazreicher/mosaic-plot/releases/download/v1.0.1/boazreicher-mosaicplot-panel-1.0.1.zip;boazreicher-mosaicplot-panel
     volumes:
       - ./provisioning:/etc/grafana/provisioning
 
