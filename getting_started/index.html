@@ -118,7 +118,30 @@
 <p>The simplest way to play around with Mosaic Plot is to use the docker-compose <a href="https://github.com/boazreicher/mosaic-plot/tree/main/plugin-test-environment">plugin test environment</a></p>
 <p>Docker compose will run a container with a Grafana instance (on port 3000) that has the Mosaic Plot plugin installed, along with a number of sample dashboards</p>
 <h2 id="example-dashboards">Example Dashboards<a class="headerlink" href="#example-dashboards" title="Permanent link">#</a></h2>
-<p>If Mosaic Plot is already installed in your Grafana instance, you can play around with it by using the following dashboards (create a new dashboard and then just copy the JSON contents into the JSON Model):</p>
+<p>If Mosaic Plot is already installed in your Grafana instance, you can play around with it by using the following dashboards (create a new dashboard and then just copy the JSON contents into the JSON Model)</p>
+<div class="admonition hint inline">
+<p class="admonition-title">Hint</p>
+<p>The dashboards are self contained (no external data required).  They all use the standard TestData DB datasource with static content</p>
+</div>
+<p><a href="https://raw.githubusercontent.com/boazreicher/mosaic-plot/main/plugin-test-environment/provisioning/dashboards/dashboards/mosaic_demo_heatmaps.json">Heatmaps Demo (Source)</a></p>
+<p align="left">
+  <img width="460" height="300" src="/img/examples/demo1.png">
+</p>
+
+<p><a href="https://raw.githubusercontent.com/boazreicher/mosaic-plot/main/plugin-test-environment/provisioning/dashboards/dashboards/mosaic_demo_mandelbrot.json">Mandelbrot Set (Source)</a></p>
+<p align="left">
+  <img width="460" height="300" src="/img/examples/mandelbrot.png">
+</p>
+
+<p><a href="https://raw.githubusercontent.com/boazreicher/mosaic-plot/main/plugin-test-environment/provisioning/dashboards/dashboards/mosaic_demo_variations.json">Variations Demo (Source)</a></p>
+<p align="left">
+  <img width="460" height="300" src="/img/examples/variations.png">
+</p>
+
+<p><a href="https://raw.githubusercontent.com/boazreicher/mosaic-plot/main/plugin-test-environment/provisioning/dashboards/dashboards/mosaic_demo_variations2.json">Variations 2 Demo (Source)</a></p>
+<p align="left">
+  <img width="460" height="300" src="/img/examples/variations2.png">
+</p>
               
             </div>
           </div>
