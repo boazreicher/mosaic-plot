@@ -1,4 +1,3 @@
-import { SCALE_WIDTH } from 'Constants';
 import * as React from 'react';
 import { Coordinates } from 'shapes/Coordinates';
 import { ScaleType } from 'types';
@@ -9,15 +8,22 @@ export const ScaleAxis = ({
   ...props
 }: React.SVGProps<SVGElement> & { min: number } & {
   max: number;
-} & { topLeft: Coordinates } & { maxY: number } & { scaleType: ScaleType }) =>
-  createYAxis(props.min, props.max, props.topLeft, props.maxY, props.scaleType);
+} & { topLeft: Coordinates } & { maxY: number } & { scaleType: ScaleType } & { width: number }) =>
+  createYAxis(props.min, props.max, props.topLeft, props.maxY, props.scaleType, props.width);
 
-function getTransform(topLeft: Coordinates) {
-  let shiftX = topLeft.x + SCALE_WIDTH;
+function getTransform(topLeft: Coordinates, width: number) {
+  let shiftX = topLeft.x + width;
   return 'translate(' + shiftX + ',0)';
 }
 
-function createYAxis(min: number, max: number, topLeft: Coordinates, maxY: number, scaleType: ScaleType) {
+function createYAxis(
+  min: number,
+  max: number,
+  topLeft: Coordinates,
+  maxY: number,
+  scaleType: ScaleType,
+  width: number
+) {
   let effectiveMin = Math.max(min, 0.00001);
   if (effectiveMin > max) {
     effectiveMin = max / 100;
@@ -27,7 +33,7 @@ function createYAxis(min: number, max: number, topLeft: Coordinates, maxY: numbe
   const yAxis = d3.axisLeft(yScale).ticks(5, '~r').tickSize(0);
   return (
     <g
-      transform={getTransform(topLeft)}
+      transform={getTransform(topLeft, width)}
       ref={(node) => {
         d3.select(node)
           .style('text-shadow', '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000')

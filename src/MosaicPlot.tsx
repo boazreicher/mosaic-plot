@@ -99,6 +99,7 @@ function buildScale(width: number, height: number, panelOptions: MosaicPlotOptio
   let effectiveHeight = height - bottomMargin;
 
   return Scale.buildScale(
+    panelOptions.scaleWidth,
     width,
     effectiveHeight,
     minValue,
@@ -200,6 +201,6 @@ function initPlotElements(
 }
 
 function getMainSvgStyle() {
-  var styles = '.' + CLICKABLE_CLASS + ' { cursor: pointer } ';
+  const styles = '.' + CLICKABLE_CLASS + ' { cursor: pointer } ';
   return <style>{styles}</style>;
 }

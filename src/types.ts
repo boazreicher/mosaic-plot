@@ -33,6 +33,7 @@ export interface MosaicPlotOptions {
   animate: boolean;
   binType: BinType;
   discreteScale: boolean;
+  scaleWidth: number;
 }
 
 export type CellShape = 'hex' | 'rect' | 'jigsaw' | 'circle' | 'circleStacked';

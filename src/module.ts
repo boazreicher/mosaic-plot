@@ -279,6 +279,17 @@ export const plugin = new PanelPlugin<MosaicPlotOptions>(MosaicPlotPanel).setPan
       category: ['Labels'],
       defaultValue: true,
     })
+    .addSliderInput({
+      path: 'scaleWidth',
+      name: 'Scale Width',
+      category: ['Labels'],
+      defaultValue: 50,
+      settings: {
+        min: 0,
+        max: 100,
+        step: 1,
+      },
+    })
     .addBooleanSwitch({
       path: 'discreteScale',
       name: 'Discrete Scale',

@@ -2,7 +2,7 @@ import { Color } from 'color/Color';
 import { fromString } from 'color/ColorUtils';
 import { RGB } from 'color/RGB';
 import { makeSpectrumColorScale } from 'color/Spectrum';
-import { SCALE_FILLER_HEIGHT, SCALE_WIDTH } from 'Constants';
+import { SCALE_FILLER_HEIGHT } from 'Constants';
 import React from 'react';
 import { Coordinates } from 'shapes/Coordinates';
 import { ScaleType } from 'types';
@@ -55,6 +55,7 @@ export class Scale {
   }
 
   public static buildScale(
+    scaleWidth: number,
     width: number,
     height: number,
     minValue: number,
@@ -88,8 +89,8 @@ export class Scale {
     }
 
     return new Scale(
-      new Coordinates(width - SCALE_WIDTH, 0),
-      SCALE_WIDTH,
+      new Coordinates(width - scaleWidth, 0),
+      scaleWidth,
       height,
       margin,
       minColor,
@@ -138,6 +139,7 @@ export class Scale {
           maxY={this.topLeft.y + this.height - this.margin}
           topLeft={new Coordinates(this.topLeft.x, this.topLeft.y + this.margin)}
           scaleType={this.scaleType}
+          width={this.width}
         />
       </>
     );

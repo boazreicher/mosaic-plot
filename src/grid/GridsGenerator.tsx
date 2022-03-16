@@ -1,5 +1,4 @@
 import { ScaleColorPicker } from 'color/ScaleColorPicker';
-import { SCALE_WIDTH } from 'Constants';
 import { Series } from 'data/Series';
 import { GridGeneratorFactory } from 'grid/GridGeneratorFactory';
 import { CellAttributes } from 'shapes/CellAttributes';
@@ -44,7 +43,7 @@ export class GridsGenerator {
   public generateGrids(panelOptions: MosaicPlotOptions, onOptionsChange: optionsChangeCallback) {
     let grids = new Grids(panelOptions, onOptionsChange);
 
-    let rightMargin = this.parameters.showScale && !this.parameters.compact ? SCALE_WIDTH : 0;
+    let rightMargin = this.parameters.showScale && !this.parameters.compact ? panelOptions.scaleWidth : 0;
     let width = this.parameters.width - rightMargin - this.parameters.leftMargin;
 
     this.gridGeneratorFactory.setColorPicker(

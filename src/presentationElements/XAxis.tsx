@@ -1,4 +1,4 @@
-import { SCALE_WIDTH, X_AXIS_HEIGHT } from 'Constants';
+import { X_AXIS_HEIGHT } from 'Constants';
 import { TimeRange } from 'data/TimeRange';
 import React from 'react';
 import { Coordinates } from 'shapes/Coordinates';
@@ -45,7 +45,7 @@ export function buildXAxis(width: number, height: number, panelOptions: MosaicPl
   }
 
   let axisHeight = X_AXIS_HEIGHT;
-  let rightMargin = panelOptions.showScale ? SCALE_WIDTH : 0;
+  let rightMargin = panelOptions.showScale ? panelOptions.scaleWidth : 0;
   let axisWidth = width - rightMargin - panelOptions.leftMargin;
 
   return (

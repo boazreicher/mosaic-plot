@@ -20,9 +20,10 @@
 | `Sort Mode` | Sort ascending or descending |
 | `Min Columns` | The minimum number of columns to display.  If `Focus` is disabled, this property determines the number of columns to show |
 | `Max Columns` | The maximum number of columns to display when focusing |
+| `Aggregation` | Aggregate function to apply when there are more data points than coloumns.  Possible values are: <ul><li>Sum</li><li>Average</li></ul> |
 | `Scale Type` | Scaling function for determining a cell's color.  Possible values are: <ul><li>Squared</li><li>Linear</li><li>Square Root</li><li>Log</li></ul> |
 | `Max Rows` | The maximum number of rows to show (after sorting) |
-| `Aggregation` | How to aggregate values in each cell.  Possible values are: <ul><li>Sum</li><li>Average</li></ul> |
+
 
 ## Labels
 
@@ -33,6 +34,7 @@
 | `Left Margin` | Size of the labels margin |
 | `Show X Axis` | Show or hide the horizontal axis |
 | `Show Scale` | Show or hide the color scale |
+| `Scale Width` | Horizontal width for the color scale |
 | `Compact Mode` | If selected, hides everything except the grid itself |
 
 ## Style
@@ -40,7 +42,8 @@
 | Name | Description |
 | ------------ | ------------- |
 | `Color Palette` | The color palette to use for coloring cells |
-| `Invert Palette` | Invert the color palette's order|
+| `Invert Palette` | Invert the color palette's order |
+| `Invert Colors` | Invert all colors used in the panel |
 | `Zero Values` | Determines how empty (zero) cells should be treated.  Possible values are: <ul><li>Regular: Using the lowest color in the selected palette</li><li>Empty: No cell is created</li><li>Customer: Use a custom color</li></ul> |
 | `Zero Color` | Custom color to use for empty cells |
 | `Outline Color Type` | Determines how cell outlines should be colored.  Possible values are: <ul><li>Same as cell</li><li>Custom</li></ul> |
