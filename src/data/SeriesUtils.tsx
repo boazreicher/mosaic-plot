@@ -160,7 +160,7 @@ function calculateTimestamps(
   numColumns: number,
   timeRange: TimeRange
 ): number[] {
-  let timestamps: number[] = []
+  let timestamps: number[] = [];
   fields.forEach((field) => {
     if (field.type === 'time') {
       if (timestamps.length > 0) {

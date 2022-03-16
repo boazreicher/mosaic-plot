@@ -5,7 +5,7 @@ export class Series {
   private timestamps: number[] = [];
   private minValue?: number;
   private maxValue?: number;
-  private sum: number = 0;
+  private sum = 0;
   private groupMax = 0;
   private groupSum = 0;
 
