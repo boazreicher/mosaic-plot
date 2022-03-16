@@ -1,0 +1,10 @@
+apiVersion: 1
+datasources:
+  - name: TestData DB
+    type: testdata
+  - name: CSV
+    type: marcusolsson-csv-datasource
+    editable: true
+    url: https://github.com/boazreicher/sierra-plot/raw/main/examples/data/
+    jsonData:
+      storage: http

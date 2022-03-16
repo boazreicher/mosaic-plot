@@ -1,0 +1,341 @@
+{
+    "annotations": {
+        "list": [{
+            "builtIn": 1,
+            "datasource": "-- Grafana --",
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+                "limit": 100,
+                "matchAny": false,
+                "tags": [],
+                "type": "dashboard"
+            },
+            "type": "dashboard"
+        }]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "links": [],
+    "liveNow": false,
+    "panels": [{
+        "datasource": "TestData DB",
+        "gridPos": {
+            "h": 20,
+            "w": 16,
+            "x": 0,
+            "y": 0
+        },
+        "id": 2,
+        "options": {
+            "aggregation": "sum",
+            "amplitudeField": "value",
+            "backgroundColor": "#5da3f4b5",
+            "chartBevel": true,
+            "chartBreakdownType": "series",
+            "chartLabelShiftX": 127,
+            "chartLabelSize": 50,
+            "chartType": "area",
+            "chartsFieldBreakdown": "chart",
+            "chartsGroupField": "groupField",
+            "color": "#663399",
+            "colorMode": "group",
+            "colorType": "single",
+            "excludedGroups": [
+                ""
+            ],
+            "excludedSeries": [
+                ""
+            ],
+            "fogColor": "rgba(255, 255, 255, 0.66)",
+            "fogHeight": 50,
+            "glow": false,
+            "glowSpread": 1,
+            "gridlineColor": "#0488d0",
+            "gridlineEnabled": false,
+            "gridlinePosition": "below",
+            "gridlineTicks": 30,
+            "gridlineWidth": 3,
+            "groupLabelSize": 50,
+            "labelColor": "#ffffff",
+            "leftMargin": 187,
+            "markersColor": "#663399",
+            "markersMode": "disable",
+            "markersRadius": 10,
+            "maxYType": "global",
+            "outlineColor": "#000000",
+            "outlineOpacity": 1,
+            "outlineWidth": 5.2,
+            "scaleY": 145,
+            "selectedChart": {
+                "type": 1,
+                "active": false,
+                "x": 674.832530647986,
+                "y": 2244.8873121869783,
+                "hightlightMode": "none",
+                "key": "chart",
+                "value": "chart4"
+            },
+            "selectedGroups": [
+                "*"
+            ],
+            "selectedSeries": [
+                "*"
+            ],
+            "seriesFieldBreakdown": "seriesField",
+            "showBackground": false,
+            "showChartLabels": true,
+            "showControlElements": true,
+            "showFog": false,
+            "showGroups": true,
+            "showRangeSelector": false,
+            "showTotal": true,
+            "skewPercentage": 4.63,
+            "sortMode": "lex",
+            "stepped": false,
+            "timeRangeEnd": 1643884910000,
+            "timeRangeStart": 1643798630000,
+            "topMargin": 0,
+            "totalBreakdown": "chart",
+            "totalChartType": "area",
+            "totalPerc": 50,
+            "totalStackMode": "stacked",
+            "transitionPeriod": "5000",
+            "transitionType": "none"
+        },
+        "targets": [{
+                "alias": "value",
+                "labels": "chart=chart1,seriesField=series1,groupField=group1",
+                "min": 1,
+                "refId": "A",
+                "scenarioId": "random_walk",
+                "spread": 3
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart1,seriesField=series2,groupField=group1",
+                "min": 1,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 6
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart1,seriesField=series3,groupField=group1",
+                "min": 1,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 8
+            },
+            {
+                "alias": "value",
+                "labels": "chart=chart2,seriesField=series1,groupField=group1",
+                "min": 1,
+                "refId": "A",
+                "scenarioId": "random_walk",
+                "spread": 3
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart2,seriesField=series2,groupField=group1",
+                "min": 1,
+                "noise": 5,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 8
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart2,seriesField=series3,groupField=group1",
+                "min": 1,
+                "noise": 5,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 6
+            },
+            {
+                "alias": "value",
+                "labels": "chart=chart3,seriesField=series1,groupField=group1",
+                "min": 1,
+                "noise": 6,
+                "refId": "A",
+                "scenarioId": "random_walk",
+                "spread": 8
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart3,seriesField=series2,groupField=group1",
+                "min": 1,
+                "noise": 6,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 4
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart3,seriesField=series3,groupField=group1",
+                "min": 1,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 5
+            },
+            {
+                "alias": "value",
+                "labels": "chart=chart4,seriesField=series1,groupField=group2",
+                "min": 1,
+                "noise": 6,
+                "refId": "A",
+                "scenarioId": "random_walk",
+                "spread": 5
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart4,seriesField=series2,groupField=group2",
+                "min": 1,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 10
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart4,seriesField=series3,groupField=group2",
+                "min": 1.3,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 3.8
+            },
+            {
+                "alias": "value",
+                "labels": "chart=chart5,seriesField=series1,groupField=group2",
+                "min": 1,
+                "refId": "A",
+                "scenarioId": "random_walk",
+                "spread": 7
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart5,seriesField=series2,groupField=group2",
+                "min": 1,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 10
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart5,seriesField=series3,groupField=group2",
+                "min": 1,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 3
+            },
+            {
+                "alias": "value",
+                "labels": "chart=chart6,seriesField=series1,groupField=group3",
+                "min": 1,
+                "refId": "A",
+                "scenarioId": "random_walk",
+                "spread": 9
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart6,seriesField=series2,groupField=group3",
+                "min": 1,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 8
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart6,seriesField=series3,groupField=group3",
+                "min": 1,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 8
+            },
+            {
+                "alias": "value",
+                "labels": "chart=chart7,seriesField=series1,groupField=group3",
+                "min": 1,
+                "refId": "A",
+                "scenarioId": "random_walk",
+                "spread": 4
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart7,seriesField=series2,groupField=group3",
+                "min": 1,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 7
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart7,seriesField=series3,groupField=group3",
+                "min": 1,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 3
+            },
+            {
+                "alias": "value",
+                "labels": "chart=chart8,seriesField=series1,groupField=group3",
+                "min": 1,
+                "refId": "A",
+                "scenarioId": "random_walk",
+                "spread": 3
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart8,seriesField=series2,groupField=group3",
+                "min": 1,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 5
+            },
+            {
+                "alias": "value",
+                "hide": false,
+                "labels": "chart=chart8,seriesField=series3,groupField=group3",
+                "min": 1,
+                "refId": "B",
+                "scenarioId": "random_walk",
+                "spread": 10
+            }
+        ],
+        "title": "Example",
+        "transparent": true,
+        "type": "boazreicher-sierraplot-panel"
+    }],
+    "schemaVersion": 31,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+        "list": []
+    },
+    "time": {
+        "from": "now-24h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "test with random walk"
+}

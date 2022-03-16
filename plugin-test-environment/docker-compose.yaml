@@ -1,0 +1,14 @@
+version: "3"
+services:
+  grafana:
+    image: grafana/grafana:8.3.4
+    ports:
+      - 3000:3000
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: 1
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+      GF_INSTALL_PLUGINS: https://github.com/boazreicher/sierra-plot/releases/download/v1.0.14/boazreicher-sierraplot-panel-1.0.14.zip;boazreicher-sierraplot-panel
+    volumes:
+      - ./provisioning:/etc/grafana/provisioning
+
+      

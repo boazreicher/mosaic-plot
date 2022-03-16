@@ -1,0 +1,202 @@
+{
+    "annotations": {
+        "list": [{
+            "builtIn": 1,
+            "datasource": "-- Grafana --",
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+                "limit": 100,
+                "matchAny": false,
+                "tags": [],
+                "type": "dashboard"
+            },
+            "type": "dashboard"
+        }]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "links": [],
+    "liveNow": false,
+    "panels": [{
+        "datasource": "CSV",
+        "gridPos": {
+            "h": 23,
+            "w": 16,
+            "x": 0,
+            "y": 0
+        },
+        "id": 3,
+        "options": {
+            "aggregation": "sum",
+            "amplitudeField": "cases_avg",
+            "backgroundColor": "#000000e6",
+            "chartBevel": true,
+            "chartBreakdownType": "none",
+            "chartColorFromGroup": false,
+            "chartLabelShiftX": 73,
+            "chartLabelSize": 32,
+            "chartType": "area",
+            "chartsFieldBreakdown": "state",
+            "chartsGroupField": "regionName",
+            "color": "#d07d3e",
+            "colorMode": "group",
+            "colorSteps": 100,
+            "colorType": "sequential",
+            "excludedGroups": [
+                ""
+            ],
+            "excludedSeries": [
+                ""
+            ],
+            "fitY": true,
+            "fogBlur": 5,
+            "fogColor": "#ffffff",
+            "fogHeight": 20,
+            "glow": true,
+            "glowSpread": 4,
+            "gridlineColor": "#ffffff2e",
+            "gridlineEnabled": true,
+            "gridlinePosition": "below",
+            "gridlineTicks": 30,
+            "gridlineWidth": 3,
+            "groupLabelSize": 55,
+            "groupOpacity": 0.53,
+            "labelColor": "#d1d1d1",
+            "leftMargin": 129,
+            "markersColor": "#663399",
+            "markersMode": "disable",
+            "markersRadius": 10,
+            "maxYType": "global",
+            "outlineColor": "#000000",
+            "outlineOpacity": 1,
+            "outlineWidth": 1.1,
+            "panX": 0,
+            "panY": 0,
+            "scaleY": 1029,
+            "selectedChart": {
+                "active": false,
+                "hightlightMode": "none",
+                "key": "",
+                "type": 1,
+                "value": "",
+                "x": 129,
+                "y": 3238.7312186978297
+            },
+            "selectedChartSaturation": 50,
+            "selectedGroups": [],
+            "selectedSeries": [
+                "*"
+            ],
+            "seperationPerc": -500,
+            "seriesFieldBreakdown": "gender",
+            "showBackground": true,
+            "showChartLabels": true,
+            "showControlElements": false,
+            "showFog": false,
+            "showFrame": false,
+            "showGroups": true,
+            "showRangeSelector": false,
+            "showTotal": true,
+            "skewPercentage": 0.5,
+            "sortMode": "max",
+            "stepped": false,
+            "switchTotal": true,
+            "timeRangeEnd": 1635627747000,
+            "timeRangeStart": 1585342800000,
+            "topMargin": 1,
+            "totalBreakdown": "group",
+            "totalChartType": "area",
+            "totalOpacity": 0.53,
+            "totalPerc": 49,
+            "totalStackMode": "stacked",
+            "transitionPeriod": "5000",
+            "transitionType": "none",
+            "ySeperation": 0,
+            "zoomPercentage": 0,
+            "zoomPercentageX": 100
+        },
+        "pluginVersion": "8.2.1",
+        "targets": [{
+            "decimalSeparator": ".",
+            "delimiter": ",",
+            "header": true,
+            "ignoreUnknown": true,
+            "path": "us_states_increases_with_gender.csv",
+            "refId": "A",
+            "schema": [{
+                    "name": "date",
+                    "type": "time"
+                },
+                {
+                    "name": "state",
+                    "type": "string"
+                },
+                {
+                    "name": "regionName",
+                    "type": "string"
+                },
+                {
+                    "name": "cases_avg_per_100k",
+                    "type": "number"
+                },
+                {
+                    "name": "cases_avg",
+                    "type": "number"
+                },
+                {
+                    "name": "cases",
+                    "type": "number"
+                },
+                {
+                    "name": "deaths",
+                    "type": "number"
+                },
+                {
+                    "name": "deaths_avg",
+                    "type": "number"
+                },
+                {
+                    "name": "deaths_avg_per_100k",
+                    "type": "number"
+                },
+                {
+                    "name": "gender",
+                    "type": "string"
+                },
+                {
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "skipRows": 0
+        }],
+        "title": "Covid19 Cases",
+        "transformations": [{
+            "id": "prepareTimeSeries",
+            "options": {
+                "format": "many"
+            }
+        }],
+        "transparent": true,
+        "type": "boazreicher-sierraplot-panel"
+    }],
+    "refresh": false,
+    "schemaVersion": 31,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+        "list": []
+    },
+    "time": {
+        "from": "now-6h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Covid 19"
+}

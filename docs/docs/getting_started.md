@@ -2,9 +2,9 @@
 
 ## Plugin Test Environment
 
-The simplest way to play around with Sierra Plot is to use the docker-compose [plugin test environment](https://github.com/boazreicher/sierra-plot/tree/main/plugin-test-environment)
+The simplest way to play around with Mosaic Plot is to use the docker-compose [plugin test environment](https://github.com/boazreicher/mosaic-plot/tree/main/plugin-test-environment)
 
-Docker compose will run a container with a Grafana instance (pn port 3000) that has the Sierra Plot plugin installed, along with a number of sample dashboards
+Docker compose will run a container with a Grafana instance (on port 3000) that has the Mosaic Plot plugin installed, along with a number of sample dashboards
 
 ## Examples
 
