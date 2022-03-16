@@ -49,7 +49,7 @@
             },
             {
                 "name": "Focus",
-                "path": "img/focus.png"
+                "path": "img/focus.gif"
             }
         ],
         "version": "%VERSION%",
