@@ -6,7 +6,7 @@ import { PaletteSelector } from 'inputs/PaletteSelector';
 import { MosaicPlotPanel } from './MosaicPlotPanel';
 import { MosaicPlotOptions } from './types';
 
-export const plugin = new PanelPlugin<MosaicPlotOptions>(MosaicPlotPanel).setPanelOptions((builder) => {
+export const plugin = new PanelPlugin<MosaicPlotOptions>(MosaicPlotPanel).setNoPadding().setPanelOptions((builder) => {
   return builder
     .addRadio({
       path: 'dataFormat',
