@@ -1,6 +1,6 @@
 {
     "name": "mosaicplot",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Mosaic Plot Grafana Plugin",
     "scripts": {
         "build": "grafana-toolkit plugin:build",
