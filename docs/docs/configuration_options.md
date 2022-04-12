@@ -22,6 +22,8 @@
 | `Max Columns` | The maximum number of columns to display when focusing |
 | `Aggregation` | Aggregate function to apply when there are more data points than columns.  Possible values are: <ul><li>Sum</li><li>Average</li></ul> |
 | `Scale Type` | Scaling function for determining a cell's color.  Possible values are: <ul><li>Squared</li><li>Linear</li><li>Square Root</li><li>Log</li></ul> |
+| `Max Type` | How the maximum value (for color scales) should be derived.  Possible values are: <ul><li>From Data: Use the maximum value found in the query results</li><li>Explicit: Use the value specified in the `Max` property</li><li>Soft Max: Use the larger of {`From Data`, `Explicit`}</li></ul> See [this issue](https://github.com/boazreicher/mosaic-plot/issues/1) for more info|
+| `Max` | Explicit max value |
 | `Max Rows` | The maximum number of rows to show (after sorting) |
 
 

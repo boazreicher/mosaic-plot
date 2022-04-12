@@ -196,6 +196,33 @@ export const plugin = new PanelPlugin<MosaicPlotOptions>(MosaicPlotPanel).setNoP
         ],
       },
     })
+    .addRadio({
+      path: 'maxType',
+      name: 'Max Type',
+      defaultValue: 'fromData',
+      category: ['Grid Properties'],
+      settings: {
+        options: [
+          {
+            value: 'fromData',
+            label: 'From Data',
+          },
+          {
+            value: 'explicit',
+            label: 'Explicit',
+          },
+          {
+            value: 'softMax',
+            label: 'Soft Max',
+          },
+        ],
+      },
+    })
+    .addTextInput({
+      path: 'maxValue',
+      name: 'Max',
+      category: ['Grid Properties'],
+    })
     .addSliderInput({
       path: 'maxRows',
       name: 'Max Rows',

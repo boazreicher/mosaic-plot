@@ -34,6 +34,8 @@ export interface MosaicPlotOptions {
   binType: BinType;
   discreteScale: boolean;
   scaleWidth: number;
+  maxType: MaxType;
+  maxValue: number;
 }
 
 export type CellShape = 'hex' | 'rect' | 'jigsaw' | 'circle' | 'circleStacked';
@@ -46,6 +48,7 @@ export type OutlineColorType = 'same' | 'custom';
 export type ScaleType = 'linear' | 'log' | 'squared' | 'sqrt';
 export type DataFormat = 'heatmap' | 'regular';
 export type BinType = 'sum' | 'avg';
+export type MaxType = 'fromData' | 'softMax' | 'explicit';
 
 export type propNumber = number | string | undefined;
 export type optionsChangeCallback = (options: MosaicPlotOptions) => void;

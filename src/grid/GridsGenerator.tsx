@@ -14,6 +14,7 @@ export class GridsGenerator {
   private data: Record<string, Series[]> = {};
   private maxValue!: number;
   private minValue!: number;
+  private effectiveMaxValue!: number;
   private numGrids = 0;
   private numRows = 0;
   private numColumns = 0;
@@ -40,6 +41,10 @@ export class GridsGenerator {
     return this.maxValue;
   }
 
+  setEffectiveMaxValue(effectiveMaxValue: number) {
+    this.effectiveMaxValue = effectiveMaxValue;
+  }
+
   generateGrids(panelOptions: MosaicPlotOptions, onOptionsChange: optionsChangeCallback) {
     let grids = new Grids(panelOptions, onOptionsChange);
 
@@ -49,7 +54,7 @@ export class GridsGenerator {
     this.gridGeneratorFactory.setColorPicker(
       new ScaleColorPicker(
         this.minValue,
-        this.maxValue,
+        this.effectiveMaxValue,
         this.parameters.palette,
         this.parameters.invertPalette,
         this.parameters.scaleType,

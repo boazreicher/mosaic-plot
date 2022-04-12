@@ -3,7 +3,7 @@ import { Bevel } from 'color/filters/Bevel';
 import { EmptyFilter } from 'color/filters/EmptyFilter';
 import { CLICKABLE_CLASS } from 'Constants';
 import { Series } from 'data/Series';
-import { getDataSeries, getNumColumns } from 'data/SeriesUtils';
+import { getDataSeries, getEffectiveMaxValue, getNumColumns } from 'data/SeriesUtils';
 import { TimeRange } from 'data/TimeRange';
 import { Grids } from 'grid/Grids';
 import { GridsGenerator } from 'grid/GridsGenerator';
@@ -133,7 +133,8 @@ function buildGrids(
     generator.addSeries(data[rowIndex]);
   }
   minValue = generator.getMinValue();
-  maxValue = generator.getMaxValue();
+  maxValue = getEffectiveMaxValue(generator.getMaxValue(), panelOptions.maxType, panelOptions.maxValue);
+  generator.setEffectiveMaxValue(maxValue);
 
   grids = generator.generateGrids(panelOptions, onOptionsChange);
 

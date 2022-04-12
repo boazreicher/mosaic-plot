@@ -1,5 +1,5 @@
 import { DataFrame, Vector } from '@grafana/data';
-import { BinType, DataFormat, SortMode, SortType } from 'types';
+import { BinType, DataFormat, MaxType, SortMode, SortType } from 'types';
 import { Series } from './Series';
 import { TimeRange } from './TimeRange';
 
@@ -300,10 +300,26 @@ function updateGroupSum(series: Series[]) {
     }
   }
 }
+
 function truncateSeries(result: Series[], maxRows: number): Series[] {
   if (result.length <= maxRows) {
     return result;
   }
 
   return result.slice(0, maxRows);
+}
+
+export function getEffectiveMaxValue(fromData: number, maxType: MaxType, explicit: number) {
+  if (isNaN(explicit)) {
+    return fromData;
+  }
+  console.log(`called getefmx with ${maxType}, ${explicit}, ${fromData}`);
+  switch (maxType) {
+    case 'fromData':
+      return fromData;
+    case 'explicit':
+      return explicit;
+    case 'softMax':
+      return Math.max(fromData, explicit);
+  }
 }
