@@ -121,7 +121,7 @@
               
                 <h1 id="data">Data<a class="headerlink" href="#data" title="Permanent link">#</a></h1>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">#</a></h2>
-<p>The Mosaic Plot panel expects <i>time series</i> data frames, meaning each series must contain at least on field with <code>time</code> type (if multiple such fields exist, the first one will be used)</p>
+<p>The Mosaic Plot panel expects <i>time series</i> data frames, meaning each series must contain at least one field with <code>time</code> type (if multiple such fields exist, the first one will be used)</p>
 <p>Two data formats are supported:</p>
 <h3 id="1-regular-data-format">1. Regular Data Format<a class="headerlink" href="#1-regular-data-format" title="Permanent link">#</a></h3>
 <p>This data format is applicable where each data frame has a <strong>numeric</strong> <a href="../configuration_options/#fields"><code>Amplitude</code></a> field and a <strong>string</strong> <a href="../configuration_options/#fields"><code>Breakdown</code></a> label to differentiate the different series.  It can also contain an (optional) additional <strong>string</strong> label for <a href="../configuration_options/#fields"><code>grouping</code></a> the different series.</p>
@@ -130,8 +130,82 @@
 Each server is located in some region
 <br>
 <br>
-For the above example, our data will contain a <code>time</code> field, a <code>number</code> field that represents the number of requests, and a <code>string</code> field representing the server name.  It might also contain a <code>string</code> field represening the region name.</p>
-<p>The data will contain a single data frame that looks something like this:</p>
+For the above example, our data will contain a <code>time</code> field, a <code>number</code> field that represents the number of requests, and a <code>string</code> label representing the server name.  It might also contain a <code>string</code> label represening the region name.
+<br>
+The data will be presented in multiple frames, where each frame corresponds to a specific combination of label values.  For example, each frame might look something like this:</p>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Host</th>
+<th>Region</th>
+<th>Requests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1647399651000</td>
+<td>use1-03</td>
+<td>us-east-1</td>
+<td>234</td>
+</tr>
+<tr>
+<td>1647399656000</td>
+<td>use1-03</td>
+<td>us-east-1</td>
+<td>125</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Host</th>
+<th>Region</th>
+<th>Requests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1647399651000</td>
+<td>use1-02</td>
+<td>us-east-1</td>
+<td>163</td>
+</tr>
+<tr>
+<td>1647399656000</td>
+<td>use1-02</td>
+<td>us-east-1</td>
+<td>14</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Host</th>
+<th>Region</th>
+<th>Requests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1647399651000</td>
+<td>usw1-01</td>
+<td>us-west-1</td>
+<td>111</td>
+</tr>
+<tr>
+<td>1647399656000</td>
+<td>usw1-01</td>
+<td>us-west-1</td>
+<td>875</td>
+</tr>
+</tbody>
+</table>
+<p>Currently, Mosaic Plot doesn't support the use case where all of the data is in a single data frame, like this:</p>
 <table>
 <thead>
 <tr>
@@ -180,6 +254,10 @@ For the above example, our data will contain a <code>time</code> field, a <code>
 </tr>
 </tbody>
 </table>
+<div class="admonition hint inline">
+<p class="admonition-title">Hint</p>
+<p>Converting the above format (single data frame, no labels) to the supported one can be achieved by using the <a href="https://grafana.com/docs/grafana/next/panels/transform-data/transformation-functions/#prepare-time-series"><code>Prepare time series transform</code></a></p>
+</div>
 <div class="admonition hint inline">
 <p class="admonition-title">Hint</p>
 <p>When using the regular data format, rows are mapped to the  <a href="../configuration_options/#fields"><code>Breakdown</code></a> field</p>
