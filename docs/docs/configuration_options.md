@@ -6,8 +6,12 @@
 | ------------ | ------------- | ------------ | ------------ |
 | `Data Format` | Structure of the data source (See [Data](data.md)) | **Required** | |
 | `Amplitude` | Value field that determines the amplitude (color) of each cell | **Required** | Request Count, Error Count |
-| `Breakdown` | String field (dimension) on which to split the data into different rows | **Required** | Host Name |
-| `Group` | String field (dimension) used to group different rows based on common values | *Optional* | Cluster Name |
+| `Breakdown` | String field/label (dimension) on which to split the data into different rows | **Required** | Host Name |
+| `Group` | String field/label (dimension) used to group different rows based on common values | *Optional* | Cluster Name |
+
+!!! hint inline
+
+    See the [`data`](data.md#1-regular-data-format) section for the distinction between fields and labels in Mosaic Plot
 
 
 ## Grid Properties

@@ -143,18 +143,22 @@
 </tr>
 <tr>
 <td><code>Breakdown</code></td>
-<td>String field (dimension) on which to split the data into different rows</td>
+<td>String field/label (dimension) on which to split the data into different rows</td>
 <td><strong>Required</strong></td>
 <td>Host Name</td>
 </tr>
 <tr>
 <td><code>Group</code></td>
-<td>String field (dimension) used to group different rows based on common values</td>
+<td>String field/label (dimension) used to group different rows based on common values</td>
 <td><em>Optional</em></td>
 <td>Cluster Name</td>
 </tr>
 </tbody>
 </table>
+<div class="admonition hint inline">
+<p class="admonition-title">Hint</p>
+<p>See the <a href="../data/#1-regular-data-format"><code>data</code></a> section for the distinction between fields and labels in Mosaic Plot</p>
+</div>
 <h2 id="grid-properties">Grid Properties<a class="headerlink" href="#grid-properties" title="Permanent link">#</a></h2>
 <table>
 <thead>
@@ -195,6 +199,14 @@
 <tr>
 <td><code>Scale Type</code></td>
 <td>Scaling function for determining a cell's color.  Possible values are: <ul><li>Squared</li><li>Linear</li><li>Square Root</li><li>Log</li></ul></td>
+</tr>
+<tr>
+<td><code>Max Type</code></td>
+<td>How the maximum value (for color scales) should be derived.  Possible values are: <ul><li>From Data: Use the maximum value found in the query results</li><li>Explicit: Use the value specified in the <code>Max</code> property</li><li>Soft Max: Use the larger of {<code>From Data</code>, <code>Explicit</code>}</li></ul> See <a href="https://github.com/boazreicher/mosaic-plot/issues/1">this issue</a> for more info</td>
+</tr>
+<tr>
+<td><code>Max</code></td>
+<td>Explicit max value</td>
 </tr>
 <tr>
 <td><code>Max Rows</code></td>

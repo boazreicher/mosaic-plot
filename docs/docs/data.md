@@ -2,7 +2,7 @@
 
 ## Requirements
 
-The Mosaic Plot panel expects <i>time series</i> data frames, meaning each series must contain at least on field with `time` type (if multiple such fields exist, the first one will be used)
+The Mosaic Plot panel expects <i>time series</i> data frames, meaning each series must contain at least one field with `time` type (if multiple such fields exist, the first one will be used)
 
 Two data formats are supported:
 ### 1. Regular Data Format
@@ -14,9 +14,26 @@ For example, let's assume that we want to plot the number of requests hitting a 
 Each server is located in some region
 <br>
 <br>
-For the above example, our data will contain a `time` field, a `number` field that represents the number of requests, and a `string` field representing the server name.  It might also contain a `string` field represening the region name.
+For the above example, our data will contain a `time` field, a `number` field that represents the number of requests, and a `string` label representing the server name.  It might also contain a `string` label represening the region name.
+<br>
+The data will be presented in multiple frames, where each frame corresponds to a specific combination of label values.  For example, each frame might look something like this:
 
-The data will contain a single data frame that looks something like this:
+| Time      | Host  | Region | Requests |
+| ----------- | ----------- | ----------- | ------------------------------------ |
+| 1647399651000       | use1-03 | us-east-1 | 234 |
+| 1647399656000      | use1-03 | us-east-1 | 125 |
+
+| Time      | Host  | Region | Requests |
+| ----------- | ----------- | ----------- | ------------------------------------ |
+| 1647399651000       | use1-02 | us-east-1 | 163 |
+| 1647399656000      | use1-02 | us-east-1 | 14 |
+
+| Time      | Host  | Region | Requests |
+| ----------- | ----------- | ----------- | ------------------------------------ |
+| 1647399651000       | usw1-01 | us-west-1 | 111 |
+| 1647399656000      | usw1-01 | us-west-1 | 875 |
+
+Currently, Mosaic Plot doesn't support the use case where all of the data is in a single data frame, like this:
 
 | Time      | Host  | Region | Requests |
 | ----------- | ----------- | ----------- | ------------------------------------ |
@@ -26,6 +43,11 @@ The data will contain a single data frame that looks something like this:
 | 1647399656000      | usw1-01 | us-west-1 | 875 |
 | 1647399656000       | use1-03 | us-east-1 | 125 |
 | 1647399656000      | use1-02 | us-east-1 | 14 |
+
+
+!!! hint inline
+
+    Converting the above format (single data frame, no labels) to the supported one can be achieved by using the [`Prepare time series transform`](https://grafana.com/docs/grafana/next/panels/transform-data/transformation-functions/#prepare-time-series)
 
 
 !!! hint inline

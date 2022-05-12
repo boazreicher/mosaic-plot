@@ -164,7 +164,6 @@ function initPlotElements(
   timeRange: TimeRange
 ): string | undefined {
   maxNumColumns = Math.min(getNumColumns(dataFrames), panelOptions.maxColumns);
-
   let numColumns: number;
   if (!panelOptions.enableFocus) {
     numColumns = panelOptions.minColumns;

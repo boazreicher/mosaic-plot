@@ -46,7 +46,7 @@ export type LabelPositionType = 'horizontal' | 'vertical' | 'angle';
 export type ZeroType = 'regular' | 'empty' | 'color';
 export type OutlineColorType = 'same' | 'custom';
 export type ScaleType = 'linear' | 'log' | 'squared' | 'sqrt';
-export type DataFormat = 'heatmap' | 'regular';
+export type DataFormat = 'heatmap' | 'regular' | 'singleFrame';
 export type BinType = 'sum' | 'avg';
 export type MaxType = 'fromData' | 'softMax' | 'explicit';
 

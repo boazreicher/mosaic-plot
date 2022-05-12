@@ -18,10 +18,17 @@ export function getDataSeries(
 ): Series[] {
   let rows: Record<string, Series> = {};
 
-  dataFrames.forEach((dataFrame) => {
-    let timestamps = calculateTimestamps(dataFrame.fields, numColumns, timeRange);
-    addRows(rows, dataFrame.fields, valueField, rowField, groupField, numColumns, dataFormat, binType, timestamps);
-  });
+  if (dataFormat === 'singleFrame') {
+    if (dataFrames.length > 1) {
+      throw new Error('Single frame data format expects exactly 1 data frame.  Found ' + dataFrames.length);
+    }
+    extractRowsFromSingleFrame(rows, dataFrames[0], numColumns, timeRange, valueField, rowField, groupField, binType);
+  } else {
+    dataFrames.forEach((dataFrame) => {
+      let timestamps = calculateTimestamps(dataFrame.fields, numColumns, timeRange);
+      addRows(rows, dataFrame.fields, valueField, rowField, groupField, numColumns, dataFormat, binType, timestamps);
+    });
+  }
 
   let result: Series[] = [];
   for (let rowName in rows) {
@@ -128,8 +135,18 @@ export function getTimeRange(series: DataFrame[]): TimeRange {
   for (let index = 0; index < series.length; index++) {
     let dataFrame = series[index];
 
-    // Assuming that field with index 0 is always time
-    let timestamps = dataFrame.fields[0].values;
+    let timestampsFieldIndex = -1;
+    for (let index = 0; index < dataFrame.fields.length; index++) {
+      if (dataFrame.fields[index].type === 'time') {
+        timestampsFieldIndex = index;
+        break;
+      }
+    }
+    if (timestampsFieldIndex === -1) {
+      throw new Error('Unable to find a time field');
+    }
+
+    let timestamps = dataFrame.fields[timestampsFieldIndex].values;
     if (minTimestamp === -1 || minTimestamp > timestamps.get(0)) {
       minTimestamp = timestamps.get(0);
     }
@@ -167,18 +184,27 @@ function calculateTimestamps(
         console.warn('Multiple time fields in data frame.  Using last');
       }
 
-      let effectiveNumColumns = Math.min(numColumns, field.values.length);
-
-      let step = Math.round((timeRange.end - timeRange.start) / effectiveNumColumns);
-
-      for (let index = 0; index < effectiveNumColumns; index++) {
-        timestamps.push(timeRange.start + index * step);
-      }
+      normailizeTimestamps(timestamps, numColumns, timeRange, field.values.length);
     }
   });
 
   return timestamps;
 }
+
+function normailizeTimestamps(timestamps: number[], numColumns: number, timeRange: TimeRange, numValues: number) {
+  if (timestamps.length > 0) {
+    console.warn('Multiple time fields in data frame.  Using last');
+  }
+
+  let effectiveNumColumns = Math.min(numColumns, numValues);
+
+  let step = Math.round((timeRange.end - timeRange.start) / effectiveNumColumns);
+
+  for (let index = 0; index < effectiveNumColumns; index++) {
+    timestamps.push(timeRange.start + index * step);
+  }
+}
+
 function addRows(
   rows: Record<string, Series>,
   fields: Array<import('@grafana/data').Field<any, import('@grafana/data').Vector<any>>>,
@@ -229,14 +255,24 @@ function addRows(
       console.warn('Found multiple series with ' + rowField + ': ' + rowName + ', using last...');
     }
 
-    rows[rowName] = buildSeries(rowName, groupName, field.values, numColumns, binType, timestamps);
+    rows[rowName] = buildSeries(rowName, groupName, createValuesArray(field.values), numColumns, binType, timestamps);
   });
+}
+
+function createValuesArray(values: Vector<any>): number[] {
+  let result: number[] = [];
+
+  for (let index = 0; index < values.length; index++) {
+    result.push(values.get(index));
+  }
+
+  return result;
 }
 
 function buildSeries(
   rowName: string,
   groupName: string | undefined,
-  values: Vector<any>,
+  values: number[],
   numColumns: number,
   binType: BinType,
   timestamps: number[]
@@ -253,13 +289,13 @@ function buildSeries(
     sum += remainder;
     if (index >= binIndex * binSize && index + 1 <= (binIndex + 1) * binSize) {
       // The value is completely in the bin
-      sum += values.get(index);
+      sum += values[index];
       remainder = 0;
     } else if (index > binIndex * binSize && index + 1 > (binIndex + 1) * binSize) {
       // The value overlaps the end of the bin
       let relativePart = 1 - (index + 1 - (binIndex + 1) * binSize);
-      sum += relativePart * values.get(index);
-      remainder = (1 - relativePart) * values.get(index);
+      sum += relativePart * values[index];
+      remainder = (1 - relativePart) * values[index];
     } else {
       throw new Error('This shouldnt happen');
     }
@@ -313,7 +349,6 @@ export function getEffectiveMaxValue(fromData: number, maxType: MaxType, explici
   if (isNaN(explicit)) {
     return fromData;
   }
-  console.log(`called getefmx with ${maxType}, ${explicit}, ${fromData}`);
   switch (maxType) {
     case 'fromData':
       return fromData;
@@ -321,5 +356,105 @@ export function getEffectiveMaxValue(fromData: number, maxType: MaxType, explici
       return explicit;
     case 'softMax':
       return Math.max(fromData, explicit);
+  }
+}
+
+function extractRowsFromSingleFrame(
+  rows: Record<string, Series>,
+  dataFrame: DataFrame,
+  numColumns: number,
+  timeRange: TimeRange,
+  valueField: string,
+  rowField: string,
+  groupField: string,
+  binType: BinType
+) {
+  let fieldRowIndex = 0;
+  let timeFieldName = '';
+
+  let numericLabel = false;
+
+  let timeStamps = new Set<number>();
+
+  let groupNames: Record<string, string> = {};
+  let values: Record<string, number[]> = {};
+
+  let maxFieldRowIndex: number | undefined;
+
+  while (fieldRowIndex !== -1) {
+    let timestamp = -1;
+    let value = -1;
+    let rowName = '';
+    let groupName: string | undefined;
+    for (let fieldIndex = 0; fieldIndex < dataFrame.fields.length; fieldIndex++) {
+      if (dataFrame.fields[fieldIndex].type === 'time') {
+        if (maxFieldRowIndex === undefined) {
+          maxFieldRowIndex = dataFrame.fields[fieldIndex].values.length;
+        }
+        if (timeFieldName === '') {
+          timeFieldName = dataFrame.fields[fieldIndex].name;
+        }
+        if (timeFieldName !== dataFrame.fields[fieldIndex].name) {
+          throw new Error(
+            'Unsupported - Multiple time fields (' + timeFieldName + ', ' + dataFrame.fields[fieldIndex].name
+          );
+        }
+
+        timestamp = dataFrame.fields[fieldIndex].values.get(fieldRowIndex);
+      } else if (dataFrame.fields[fieldIndex].type === 'number') {
+        if (dataFrame.fields[fieldIndex].name === valueField) {
+          value = dataFrame.fields[fieldIndex].values.get(fieldRowIndex);
+        } else if (dataFrame.fields[fieldIndex].name === rowField) {
+          rowName = dataFrame.fields[fieldIndex].values.get(fieldRowIndex);
+          numericLabel = true;
+        } else if (dataFrame.fields[fieldIndex].name === groupField) {
+          groupName = dataFrame.fields[fieldIndex].values.get(fieldRowIndex);
+          numericLabel = true;
+        }
+      } else if (dataFrame.fields[fieldIndex].type === 'string') {
+        if (dataFrame.fields[fieldIndex].name === rowField) {
+          rowName = dataFrame.fields[fieldIndex].values.get(fieldRowIndex);
+        } else if (dataFrame.fields[fieldIndex].name === groupField) {
+          groupName = dataFrame.fields[fieldIndex].values.get(fieldRowIndex);
+        }
+      } else {
+        console.warn(
+          'Unsupported field type ' +
+            dataFrame.fields[fieldIndex].type +
+            ' for field ' +
+            dataFrame.fields[fieldIndex].name
+        );
+      }
+    }
+
+    timeStamps.add(timestamp);
+
+    if (groupName !== undefined) {
+      groupNames[rowName] = groupName;
+    }
+    if (!values.hasOwnProperty(rowName)) {
+      values[rowName] = [];
+    }
+    values[rowName].push(value);
+
+    fieldRowIndex++;
+    if (fieldRowIndex === maxFieldRowIndex) {
+      fieldRowIndex = -1;
+    }
+  }
+
+  if (numericLabel) {
+    console.warn('Using a numeric field as a label.  Try converting to a string.');
+  }
+
+  let formattedTimestamps: number[] = [];
+  normailizeTimestamps(formattedTimestamps, numColumns, timeRange, timeStamps.size);
+
+  for (let rowName in values) {
+    let groupName: string | undefined;
+    if (groupNames.hasOwnProperty(rowName)) {
+      groupName = groupNames[rowName];
+    }
+    rows[rowName] = buildSeries(rowName, groupName, values[rowName], numColumns, binType, formattedTimestamps);
   }
 }

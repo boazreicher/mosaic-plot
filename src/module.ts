@@ -17,11 +17,15 @@ export const plugin = new PanelPlugin<MosaicPlotOptions>(MosaicPlotPanel).setNoP
         options: [
           {
             value: 'regular',
-            label: 'Regular',
+            label: 'Multi Frame',
           },
           {
             value: 'heatmap',
             label: 'Heatmap',
+          },
+          {
+            value: 'singleFrame',
+            label: 'Single Frame',
           },
         ],
       },

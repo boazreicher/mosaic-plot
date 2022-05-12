@@ -11,6 +11,10 @@ export function getLabelSelectorData(data: DataFrame[], value?: string, autoFill
     var labels: Set<string> = new Set();
     for (let i = 0; i < data.length; i++) {
       for (let fieldIndex = 0; fieldIndex < data[i].fields.length; fieldIndex++) {
+        if (data[i].fields[fieldIndex].type !== 'time') {
+          labels.add(data[i].fields[fieldIndex].name);
+        }
+
         for (let label in data[i].fields[fieldIndex].labels) {
           if (first === undefined) {
             first = label;
