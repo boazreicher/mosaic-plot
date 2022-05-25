@@ -60,9 +60,11 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#1-regular-data-format">1. Regular Data Format</a>
+    <li class="toctree-l3"><a class="reference internal" href="#1-multi-frame-data-format">1. Multi Frame Data Format</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#2-heatmap-data-format">2. Heatmap Data Format</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-single-frame-data-format">3. Single Frame Data Format</a>
     </li>
         </ul>
     </li>
@@ -122,9 +124,13 @@
                 <h1 id="data">Data<a class="headerlink" href="#data" title="Permanent link">#</a></h1>
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">#</a></h2>
 <p>The Mosaic Plot panel expects <i>time series</i> data frames, meaning each series must contain at least one field with <code>time</code> type (if multiple such fields exist, the first one will be used)</p>
-<p>Two data formats are supported:</p>
-<h3 id="1-regular-data-format">1. Regular Data Format<a class="headerlink" href="#1-regular-data-format" title="Permanent link">#</a></h3>
-<p>This data format is applicable where each data frame has a <strong>numeric</strong> <a href="../configuration_options/#fields"><code>Amplitude</code></a> field and a <strong>string</strong> <a href="../configuration_options/#fields"><code>Breakdown</code></a> label to differentiate the different series.  It can also contain an (optional) additional <strong>string</strong> label for <a href="../configuration_options/#fields"><code>grouping</code></a> the different series.</p>
+<p>Three data formats are supported:</p>
+<h3 id="1-multi-frame-data-format">1. Multi Frame Data Format<a class="headerlink" href="#1-multi-frame-data-format" title="Permanent link">#</a></h3>
+<div class="admonition hint inline">
+<p class="admonition-title">Hint</p>
+<p>This is the default format.  It was previously referred to as the <code>Regular Data Format</code></p>
+</div>
+<p>This data format is applicable where each data frame has a <strong>time</strong> field, a <strong>numeric</strong> <a href="../configuration_options/#fields"><code>Amplitude</code></a> field and a <strong>string</strong> <a href="../configuration_options/#fields"><code>Breakdown</code></a> label to differentiate the different series.  It can also contain an (optional) additional <strong>string</strong> label for <a href="../configuration_options/#fields"><code>grouping</code></a> the different series.</p>
 <p>For example, let's assume that we want to plot the number of requests hitting a number of different servers
 <br>
 Each server is located in some region
@@ -205,62 +211,13 @@ The data will be presented in multiple frames, where each frame corresponds to a
 </tr>
 </tbody>
 </table>
-<p>Currently, Mosaic Plot doesn't support the use case where all of the data is in a single data frame, like this:</p>
-<table>
-<thead>
-<tr>
-<th>Time</th>
-<th>Host</th>
-<th>Region</th>
-<th>Requests</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1647399651000</td>
-<td>use1-03</td>
-<td>us-east-1</td>
-<td>234</td>
-</tr>
-<tr>
-<td>1647399651000</td>
-<td>use1-02</td>
-<td>us-east-1</td>
-<td>163</td>
-</tr>
-<tr>
-<td>1647399651000</td>
-<td>usw1-01</td>
-<td>us-west-1</td>
-<td>111</td>
-</tr>
-<tr>
-<td>1647399656000</td>
-<td>usw1-01</td>
-<td>us-west-1</td>
-<td>875</td>
-</tr>
-<tr>
-<td>1647399656000</td>
-<td>use1-03</td>
-<td>us-east-1</td>
-<td>125</td>
-</tr>
-<tr>
-<td>1647399656000</td>
-<td>use1-02</td>
-<td>us-east-1</td>
-<td>14</td>
-</tr>
-</tbody>
-</table>
 <div class="admonition hint inline">
 <p class="admonition-title">Hint</p>
-<p>Converting the above format (single data frame, no labels) to the supported one can be achieved by using the <a href="https://grafana.com/docs/grafana/next/panels/transform-data/transformation-functions/#prepare-time-series"><code>Prepare time series transform</code></a></p>
+<p>In the above example, it is important to note that <code>Time</code> &amp; <code>Requests</code> are fields, while <code>Host</code> &amp; <code>Region</code> are actually labels</p>
 </div>
 <div class="admonition hint inline">
 <p class="admonition-title">Hint</p>
-<p>When using the regular data format, rows are mapped to the  <a href="../configuration_options/#fields"><code>Breakdown</code></a> field</p>
+<p>When using the multi frame data format, rows are mapped to the <a href="../configuration_options/#fields"><code>Breakdown</code></a> label</p>
 </div>
 <h3 id="2-heatmap-data-format">2. Heatmap Data Format<a class="headerlink" href="#2-heatmap-data-format" title="Permanent link">#</a></h3>
 <p>This data format is applicable where each data frame contains only a <strong>time</strong> field and a <strong>numeric</strong> value field.</p>
@@ -337,6 +294,70 @@ For the above example, our data will contain multiple data frames, where each fr
 <div class="admonition hint inline">
 <p class="admonition-title">Hint</p>
 <p>When using the heatmap data format, each row is mapped to a specific data frame</p>
+</div>
+<h3 id="3-single-frame-data-format">3. Single Frame Data Format<a class="headerlink" href="#3-single-frame-data-format" title="Permanent link">#</a></h3>
+<p>This data format is applicable when all of the data is in a single data frame.  The data frame must contain a <strong>time</strong> field, a <strong>numeric</strong> <a href="../configuration_options/#fields"><code>Amplitude</code></a> field and a <strong>string</strong> <a href="../configuration_options/#fields"><code>Breakdown</code></a> field to differentiate the different series.  It can also contain an (optional) additional <strong>string</strong> field for <a href="../configuration_options/#fields"><code>grouping</code></a> the different series.</p>
+<p>For example, let's assume that we want to plot the number of requests hitting a number of different servers
+<br>
+Each server is located in some region
+<br>
+<br>
+For the above example, our data will contain a  <code>time</code> field, a <code>number</code> field that represents the number of requests, and a <code>string</code> field representing the server name.  It might also contain a <code>string</code> field represening the region name.</p>
+<p>Our data will be in a single data frame (with no labels, just fields).
+<br>
+It might look something like this:
+<br></p>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Host</th>
+<th>Region</th>
+<th>Requests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1647399651000</td>
+<td>use1-03</td>
+<td>us-east-1</td>
+<td>234</td>
+</tr>
+<tr>
+<td>1647399651000</td>
+<td>use1-02</td>
+<td>us-east-1</td>
+<td>163</td>
+</tr>
+<tr>
+<td>1647399651000</td>
+<td>usw1-01</td>
+<td>us-west-1</td>
+<td>111</td>
+</tr>
+<tr>
+<td>1647399656000</td>
+<td>usw1-01</td>
+<td>us-west-1</td>
+<td>875</td>
+</tr>
+<tr>
+<td>1647399656000</td>
+<td>use1-03</td>
+<td>us-east-1</td>
+<td>125</td>
+</tr>
+<tr>
+<td>1647399656000</td>
+<td>use1-02</td>
+<td>us-east-1</td>
+<td>14</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition hint inline">
+<p class="admonition-title">Hint</p>
+<p>When using the single frame data format, rows are mapped to the <a href="../configuration_options/#fields"><code>Breakdown</code></a> field</p>
 </div>
 <h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">#</a></h2>
 <ul>
