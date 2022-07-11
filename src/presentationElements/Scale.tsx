@@ -23,6 +23,7 @@ export class Scale {
   private inverted: boolean;
   private discrete: boolean;
   private invertedColors: boolean;
+  private isDark: boolean;
 
   constructor(
     topLeft: Coordinates,
@@ -37,7 +38,8 @@ export class Scale {
     scaleType: ScaleType,
     inverted: boolean,
     discrete: boolean,
-    invertedColors: boolean
+    invertedColors: boolean,
+    isDark: boolean
   ) {
     this.topLeft = topLeft;
     this.width = width;
@@ -52,6 +54,7 @@ export class Scale {
     this.inverted = inverted;
     this.discrete = discrete;
     this.invertedColors = invertedColors;
+    this.isDark = isDark;
   }
 
   static buildScale(
@@ -65,7 +68,8 @@ export class Scale {
     scaleType: ScaleType,
     inverted: boolean,
     discrete: boolean,
-    invertedColors: boolean
+    invertedColors: boolean,
+    isDark: boolean
   ) {
     if (typeof width !== 'number') {
       throw new Error('Width must be a number');
@@ -101,7 +105,8 @@ export class Scale {
       scaleType,
       inverted,
       discrete,
-      invertedColors
+      invertedColors,
+      isDark
     );
   }
 
@@ -140,6 +145,7 @@ export class Scale {
           topLeft={new Coordinates(this.topLeft.x, this.topLeft.y + this.margin)}
           scaleType={this.scaleType}
           width={this.width}
+          isDark={this.isDark}
         />
       </>
     );

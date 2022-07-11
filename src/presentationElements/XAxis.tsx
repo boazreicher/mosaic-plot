@@ -10,13 +10,13 @@ export const XAxis = ({
   ...props
 }: React.SVGProps<SVGElement> & {} & { timeRange: TimeRange } & { topLeft: Coordinates } & {
   width: number;
-}) => createXAxis(props.timeRange, props.topLeft, props.width);
+} & { isDark: boolean }) => createXAxis(props.timeRange, props.topLeft, props.width, props.isDark);
 
 function getTransform(topLeft: Coordinates) {
   return 'translate(0,' + topLeft.y + ')';
 }
 
-function createXAxis(timeRange: TimeRange, topLeft: Coordinates, width: number) {
+function createXAxis(timeRange: TimeRange, topLeft: Coordinates, width: number, isDark: boolean) {
   const xScale = d3
     .scaleTime()
     .domain([timeRange.start, timeRange.end])
@@ -28,7 +28,7 @@ function createXAxis(timeRange: TimeRange, topLeft: Coordinates, width: number) 
       ref={(node) => {
         d3.select(node)
           .style('font-size', '10')
-          .style('text-shadow', '-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000')
+          .style('text-shadow', getShadow(isDark))
           .call(xAxis as any)
           .selectAll('text')
           .style('text-anchor', 'end')
@@ -37,6 +37,12 @@ function createXAxis(timeRange: TimeRange, topLeft: Coordinates, width: number) 
       }}
     />
   );
+}
+
+function getShadow(isDark: boolean) {
+  return isDark
+    ? '-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000'
+    : '-0.5px -0.5px 0 #bdbdbd, 0.5px -0.5px 0 #bdbdbd, -0.5px 0.5px 0 #bdbdbd, 0.5px 0.5px 0 #bdbdbd';
 }
 
 export function buildXAxis(width: number, height: number, panelOptions: MosaicPlotOptions, timeRange: TimeRange) {
@@ -54,6 +60,7 @@ export function buildXAxis(width: number, height: number, panelOptions: MosaicPl
       width={axisWidth}
       timeRange={timeRange}
       topLeft={new Coordinates(panelOptions.leftMargin, height - axisHeight)}
+      isDark={panelOptions.isDark}
     />
   );
 }

@@ -83,7 +83,12 @@ function buildElements(
       {buildXAxis(width, height, panelOptions, timeRange)}
       {buildAllYAxis(grids, width, height, panelOptions.leftMargin, panelOptions.labelType, panelOptions.compact).map(
         (yAxisData) => (
-          <YAxis key={yAxisData.getId()} data={yAxisData} labelPositionType={panelOptions.labelPositionType} />
+          <YAxis
+            key={yAxisData.getId()}
+            data={yAxisData}
+            labelPositionType={panelOptions.labelPositionType}
+            isDark={panelOptions.isDark}
+          />
         )
       )}
     </>
@@ -109,7 +114,8 @@ function buildScale(width: number, height: number, panelOptions: MosaicPlotOptio
     panelOptions.scaleType,
     panelOptions.invertPalette,
     panelOptions.discreteScale,
-    panelOptions.invertColors
+    panelOptions.invertColors,
+    panelOptions.isDark
   );
 }
 

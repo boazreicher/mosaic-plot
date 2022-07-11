@@ -11,7 +11,7 @@ export const YAxis = ({
   ...props
 }: React.SVGProps<SVGElement> & { data: YAxisData } & {
   labelPositionType: LabelPositionType;
-}) => createYAxis(props.data, props.labelPositionType);
+} & { isDark: boolean }) => createYAxis(props.data, props.labelPositionType, props.isDark);
 
 function getTransform(topLeft: Coordinates) {
   let shiftX = topLeft.x;
@@ -44,7 +44,7 @@ function getTranslation(labelPositionType: LabelPositionType): string {
   }
 }
 
-function createYAxis(data: YAxisData, labelPositionType: LabelPositionType) {
+function createYAxis(data: YAxisData, labelPositionType: LabelPositionType, isDark: boolean) {
   let yScale = initScale(data);
 
   const yAxis = d3.axisLeft(yScale); //.tickSize(0);
@@ -53,7 +53,7 @@ function createYAxis(data: YAxisData, labelPositionType: LabelPositionType) {
       transform={getTransform(data.getTopLeft())}
       ref={(node) => {
         d3.select(node)
-          .style('text-shadow', '-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000')
+          .style('text-shadow', getShadow(isDark))
           .style('font-size', '10')
           .call(yAxis as any)
           .selectAll('text')
@@ -63,6 +63,12 @@ function createYAxis(data: YAxisData, labelPositionType: LabelPositionType) {
       }}
     />
   );
+}
+
+function getShadow(isDark: boolean) {
+  return isDark
+    ? '-0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000'
+    : '-0.5px -0.5px 0 #bdbdbd, 0.5px -0.5px 0 #bdbdbd, -0.5px 0.5px 0 #bdbdbd, 0.5px 0.5px 0 #bdbdbd';
 }
 
 export function buildAllYAxis(

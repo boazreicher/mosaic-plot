@@ -1,5 +1,5 @@
 import { PanelProps } from '@grafana/data';
-import { stylesFactory } from '@grafana/ui';
+import { stylesFactory, useTheme2 } from '@grafana/ui';
 import { getTimeRange } from 'data/SeriesUtils';
 import { css, cx } from 'emotion';
 import { MosaicPlot } from 'MosaicPlot';
@@ -10,6 +10,8 @@ interface Props extends PanelProps<MosaicPlotOptions> {}
 
 export const MosaicPlotPanel: React.FC<Props> = ({ options, data, width, height, onOptionsChange }) => {
   const styles = getStyles();
+  const theme = useTheme2();
+  options.isDark = theme.isDark;
 
   return (
     <div

@@ -36,6 +36,7 @@ export interface MosaicPlotOptions {
   scaleWidth: number;
   maxType: MaxType;
   maxValue: number;
+  isDark: boolean;
 }
 
 export type CellShape = 'hex' | 'rect' | 'jigsaw' | 'circle' | 'circleStacked';
