@@ -295,7 +295,7 @@ function buildSeries(
     sum += remainder;
     nullCount += nullRemainder;
 
-    isNull = values[index] == null
+    isNull = values[index] == null;
 
     if (index >= binIndex * binSize && index + 1 <= (binIndex + 1) * binSize) {
       // The value is completely in the bin
@@ -303,7 +303,7 @@ function buildSeries(
       remainder = 0;
       nullRemainder = 0;
 
-      if(isNull){nullCount += 1}
+      if(isNull){nullCount += 1;}
 
     } else if (index > binIndex * binSize && index + 1 > (binIndex + 1) * binSize) {
       // The value overlaps the end of the bin
@@ -313,7 +313,7 @@ function buildSeries(
 
       if(isNull){
         nullCount += relativePart;
-        nullRemainder = 1 - relativePart
+        nullRemainder = 1 - relativePart;
       }
 
     } else {
