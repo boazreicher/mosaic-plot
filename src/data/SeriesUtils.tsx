@@ -308,7 +308,6 @@ function buildSeries(
     } else if (index > binIndex * binSize && index + 1 > (binIndex + 1) * binSize) {
       // The value overlaps the end of the bin
       let relativePart = 1 - (index + 1 - (binIndex + 1) * binSize);
-      console.log("relativePart: " + relativePart);
       sum += relativePart * values[index];
       remainder = (1 - relativePart) * values[index];
 
