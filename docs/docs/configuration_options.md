@@ -55,7 +55,7 @@
 | `Color Palette` | The color palette to use for coloring cells |
 | `Invert Palette` | Invert the color palette's order |
 | `Invert Colors` | Invert all colors used in the panel |
-| `Zero Values` | Determines how empty (zero) cells should be treated.  Possible values are: <ul><li>Regular: Using the lowest color in the selected palette</li><li>Empty: No cell is created</li><li>Customer: Use a custom color</li></ul> |
+| `Zero Values` | Determines how empty (zero) cells should be treated.  Possible values are: <ul><li>Regular: Using the lowest color in the selected palette</li><li>Empty: No cell is created.  Values ignored in average.</li><li>Customer: Use a custom color</li></ul> |
 | `Zero Color` | Custom color to use for empty cells |
 | `Outline Color Type` | Determines how cell outlines should be colored.  Possible values are: <ul><li>Same as cell</li><li>Custom</li></ul> |
 | `Outline Color` | Custom color to use for cell outlines |
