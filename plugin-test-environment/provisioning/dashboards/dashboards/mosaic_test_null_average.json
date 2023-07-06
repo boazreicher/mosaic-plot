@@ -21,7 +21,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 5,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -77,7 +76,7 @@
       },
       "targets": [
         {
-          "csvContent": "Time,series,value,group\n1687272258,A,1,C\n1687272318,A,1,C\n1687272378,A,3,C\n1687272438,A,2,C\n1687272498,A,2,C\n1687272258,B,3,C\n1687272318,B,3,C\n1687272378,B,3,C\n1687272438,B,3,C\n1687272498,B,3,C",
+          "csvContent": "Time,series,value,group\n1687272258,A,1,C\n1687272318,A,1,C\n1687272378,A,0,C\n1687272438,A,2,C\n1687272498,A,2,C\n1687272258,B,3,C\n1687272318,B,3,C\n1687272378,B,3,C\n1687272438,B,3,C\n1687272498,B,3,C",
           "datasource": {
             "type": "testdata",
             "uid": "P53465F745837BCFD"
@@ -99,6 +98,70 @@
         "w": 12,
         "x": 12,
         "y": 0
+      },
+      "id": 4,
+      "options": {
+        "amplitudeField": "value",
+        "bevel": false,
+        "binType": "avg",
+        "cellShape": "rect",
+        "compact": false,
+        "dataFormat": "singleFrame",
+        "discreteScale": false,
+        "enableFocus": false,
+        "groupField": "group",
+        "invertColors": false,
+        "invertPalette": false,
+        "isDark": true,
+        "labelPositionType": "horizontal",
+        "labelType": "series",
+        "leftMargin": 50,
+        "maxColumns": 2,
+        "maxRows": 1000,
+        "maxType": "fromData",
+        "minColumns": 2,
+        "numColumns": 2,
+        "outlineColor": "#000000",
+        "outlineColorType": "same",
+        "outlineWidth": 2,
+        "palette": "interpolateRdYlGn",
+        "rowField": "series",
+        "scaleType": "log",
+        "scaleWidth": 50,
+        "seed": 0,
+        "showScale": true,
+        "showXAxis": true,
+        "smooth": false,
+        "sortMode": "asc",
+        "sortType": "lex",
+        "spacing": 0,
+        "zeroColor": "#000000",
+        "zeroType": "empty"
+      },
+      "targets": [
+        {
+          "csvContent": "Time,series,value,group\n1687272258,A,1,C\n1687272318,A,1,C\n1687272378,A,,C\n1687272438,A,2,C\n1687272498,A,2,C\n1687272258,B,3,C\n1687272318,B,3,C\n1687272378,B,3,C\n1687272438,B,3,C\n1687272498,B,3,C",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P53465F745837BCFD"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Averaging Test With Null (Zeros Value: Empty)",
+      "type": "boazreicher-mosaicplot-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P53465F745837BCFD"
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 9
       },
       "id": 3,
       "options": {
@@ -163,70 +226,6 @@
         "w": 12,
         "x": 12,
         "y": 9
-      },
-      "id": 4,
-      "options": {
-        "amplitudeField": "value",
-        "bevel": false,
-        "binType": "avg",
-        "cellShape": "rect",
-        "compact": false,
-        "dataFormat": "singleFrame",
-        "discreteScale": false,
-        "enableFocus": false,
-        "groupField": "group",
-        "invertColors": false,
-        "invertPalette": false,
-        "isDark": true,
-        "labelPositionType": "horizontal",
-        "labelType": "series",
-        "leftMargin": 50,
-        "maxColumns": 2,
-        "maxRows": 1000,
-        "maxType": "fromData",
-        "minColumns": 2,
-        "numColumns": 2,
-        "outlineColor": "#000000",
-        "outlineColorType": "same",
-        "outlineWidth": 2,
-        "palette": "interpolateRdYlGn",
-        "rowField": "series",
-        "scaleType": "log",
-        "scaleWidth": 50,
-        "seed": 0,
-        "showScale": true,
-        "showXAxis": true,
-        "smooth": false,
-        "sortMode": "asc",
-        "sortType": "lex",
-        "spacing": 0,
-        "zeroColor": "#000000",
-        "zeroType": "empty"
-      },
-      "targets": [
-        {
-          "csvContent": "Time,series,value,group\n1687272258,A,1,C\n1687272318,A,1,C\n1687272378,A,,C\n1687272438,A,2,C\n1687272498,A,2,C\n1687272258,B,3,C\n1687272318,B,3,C\n1687272378,B,3,C\n1687272438,B,3,C\n1687272498,B,3,C",
-          "datasource": {
-            "type": "testdata",
-            "uid": "P53465F745837BCFD"
-          },
-          "refId": "A",
-          "scenarioId": "csv_content"
-        }
-      ],
-      "title": "Averaging Test With Null (Zeros Value: Empty)",
-      "type": "boazreicher-mosaicplot-panel"
-    },
-    {
-      "datasource": {
-        "type": "testdata",
-        "uid": "P53465F745837BCFD"
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 18
       },
       "id": 5,
       "options": {
@@ -297,6 +296,6 @@
   "timezone": "",
   "title": "Average Test",
   "uid": "z0f4kbrVk",
-  "version": 8,
+  "version": 1,
   "weekStart": ""
 }

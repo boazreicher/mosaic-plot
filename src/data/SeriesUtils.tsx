@@ -331,7 +331,6 @@ function buildSeries(
         case 'avg':
           if (zeroType == 'empty'){
             // do not include nulls in average calculation
-            console.log("nullCount: " + nullCount)
             aggregated = sum / (binSize - nullCount);
           }
           else{
@@ -342,6 +341,7 @@ function buildSeries(
 
       series.addValue(timestamps[binIndex], aggregated);
       sum = 0;
+      nullCount = 0;
       binIndex++;
     }
   }
