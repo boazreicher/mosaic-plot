@@ -27,7 +27,7 @@ export function getDataSeries(
   } else {
     dataFrames.forEach((dataFrame) => {
       let timestamps = calculateTimestamps(dataFrame.fields, numColumns, timeRange);
-      addRows(rows, dataFrame.fields, valueField, rowField, groupField, numColumns, dataFormat, binType, timestamps);
+      addRows(rows, dataFrame.fields, valueField, rowField, groupField, numColumns, dataFormat, binType, timestamps, zeroType);
     });
   }
 
@@ -305,10 +305,10 @@ function buildSeries(
 
       if(isNull){nullCount += 1}
 
-      nullCount += 1;
     } else if (index > binIndex * binSize && index + 1 > (binIndex + 1) * binSize) {
       // The value overlaps the end of the bin
       let relativePart = 1 - (index + 1 - (binIndex + 1) * binSize);
+      console.log("relativePart: " + relativePart);
       sum += relativePart * values[index];
       remainder = (1 - relativePart) * values[index];
 
@@ -331,6 +331,7 @@ function buildSeries(
         case 'avg':
           if (zeroType == 'empty'){
             // do not include nulls in average calculation
+            console.log("nullCount: " + nullCount)
             aggregated = sum / (binSize - nullCount);
           }
           else{
