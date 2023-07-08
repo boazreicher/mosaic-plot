@@ -303,7 +303,9 @@ function buildSeries(
       remainder = 0;
       nullRemainder = 0;
 
-      if(isNull){nullCount += 1;}
+      if (isNull) {
+        nullCount += 1;
+      }
 
     } else if (index > binIndex * binSize && index + 1 > (binIndex + 1) * binSize) {
       // The value overlaps the end of the bin
@@ -311,7 +313,7 @@ function buildSeries(
       sum += relativePart * values[index];
       remainder = (1 - relativePart) * values[index];
 
-      if(isNull){
+      if (isNull) {
         nullCount += relativePart;
         nullRemainder = 1 - relativePart;
       }
@@ -328,11 +330,14 @@ function buildSeries(
           aggregated = sum;
           break;
         case 'avg':
-          if (zeroType == 'empty'){
+          if (zeroType == 'empty' && nullCount == binSize) {
+            aggregated = 0;
+          }
+          else if (zeroType == 'empty') {
             // do not include nulls in average calculation
             aggregated = sum / (binSize - nullCount);
           }
-          else{
+          else {
             aggregated = sum / binSize;
           }
           break;
