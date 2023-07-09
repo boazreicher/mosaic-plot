@@ -23,11 +23,32 @@ export function getDataSeries(
     if (dataFrames.length > 1) {
       throw new Error('Single frame data format expects exactly 1 data frame.  Found ' + dataFrames.length);
     }
-    extractRowsFromSingleFrame(rows, dataFrames[0], numColumns, timeRange, valueField, rowField, groupField, binType, zeroType);
+    extractRowsFromSingleFrame(
+      rows,
+      dataFrames[0],
+      numColumns,
+      timeRange,
+      valueField,
+      rowField,
+      groupField,
+      binType,
+      zeroType
+    );
   } else {
     dataFrames.forEach((dataFrame) => {
       let timestamps = calculateTimestamps(dataFrame.fields, numColumns, timeRange);
-      addRows(rows, dataFrame.fields, valueField, rowField, groupField, numColumns, dataFormat, binType, timestamps, zeroType);
+      addRows(
+        rows,
+        dataFrame.fields,
+        valueField,
+        rowField,
+        groupField,
+        numColumns,
+        dataFormat,
+        binType,
+        timestamps,
+        zeroType
+      );
     });
   }
 
@@ -257,7 +278,15 @@ function addRows(
       console.warn('Found multiple series with ' + rowField + ': ' + rowName + ', using last...');
     }
 
-    rows[rowName] = buildSeries(rowName, groupName, createValuesArray(field.values), numColumns, binType, timestamps, zeroType);
+    rows[rowName] = buildSeries(
+      rowName,
+      groupName,
+      createValuesArray(field.values),
+      numColumns,
+      binType,
+      timestamps,
+      zeroType
+    );
   });
 }
 
@@ -306,7 +335,6 @@ function buildSeries(
       if (isNull) {
         nullCount += 1;
       }
-
     } else if (index > binIndex * binSize && index + 1 > (binIndex + 1) * binSize) {
       // The value overlaps the end of the bin
       let relativePart = 1 - (index + 1 - (binIndex + 1) * binSize);
@@ -317,7 +345,6 @@ function buildSeries(
         nullCount += relativePart;
         nullRemainder = 1 - relativePart;
       }
-
     } else {
       throw new Error('This shouldnt happen');
     }
@@ -332,12 +359,10 @@ function buildSeries(
         case 'avg':
           if (zeroType == 'empty' && nullCount == binSize) {
             aggregated = 0;
-          }
-          else if (zeroType == 'empty') {
+          } else if (zeroType == 'empty') {
             // do not include nulls in average calculation
             aggregated = sum / (binSize - nullCount);
-          }
-          else {
+          } else {
             aggregated = sum / binSize;
           }
           break;
@@ -488,6 +513,14 @@ function extractRowsFromSingleFrame(
     if (groupNames.hasOwnProperty(rowName)) {
       groupName = groupNames[rowName];
     }
-    rows[rowName] = buildSeries(rowName, groupName, values[rowName], numColumns, binType, formattedTimestamps, zeroType);
+    rows[rowName] = buildSeries(
+      rowName,
+      groupName,
+      values[rowName],
+      numColumns,
+      binType,
+      formattedTimestamps,
+      zeroType
+    );
   }
 }
