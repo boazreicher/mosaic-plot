@@ -357,9 +357,9 @@ function buildSeries(
           aggregated = sum;
           break;
         case 'avg':
-          if (zeroType == 'empty' && nullCount == binSize) {
+          if (zeroType === 'empty' && nullCount === binSize) {
             aggregated = 0;
-          } else if (zeroType == 'empty') {
+          } else if (zeroType === 'empty') {
             // do not include nulls in average calculation
             aggregated = sum / (binSize - nullCount);
           } else {
