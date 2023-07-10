@@ -1,0 +1,365 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P53465F745837BCFD"
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "amplitudeField": "value",
+        "bevel": false,
+        "binType": "avg",
+        "cellShape": "rect",
+        "compact": false,
+        "dataFormat": "singleFrame",
+        "discreteScale": false,
+        "enableFocus": false,
+        "groupField": "group",
+        "invertColors": false,
+        "invertPalette": false,
+        "isDark": true,
+        "labelPositionType": "horizontal",
+        "labelType": "series",
+        "leftMargin": 50,
+        "maxColumns": 2,
+        "maxRows": 1000,
+        "maxType": "fromData",
+        "minColumns": 2,
+        "numColumns": 2,
+        "outlineColor": "#000000",
+        "outlineColorType": "same",
+        "outlineWidth": 2,
+        "palette": "interpolateRdYlGn",
+        "rowField": "series",
+        "scaleType": "log",
+        "scaleWidth": 50,
+        "seed": 0,
+        "showScale": true,
+        "showXAxis": true,
+        "smooth": false,
+        "sortMode": "asc",
+        "sortType": "lex",
+        "spacing": 0,
+        "zeroColor": "#000000",
+        "zeroType": "regular"
+      },
+      "targets": [
+        {
+          "csvContent": "Time,series,value,group\n1687272258,A,1,C\n1687272318,A,1,C\n1687272378,A,0,C\n1687272438,A,2,C\n1687272498,A,2,C\n1687272258,B,3,C\n1687272318,B,3,C\n1687272378,B,3,C\n1687272438,B,3,C\n1687272498,B,3,C",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P53465F745837BCFD"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Averaging Test (No Nulls)",
+      "type": "boazreicher-mosaicplot-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P53465F745837BCFD"
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "amplitudeField": "value",
+        "bevel": false,
+        "binType": "avg",
+        "cellShape": "rect",
+        "compact": false,
+        "dataFormat": "singleFrame",
+        "discreteScale": false,
+        "enableFocus": false,
+        "groupField": "group",
+        "invertColors": false,
+        "invertPalette": false,
+        "isDark": true,
+        "labelPositionType": "horizontal",
+        "labelType": "series",
+        "leftMargin": 50,
+        "maxColumns": 2,
+        "maxRows": 1000,
+        "maxType": "fromData",
+        "minColumns": 2,
+        "numColumns": 2,
+        "outlineColor": "#000000",
+        "outlineColorType": "same",
+        "outlineWidth": 2,
+        "palette": "interpolateRdYlGn",
+        "rowField": "series",
+        "scaleType": "log",
+        "scaleWidth": 50,
+        "seed": 0,
+        "showScale": true,
+        "showXAxis": true,
+        "smooth": false,
+        "sortMode": "asc",
+        "sortType": "lex",
+        "spacing": 0,
+        "zeroColor": "#000000",
+        "zeroType": "empty"
+      },
+      "targets": [
+        {
+          "csvContent": "Time,series,value,group\n1687272258,A,1,C\n1687272318,A,1,C\n1687272378,A,,C\n1687272438,A,2,C\n1687272498,A,2,C\n1687272258,B,3,C\n1687272318,B,3,C\n1687272378,B,3,C\n1687272438,B,3,C\n1687272498,B,3,C",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P53465F745837BCFD"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Averaging Test With Null (Zeros Value: Empty)",
+      "type": "boazreicher-mosaicplot-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P53465F745837BCFD"
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 9
+      },
+      "id": 3,
+      "options": {
+        "amplitudeField": "value",
+        "bevel": false,
+        "binType": "avg",
+        "cellShape": "rect",
+        "compact": false,
+        "dataFormat": "singleFrame",
+        "discreteScale": false,
+        "enableFocus": false,
+        "groupField": "group",
+        "invertColors": false,
+        "invertPalette": false,
+        "isDark": true,
+        "labelPositionType": "horizontal",
+        "labelType": "series",
+        "leftMargin": 50,
+        "maxColumns": 2,
+        "maxRows": 1000,
+        "maxType": "fromData",
+        "minColumns": 2,
+        "numColumns": 2,
+        "outlineColor": "#000000",
+        "outlineColorType": "same",
+        "outlineWidth": 2,
+        "palette": "interpolateRdYlGn",
+        "rowField": "series",
+        "scaleType": "log",
+        "scaleWidth": 50,
+        "seed": 0,
+        "showScale": true,
+        "showXAxis": true,
+        "smooth": false,
+        "sortMode": "asc",
+        "sortType": "lex",
+        "spacing": 0,
+        "zeroColor": "#000000",
+        "zeroType": "regular"
+      },
+      "targets": [
+        {
+          "csvContent": "Time,series,value,group\n1687272258,A,1,C\n1687272318,A,1,C\n1687272378,A,,C\n1687272438,A,2,C\n1687272498,A,2,C\n1687272258,B,3,C\n1687272318,B,3,C\n1687272378,B,3,C\n1687272438,B,3,C\n1687272498,B,3,C",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P53465F745837BCFD"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Averaging Test With Null (Zeros Value: Regular)",
+      "type": "boazreicher-mosaicplot-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P53465F745837BCFD"
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 9
+      },
+      "id": 5,
+      "options": {
+        "amplitudeField": "value",
+        "bevel": false,
+        "binType": "avg",
+        "cellShape": "rect",
+        "compact": false,
+        "dataFormat": "singleFrame",
+        "discreteScale": false,
+        "enableFocus": false,
+        "groupField": "group",
+        "invertColors": false,
+        "invertPalette": false,
+        "isDark": true,
+        "labelPositionType": "horizontal",
+        "labelType": "series",
+        "leftMargin": 50,
+        "maxColumns": 2,
+        "maxRows": 1000,
+        "maxType": "fromData",
+        "minColumns": 2,
+        "numColumns": 2,
+        "outlineColor": "#000000",
+        "outlineColorType": "same",
+        "outlineWidth": 2,
+        "palette": "interpolateRdYlGn",
+        "rowField": "series",
+        "scaleType": "log",
+        "scaleWidth": 50,
+        "seed": 0,
+        "showScale": true,
+        "showXAxis": true,
+        "smooth": false,
+        "sortMode": "asc",
+        "sortType": "lex",
+        "spacing": 0,
+        "zeroColor": "#000000",
+        "zeroType": "empty"
+      },
+      "targets": [
+        {
+          "csvContent": "Time,series,value,group\n1687272258,A,1,C\n1687272318,A,1,C\n1687272438,A,2,C\n1687272498,A,2,C\n1687272258,B,3,C\n1687272318,B,3,C\n1687272438,B,3,C\n1687272498,B,3,C",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P53465F745837BCFD"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Averaging Test With Null Removed from Input (Zeros Value: Empty)",
+      "type": "boazreicher-mosaicplot-panel"
+    },
+    {
+      "datasource": {
+        "type": "testdata",
+        "uid": "P53465F745837BCFD"
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 18
+      },
+      "id": 6,
+      "options": {
+        "amplitudeField": "value",
+        "bevel": false,
+        "binType": "avg",
+        "cellShape": "rect",
+        "compact": false,
+        "dataFormat": "singleFrame",
+        "discreteScale": false,
+        "enableFocus": false,
+        "groupField": "group",
+        "invertColors": false,
+        "invertPalette": false,
+        "isDark": true,
+        "labelPositionType": "horizontal",
+        "labelType": "series",
+        "leftMargin": 50,
+        "maxColumns": 2,
+        "maxRows": 1000,
+        "maxType": "fromData",
+        "minColumns": 2,
+        "numColumns": 2,
+        "outlineColor": "#000000",
+        "outlineColorType": "same",
+        "outlineWidth": 2,
+        "palette": "interpolateRdYlGn",
+        "rowField": "series",
+        "scaleType": "log",
+        "scaleWidth": 50,
+        "seed": 0,
+        "showScale": true,
+        "showXAxis": true,
+        "smooth": false,
+        "sortMode": "asc",
+        "sortType": "lex",
+        "spacing": 0,
+        "zeroColor": "#000000",
+        "zeroType": "empty"
+      },
+      "targets": [
+        {
+          "csvContent": "Time,series,value,group\n1687272258,A,,C\n1687272318,A,,C\n1687272438,A,,C\n1687272498,A,2,C\n1687272258,B,3,C\n1687272318,B,3,C\n1687272438,B,3,C\n1687272498,B,3,C",
+          "datasource": {
+            "type": "testdata",
+            "uid": "P53465F745837BCFD"
+          },
+          "refId": "A",
+          "scenarioId": "csv_content"
+        }
+      ],
+      "title": "Averaging Test Entire Bucket Null (Zeros Value: Empty)",
+      "type": "boazreicher-mosaicplot-panel"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 34,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Average Test",
+  "uid": "z0f4kbrVk",
+  "version": 2,
+  "weekStart": ""
+}

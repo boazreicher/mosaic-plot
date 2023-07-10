@@ -196,7 +196,8 @@ function initPlotElements(
       timeRange,
       panelOptions.dataFormat,
       panelOptions.maxRows,
-      panelOptions.binType
+      panelOptions.binType,
+      panelOptions.zeroType
     );
     errorMessage = null;
   } catch (error) {

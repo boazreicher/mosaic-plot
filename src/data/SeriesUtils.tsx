@@ -1,5 +1,5 @@
 import { DataFrame, Vector } from '@grafana/data';
-import { BinType, DataFormat, MaxType, SortMode, SortType } from 'types';
+import { BinType, DataFormat, MaxType, SortMode, SortType, ZeroType } from 'types';
 import { Series } from './Series';
 import { TimeRange } from './TimeRange';
 
@@ -14,7 +14,8 @@ export function getDataSeries(
   timeRange: TimeRange,
   dataFormat: DataFormat,
   maxRows: number,
-  binType: BinType
+  binType: BinType,
+  zeroType: ZeroType
 ): Series[] {
   let rows: Record<string, Series> = {};
 
@@ -22,11 +23,32 @@ export function getDataSeries(
     if (dataFrames.length > 1) {
       throw new Error('Single frame data format expects exactly 1 data frame.  Found ' + dataFrames.length);
     }
-    extractRowsFromSingleFrame(rows, dataFrames[0], numColumns, timeRange, valueField, rowField, groupField, binType);
+    extractRowsFromSingleFrame(
+      rows,
+      dataFrames[0],
+      numColumns,
+      timeRange,
+      valueField,
+      rowField,
+      groupField,
+      binType,
+      zeroType
+    );
   } else {
     dataFrames.forEach((dataFrame) => {
       let timestamps = calculateTimestamps(dataFrame.fields, numColumns, timeRange);
-      addRows(rows, dataFrame.fields, valueField, rowField, groupField, numColumns, dataFormat, binType, timestamps);
+      addRows(
+        rows,
+        dataFrame.fields,
+        valueField,
+        rowField,
+        groupField,
+        numColumns,
+        dataFormat,
+        binType,
+        timestamps,
+        zeroType
+      );
     });
   }
 
@@ -214,7 +236,8 @@ function addRows(
   numColumns: number,
   dataFormat: string,
   binType: BinType,
-  timestamps: number[]
+  timestamps: number[],
+  zeroType: ZeroType
 ) {
   fields.forEach((field) => {
     if (field.type === 'time') {
@@ -255,7 +278,15 @@ function addRows(
       console.warn('Found multiple series with ' + rowField + ': ' + rowName + ', using last...');
     }
 
-    rows[rowName] = buildSeries(rowName, groupName, createValuesArray(field.values), numColumns, binType, timestamps);
+    rows[rowName] = buildSeries(
+      rowName,
+      groupName,
+      createValuesArray(field.values),
+      numColumns,
+      binType,
+      timestamps,
+      zeroType
+    );
   });
 }
 
@@ -275,7 +306,8 @@ function buildSeries(
   values: number[],
   numColumns: number,
   binType: BinType,
-  timestamps: number[]
+  timestamps: number[],
+  zeroType: ZeroType
 ): Series {
   let series = new Series(rowName, groupName);
 
@@ -284,18 +316,35 @@ function buildSeries(
   let sum = 0;
   let remainder = 0;
   let binIndex = 0;
+  let nullCount = 0;
+  let nullRemainder = 0;
+  let isNull = false;
 
   for (let index = 0; index < values.length; index++) {
     sum += remainder;
+    nullCount += nullRemainder;
+
+    isNull = values[index] == null;
+
     if (index >= binIndex * binSize && index + 1 <= (binIndex + 1) * binSize) {
       // The value is completely in the bin
       sum += values[index];
       remainder = 0;
+      nullRemainder = 0;
+
+      if (isNull) {
+        nullCount += 1;
+      }
     } else if (index > binIndex * binSize && index + 1 > (binIndex + 1) * binSize) {
       // The value overlaps the end of the bin
       let relativePart = 1 - (index + 1 - (binIndex + 1) * binSize);
       sum += relativePart * values[index];
       remainder = (1 - relativePart) * values[index];
+
+      if (isNull) {
+        nullCount += relativePart;
+        nullRemainder = 1 - relativePart;
+      }
     } else {
       throw new Error('This shouldnt happen');
     }
@@ -308,12 +357,20 @@ function buildSeries(
           aggregated = sum;
           break;
         case 'avg':
-          aggregated = sum / binSize;
+          if (zeroType === 'empty' && nullCount === binSize) {
+            aggregated = 0;
+          } else if (zeroType === 'empty') {
+            // do not include nulls in average calculation
+            aggregated = sum / (binSize - nullCount);
+          } else {
+            aggregated = sum / binSize;
+          }
           break;
       }
 
       series.addValue(timestamps[binIndex], aggregated);
       sum = 0;
+      nullCount = 0;
       binIndex++;
     }
   }
@@ -367,7 +424,8 @@ function extractRowsFromSingleFrame(
   valueField: string,
   rowField: string,
   groupField: string,
-  binType: BinType
+  binType: BinType,
+  zeroType: ZeroType
 ) {
   let fieldRowIndex = 0;
   let timeFieldName = '';
@@ -455,6 +513,14 @@ function extractRowsFromSingleFrame(
     if (groupNames.hasOwnProperty(rowName)) {
       groupName = groupNames[rowName];
     }
-    rows[rowName] = buildSeries(rowName, groupName, values[rowName], numColumns, binType, formattedTimestamps);
+    rows[rowName] = buildSeries(
+      rowName,
+      groupName,
+      values[rowName],
+      numColumns,
+      binType,
+      formattedTimestamps,
+      zeroType
+    );
   }
 }
